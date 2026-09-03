@@ -198,3 +198,8 @@ During the panel Q&A, Dr. Lang pointed out that Excel and Google Sheets are not 
 
 Sena also gave a digital marketing example of this problem: linking to or taking screenshots from Google Sheets and then having to redo everything whenever the data updates. With Quarto, the report can pull directly from the source, so the content stays current as the data changes.
 
+# Appendix 
+
+- [Course repository](https://github.com/jakevns/IBM6500)
+- [Rendered assignment (GitHub Pages)](https://jakevns.github.io/IBM6500/M01/Evans,%20Jake-M01-1-Intro_Principle.html)
+- [Source file (.qmd)](https://github.com/jakevns/IBM6500/blob/main/M01/Evans%2C%20Jake-M01-1-Intro_Principle.qmd)
