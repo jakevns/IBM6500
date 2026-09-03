@@ -284,3 +284,9 @@ Below is a summary of the Quarto and Markdown tools I used throughout this repor
 11. **Bulleted lists** — used to define the six variables in the `economics` data set in a format that is easy to scan.
 12. **YAML configuration** — `toc`, `toc-depth`, `number-sections`, `code-line-numbers`, `code-link`, and `embed-resources` were all set in the header to create a self-contained and easy-to-navigate HTML report.
 13. **In-chunk comments** — every code chunk includes `#` comments explaining *why* each line is there, not just what it does, so the code is easier to understand when I return to it later.
+
+# Appendix: Links
+
+- [Course repository](https://github.com/jakevns/IBM6500)
+- [Rendered report (GitHub Pages)](https://jakevns.github.io/IBM6500/M01/Evans%2CJake-M01-2-Intro_Literate_programming_Application.html)
+- [Source file (.qmd)](https://github.com/jakevns/IBM6500/blob/main/M01/Evans%2CJake-M01-2-Intro_Literate_programming_Application.qmd)
