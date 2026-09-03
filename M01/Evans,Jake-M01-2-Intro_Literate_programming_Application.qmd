@@ -1,0 +1,286 @@
+---
+title: "M01-2-Introduction to Literate Programming-Application Assignment"
+author: "Jake Evans"
+date: '`r format(Sys.time())`'
+format: 
+  html: 
+    toc: true
+    toc-depth: 4
+    number-sections: true
+    code-line-numbers: true
+    code-fold: false
+    code-link: true
+    embed-resources: true
+editor: visual
+execute: 
+  freeze: auto
+  warning: false
+---
+
+# Introduction
+
+This is my application assignment for Module 1, where I apply the literate programming concepts covered in the M01-1 principles lecture. Each exercise starts with the question, followed by the code chunk used to answer it, so the document can also serve as a standalone reference after the course ends.
+
+
+# Exercise 1: Creating a Variable
+
+> **Ex 1.** Create a variable called `X` and assign the text "This is my first assignment" to it.
+
+::: callout-tip
+Use `<-` to assign a variable to the text.
+:::
+
+```{r}
+#| label: ex1-assign-variable
+
+# The assignment operator in R is "<-" 
+# Read it as: store the value on the right INTO the name on the left.
+X <- "This is my first assignment"
+
+# Assignment alone produces no output, so print the object to confirm it worked.
+X
+```
+
+::: callout-note
+Assigning a value to an object in R does not display anything by itself. Typing the object name on its own line is what actually prints the value. This is the confirmation habit the instructions ask us to use throughout the assignment.
+:::
+
+# Exercise 2: Adding Text in Base R
+
+> **Ex 2.** Adding texts in Base R.
+
+## Learning `paste()` from the Help Documentation
+
+> **(1)** Look up the `paste()` function in the help documentation to learn how to use it. Copy some of the examples from the help document into your codebook and run them one line at a time.
+
+::: callout-tip
+This exercise shows how you can learn by using the sample code provided in the help documentation for almost any function in R. Run each line individually to see how `paste()` and `paste0()` work differently.
+:::
+
+```{r}
+#| label: ex2-help-lookup
+#| eval: false
+
+# Pull up the help document for paste().
+# The examples live at the bottom of the help page.
+?paste
+```
+
+```{r}
+#| label: ex2-paste-examples
+
+# --- Examples adapted from the paste() help document ---
+
+# paste() inserts a space between arguments by default.
+paste("A", "B", "C")
+
+# paste0() joins with NO separator - that is the key difference.
+paste0("A", "B", "C")
+
+# The sep argument controls what goes between the arguments.
+paste("A", "B", "C", sep = "-")
+
+# paste() is vectorized: it recycles the shorter argument.
+paste0("Observation_", 1:5)
+
+# The collapse argument flattens a vector into ONE single string.
+paste(c("apple", "banana", "cherry"), collapse = ", ")
+
+# sep and collapse can be combined.
+paste("Row", 1:3, sep = "_", collapse = " | ")
+```
+
+::: callout-note
+The key distinction to remember is that `sep` controls what goes *between the arguments*, while `collapse` controls what goes *between the elements of a vector* when combining it into a single string.
+:::
+
+## Appending Text to `X`
+
+> **(2)** Using the `paste()` function, add "and I'm loving it!" to `X`, the variable that you just created.
+
+```{r}
+#| label: ex2-append-text
+
+# paste() joins the existing variable with the new text.
+X <- paste(X, "and I'm loving it!")
+
+# Print to confirm the text was appended correctly.
+X
+```
+
+# Exercise 3: Creating and Modifying a Vector
+
+> **Ex 3.** Create a vector called `Y` with the numbers 2, 3, 4, and 5. Next, multiply the vector by 2 and save it as `Y` again.
+
+```{r}
+#| label: ex3-vector
+
+# c() stands for "combine" - it builds a vector from individual values.
+Y <- c(2, 3, 4, 5)
+Y
+
+# R is vectorized: multiplying by 2 applies to EVERY element at once.
+# No loop is needed, unlike most other programming languages.
+Y <- Y * 2
+
+# Print to confirm the multiplication overwrote Y correctly.
+Y
+```
+
+::: callout-important
+Reassigning `Y <- Y * 2` overwrites the original vector. Once this runs, the original values (2, 3, 4, 5) are replaced. If you run the chunk a second time, the values will be doubled *again*, which can easily cause confusion when code chunks are re-executed out of order.
+:::
+
+# Exercise 4: Printing Both Objects
+
+> **Ex 4.** Print both the variable (`X`) and the vector (`Y`).
+
+```{r}
+#| label: ex4-print-both
+
+# Typing an object name auto-prints it at the console.
+X
+Y
+
+# print() does the same thing explicitly, and is required 
+# inside loops and functions where auto-printing doesn't happen.
+print(X)
+print(Y)
+```
+
+# Exercise 5: Maximum and Minimum Values
+
+> **Ex 5.** Show the maximum and the minimum value of the vector `Y` that you created.
+
+```{r}
+#| label: ex5-max-min
+
+# max() returns the largest value in the vector.
+max(Y)
+
+# min() returns the smallest value in the vector.
+min(Y)
+
+# range() is a useful shortcut - it returns both at once as a vector.
+range(Y)
+```
+
+# Exercise 6: Loading ggplot2 and the economics Data
+
+> **Ex 6.** Load up the `ggplot2` package and take a look at the first six rows of the data called "economics," which is available with the package.
+
+::: callout-important
+The `install.packages()` line is commented out using `#`. If it were left active, R would try to reinstall the package every time the document renders, which would slow down the process and could cause the render to fail.
+:::
+
+```{r}
+#| label: ex6-load-ggplot2
+
+# install.packages("ggplot2")  # Only needed once. Commented out to avoid reinstalling on render.
+
+# library() loads an already-installed package into the current session.
+library(ggplot2)
+
+# head() shows the first six rows by default - a quick way to inspect a data set.
+head(economics)
+```
+
+# Exercise 7: Building a Chart with ggplot2
+
+> **Ex 7.** Use the data set "economics" from the `ggplot2` package. First understand the data by referring to the help document. Provide the definition of the variables in bullets to aid readers who will not have access to the help document. Pick two variables that you think are somehow related. Then draw a chart using the `ggplot2` package, assigning `plot` to the basic layers of data, aesthetics, and geometry. Using `labs()`, add the title and labels for the x-axis and y-axis.
+
+::: callout-tip
+Since all of the variables are continuous, you can use a scatter plot (`geom_point`) to compare the two variables. The help documentation includes the full, unabridged names of the variables, so use those full names for the x- and y-axis labels in the chart.
+:::
+
+## Variable Definitions
+
+The `economics` data set is a monthly time series of U.S. economic indicators collected from 1967 onward. It contains six variables:
+
+* **`date`** — the month when the data was collected
+* **`pce`** — personal consumption expenditures, in billions of dollars
+* **`pop`** — total population, in thousands
+* **`psavert`** — personal savings rate
+* **`uempmed`** — median duration of unemployment, in weeks
+* **`unemploy`** — number of unemployed persons, in thousands
+
+## Selecting Two Related Variables
+
+I chose **`unemploy`** and **`uempmed`** because they measure two different sides of the same underlying condition. `unemploy` shows *how many* people are unemployed, while `uempmed` shows *how long* the typical unemployed person remains unemployed. If unemployment is getting worse in both size and duration at the same time, I would expect the two variables to move in the same direction.
+
+```{r}
+#| label: ex7-build-plot
+
+# Build the plot in layers, per the grammar of graphics:
+#   1. data      -> the economics data set
+#   2. aesthetics -> which variable maps to which axis
+#   3. geometry   -> how the data is drawn (points, for a scatter plot)
+plot <- ggplot(data = economics, aes(x = unemploy, y = uempmed)) +
+  geom_point()
+
+# Add the title and axis labels using the full variable names from the help doc.
+plot + 
+  labs(title = "Number of Unemployed vs. Median Duration of Unemployment",
+       x = "Number of Unemployed (in thousands)",
+       y = "Median Duration of Unemployment (in weeks)")
+```
+
+# Exercise 8: Replicating the Chart with a Pipe
+
+> **Ex 8.** Replicate the chart above using a pipe operator and without saving the initial plot as a plot object — one long chain of code from the data at the top to the last addition to the chart. Add a label and caption to the figure so it can be cross-referenced. Make the width of the figure 5 with an aspect ratio of 0.6.
+
+::: callout-tip
+Once you replicate the chart, use `#|` inside the code chunk to control the label, caption, and size of the figure.
+:::
+
+```{r}
+#| label: fig-unemployment
+#| fig-cap: "Relationship between the number of unemployed persons and the median duration of unemployment, US monthly data from 1967 onward."
+#| fig-width: 5
+#| fig-asp: 0.6
+
+# The native pipe (|>) passes the data set directly into ggplot() 
+# as its first argument, so no plot object needs to be saved first.
+economics |>
+  ggplot(aes(x = unemploy, y = uempmed)) +
+  geom_point() +
+  labs(title = "Number of Unemployed vs. Median Duration of Unemployment",
+       x = "Number of Unemployed (in thousands)",
+       y = "Median Duration of Unemployment (in weeks)")
+```
+
+::: callout-note
+Note the syntax change in the middle of the chain: `|>` pipes the *data* into `ggplot()`, but once you are working inside ggplot2, additional layers are added using `+`. Mixing these two up is one of the most common beginner mistakes when working with the Tidyverse.
+:::
+
+# Exercise 9: Describing the Findings
+
+> **Ex 9.** Using one of the callout blocks, describe your findings. In doing so, use cross-referencing to refer to the figure you created earlier.
+
+::: callout-important
+## Findings
+
+@fig-unemployment shows a clear positive relationship between the two measures: as the number of unemployed people increases, the median duration of unemployment tends to increase as well. This supports the expectation that unemployment can worsen in both size and duration at the same time rather than moving independently.
+
+The relationship is not perfectly linear, though. The points spread out more at higher unemployment levels, and there is a noticeable cluster where unemployment is moderate but the median duration remains unusually high. This suggests that the *duration* of unemployment can stay elevated even after the *number* of unemployed people starts to fall. In other words, people may return to work gradually during a recovery, while long-term unemployment continues to linger even after the downturn itself has ended.
+:::
+
+# Exercise 10: Tools Implemented
+
+> **Ex 10.** Make sure your codebook is well organized, easy to navigate, and beautiful. Implement as many tools as you learned in Step 1. Then explicitly state under this question what you did, summarized in a numbered list, using at least 10 different kinds of tools.
+
+Below is a summary of the Quarto and Markdown tools I used throughout this report to keep it reproducible, easy to navigate, and easy to read:
+
+1. **Section numbering with headings** — `#`, `##`, and `###` organize the document into numbered sections and subsections. These headings also populate the table of contents and the RStudio Outline panel, making the report easier to navigate.
+2. **Bold font** — used with `**text**` to highlight key terms, variable names, and exercise labels.
+3. *Italicized font* — used with `*text*` to emphasize specific words and contrasts within sentences.
+4. **`callout-tip`** — used for each hint provided in the assignment instructions so the hints stay visually separate from the task itself.
+5. **`callout-note`** — used to record additional observations that may be useful later, such as the difference between `sep` and `collapse`.
+6. **`callout-important`** — used for warnings that could cause problems later, such as overwriting a vector or leaving `install.packages()` uncommented.
+7. **Block quotes** — used consistently with `>` to separate each task statement from my own commentary.
+8. **Backticks around functions** — used with `` ` `` to separate function and variable names from regular prose, such as `paste()`, `economics`, and `geom_point()`.
+9. **Cross-referencing the figure** — the figure was labeled `fig-unemployment` and given a caption, then referenced in Exercise 9 using `@fig-unemployment`, which creates a clickable link with a hover preview.
+10. **Chunk options with `#|`** — used to control how each chunk behaves: `label` names the chunk, `fig-cap` adds the caption, `fig-width` and `fig-asp` control figure sizing, and `eval: false` allows the `?paste` call to appear without running during rendering.
+11. **Bulleted lists** — used to define the six variables in the `economics` data set in a format that is easy to scan.
+12. **YAML configuration** — `toc`, `toc-depth`, `number-sections`, `code-line-numbers`, `code-link`, and `embed-resources` were all set in the header to create a self-contained and easy-to-navigate HTML report.
+13. **In-chunk comments** — every code chunk includes `#` comments explaining *why* each line is there, not just what it does, so the code is easier to understand when I return to it later.
