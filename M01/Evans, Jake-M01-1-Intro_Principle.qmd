@@ -1,0 +1,200 @@
+---
+title: "Module 1 Introduction to Literate Programming with Quarto"
+author: "Jake Evans"
+date: '`r format(Sys.time())`'
+format: 
+  html: 
+    toc: true
+    toc-depth: 4
+    number-sections: true
+    code-line-numbers: true
+    code-fold: false
+    code-link: true
+    embed-resources: true
+    df-print: paged
+editor: visual
+execute: 
+  freeze: auto
+  warning: false
+---
+
+# Introduction
+
+This is my codebook for the M01-1 workshop on literate programming with Quarto, based on the presentation by Dr. Jung, Dr. Lang, Jared, and Sena. I’m following along and typing out the code and syntax as they demonstrate it, while organizing everything into sections by topic so I can easily come back and reference it later.
+
+# Project Setup in RStudio
+
+Before writing any code, the workshop recommends starting a **New Project** in RStudio instead of just opening a loose file. This automatically creates an `.Rproj` file, which is the file you should reopen the next time you work on the project rather than opening the `.qmd` file directly. The `.Rproj` automatically sets the correct working directory for you.
+
+There are three ways to start a project:
+
+* **New Directory** — creates a brand-new project folder on your local drive
+* **Existing Directory** — turns a folder you already have into a project
+* **Version Control (Git)** — clones a GitHub repository, such as a class repository someone shares with you through a URL
+
+For this workshop, I used **New Directory > Quarto Document/New Project** and created a `workshop1` folder to keep the `.qmd` file, its rendered output, and any images together in one place.
+
+# Codebooks in R: Three Types
+
+The workshop covered three different kinds of "codebooks" that R users can work in:
+
+1. **R Script (`.R`)** — the original and simplest type of codebook. Everything you type is treated as code by default, so you have to use `#` when you want to add a comment or note instead of code.
+2. **R Markdown (`.Rmd`)** — combines code, output, and written text in one document, but it requires additional packages to access its full ecosystem, such as blogs and books.
+3. **Quarto (`.qmd`)** — the newer document type that can do everything R Markdown can do without requiring those extra packages. It also supports other programming languages, including Python, Julia, and Observable JS, as well as other IDEs like VS Code and Jupyter.
+
+
+```{r}
+#| eval: false
+# This is what a comment looks like in an .R script — 
+# everything else on an uncommented line is treated as code.
+1 + 2
+```
+
+# The Three Areas of a Quarto Document
+
+Every `.qmd` file is made up of three main areas:
+
+1. **YAML header** — surrounded by three dashes (`---`) at the top and bottom. This controls the structure and settings of the rendered output, such as the title, author, date, format, table of contents, and other document options.
+2. **Code chunks** — begin with three backticks and curly braces containing the language, such as ` ```{r} `, and end with three backticks. This is where the code goes.
+3. **Text area** — everything outside of code chunks. This is where you write the narrative or prose using Markdown syntax, including headings, bold text, links, and other formatting.
+
+::: callout-note
+One warning from the instructor that stuck with me: don't write code in the text area. RStudio will ignore it unless it is inside a code chunk or written as special *inline code*. It might look fine while you're typing, but it will not actually run when the document is rendered.
+:::
+
+## Reading Data the Base R Way vs. the Tidyverse Way
+
+```{r}
+#| eval: false
+# Base R way - pass the data set into the function
+head(mtcars)
+
+# Tidyverse way - start with the data, then pipe into the function
+mtcars |> head()
+```
+
+The Tidyverse's pipe-based (`|>`) style became popular as R started being used more heavily for data science rather than just statistics. Developed largely through the work of Hadley Wickham, the Tidyverse is a "mega package" made up of roughly ten packages, including `ggplot2`, that are designed to work together using a consistent grammar and style.
+
+# Markdown Formatting Basics
+
+## Headings
+
+Headings are created using `#` symbols followed by a space — one `#` for a top-level heading, two for a subheading, and so on, up to six levels. These headings automatically appear in RStudio's **Outline** panel, which makes it much easier to navigate through a longer `.qmd` file.
+
+``` markdown
+# Hello
+## My name is
+### Jake
+```
+
+## Text Formatting
+
+``` markdown
+**this is bold**
+
+`this is code`
+
+*this is italicized*
+```
+
+In the visual editor, you can also highlight the text and use the Bold, Italic, or Code buttons in the toolbar. It gives you the same result, just through a different method.
+
+## Lists
+
+``` markdown
+- item one
+- item two
+  - sub item
+```
+
+``` markdown
+1. list one
+2. list two
+```
+
+## Links and Images
+
+``` markdown
+[Google](https://google.com)
+```
+
+``` markdown
+![Alt text describing the image](path-or-url-to-image.png)
+```
+
+Both can also be added through the visual editor. Just highlight the text and click the link button, or use the image button to open a small prompt where you can choose a file or enter a URL.
+
+## Callout Blocks and Block Quotes
+
+Typing `/` opens Quarto's **Insert Anything** menu, which is a quick way to add callouts, block quotes, tables, figures, and even emojis without having to memorize the raw syntax.
+
+::: callout-note
+This is a callout block, inserted using the `/` shortcut and selecting "Callout."
+:::
+
+> This is a block quote, also inserted using the `/` shortcut.
+
+# Cross-Referencing a Table
+
+To reference a table (or figure) elsewhere in the document, it needs a label that starts with `tbl-` (or `fig-` for figures) plus a caption. Referencing it later with `@tbl-example` creates a clickable link that pops up a preview of the table.
+
+```{r}
+#| label: tbl-example
+#| tbl-cap: "This is a table"
+
+data.frame(
+  Column1 = c("A", "B", "C"),
+  Column2 = c(1, 2, 3),
+  Column3 = c("X", "Y", "Z")
+)
+```
+
+See @tbl-example above for a simple three-column, three-row example.
+
+# Controlling Code Visibility with Chunk Options
+
+By default, Quarto displays both the code and its output when the document is rendered. The `echo` chunk option controls whether the code itself appears in the final document.
+
+
+```{r}
+#| label: fig-cars
+#| fig-cap: "Speed vs. stopping distance in the built-in cars dataset"
+#| echo: false
+
+plot(cars)
+```
+
+Setting `echo: false` for this chunk means that only the plot in @fig-cars appears in the rendered document, while the `plot(cars)` code itself stays hidden. Changing it to `echo: true` (or removing the option, since `true` is the default) would display the code above the plot as well.
+
+# Output Formats
+
+One of the biggest advantages of Quarto highlighted in the workshop is that the **same `.qmd` file** can be rendered into multiple formats simply by changing the YAML, without having to change the code or text itself:
+
+* `html` — the default, web-ready output
+* `pdf` — requires TinyTeX to be installed first
+* `docx` — generates an actual Word document
+* `revealjs` — turns the same content into an HTML slide presentation
+* `pptx` — can also render the document as a PowerPoint presentation
+* `dashboard` — used for building interactive dashboards
+
+
+
+A single document can also include multiple formats at once in the YAML, allowing Quarto to generate all of them side by side, such as an HTML page with a downloadable PDF version of the same content.
+
+# Publishing
+
+Once a project is set up, Quarto can publish directly to the web with one command run in the RStudio **Terminal** tab:
+
+```{bash}
+#| eval: false
+quarto publish
+```
+
+The workshop demonstrated how to publish with **Netlify**, but Quarto also supports **Quarto Pub**, **GitHub Pages**, **Posit Connect**, and **Hugging Face**, many of which offer free options. This connects back to the GitHub setup from earlier in the course, since version control with Git and publishing are separate parts of the same reproducible workflow, but they work closely together.
+
+# Why This Matters for My Work
+
+During the panel Q&A, Dr. Lang pointed out that Excel and Google Sheets are not always reproducible. You copy and paste data, add a column, make changes, and then a few weeks later it can be difficult to remember exactly how you arrived at a certain number. With R, the code leaves a clear trail, so you can go back and retrace each step of the process.
+
+Sena also gave a digital marketing example of this problem: linking to or taking screenshots from Google Sheets and then having to redo everything whenever the data updates. With Quarto, the report can pull directly from the source, so the content stays current as the data changes.
+
