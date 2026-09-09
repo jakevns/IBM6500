@@ -75,7 +75,7 @@ The Tidyverse is described as a "mega package" of eight core packages that share
 | purrr   | Functional programming — applying functions across lists |
 | ggplot2 | Grammar-of-graphics based visualization                  |
 
-: Core packages in the Tidyverse and their roles {#tbl-tidyverse}
+: Core packages in the Tidyverse and their roles
 
 The dplyr-plus-ggplot2 combination below is a small working example of the pattern Step 5 of Thomas Mock's, "Intro to the Tidyverse", video covered: filter/group/summarize the data, then hand it straight to ggplot2.
 
@@ -134,7 +134,7 @@ What stood out to me is how Quarto makes it possible for people using either lan
 ## Module Sources Referenced
 
 | Step | Source | Presenter(s) |
-|:----------------|:-----------------------------|:------------------------|
+|:---|:---|:---|
 | 1 | An Introduction to Reproducible Research Practices | Sophia Lafferty-Hess & John Little, Duke University Libraries |
 | 2–3 | In-depth Literate Programming with Quarto; Quick Project Publication on gh-pages | Prof. Jae-M Jung |
 | 4 | Welcome to Quarto Workshop! | Tom Mock, Posit |
@@ -142,7 +142,7 @@ What stood out to me is how Quarto makes it possible for people using either lan
 | 6 | 20 R Packages You Should Know (in 2021) | Richard, *Richard on Data* |
 | 7 | R vs. Python: Which Should You Learn? | Practitioner and academic panels |
 
-: Module 02 video sources referenced in this reflection {#tbl-sources}
+: Module 02 video sources referenced in this reflection
 
 ::: {.callout-note collapse="true"}
 ## Quarto features used in this report
