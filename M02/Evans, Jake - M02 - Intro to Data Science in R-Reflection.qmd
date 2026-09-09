@@ -127,14 +127,14 @@ What stood out to me is how Quarto makes it possible for people using either lan
 
 ## Project Links
 
-- **GitHub Repository:** <https://github.com/jakevns/RStudio>
+- **GitHub Repository:** <https://github.com/jakevns/IBM6500/tree/main/M02>
 
-- **GitHub Pages Report:** <https://jakevns.github.io/RStudio/Evans%2C%20Jake%20-%20M02%20-%20Intro%20to%20Data%20Science%20in%20R-Reflection.html>
+- **GitHub Pages Report:** <https://jakevns.github.io/IBM6500/M02/Evans%2C%20Jake%20-%20M02%20-%20Intro%20to%20Data%20Science%20in%20R-Reflection.html>
 
 ## Module Sources Referenced
 
 | Step | Source | Presenter(s) |
-|:---|:---|:---|
+|:-----------------------|:-----------------------|:-----------------------|
 | 1 | An Introduction to Reproducible Research Practices | Sophia Lafferty-Hess & John Little, Duke University Libraries |
 | 2–3 | In-depth Literate Programming with Quarto; Quick Project Publication on gh-pages | Prof. Jae-M Jung |
 | 4 | Welcome to Quarto Workshop! | Tom Mock, Posit |

@@ -28,20 +28,19 @@ Before writing any code, the workshop recommends starting a **New Project** in R
 
 There are three ways to start a project:
 
-* **New Directory** — creates a brand-new project folder on your local drive
-* **Existing Directory** — turns a folder you already have into a project
-* **Version Control (Git)** — clones a GitHub repository, such as a class repository someone shares with you through a URL
+- **New Directory** — creates a brand-new project folder on your local drive
+- **Existing Directory** — turns a folder you already have into a project
+- **Version Control (Git)** — clones a GitHub repository, such as a class repository someone shares with you through a URL
 
-For this workshop, I used **New Directory > Quarto Document/New Project** and created a `workshop1` folder to keep the `.qmd` file, its rendered output, and any images together in one place.
+For this workshop, I used **New Directory \> Quarto Document/New Project** and created a `workshop1` folder to keep the `.qmd` file, its rendered output, and any images together in one place.
 
 # Codebooks in R: Three Types
 
 The workshop covered three different kinds of "codebooks" that R users can work in:
 
-1. **R Script (`.R`)** — the original and simplest type of codebook. Everything you type is treated as code by default, so you have to use `#` when you want to add a comment or note instead of code.
-2. **R Markdown (`.Rmd`)** — combines code, output, and written text in one document, but it requires additional packages to access its full ecosystem, such as blogs and books.
-3. **Quarto (`.qmd`)** — the newer document type that can do everything R Markdown can do without requiring those extra packages. It also supports other programming languages, including Python, Julia, and Observable JS, as well as other IDEs like VS Code and Jupyter.
-
+1.  **R Script (`.R`)** — the original and simplest type of codebook. Everything you type is treated as code by default, so you have to use `#` when you want to add a comment or note instead of code.
+2.  **R Markdown (`.Rmd`)** — combines code, output, and written text in one document, but it requires additional packages to access its full ecosystem, such as blogs and books.
+3.  **Quarto (`.qmd`)** — the newer document type that can do everything R Markdown can do without requiring those extra packages. It also supports other programming languages, including Python, Julia, and Observable JS, as well as other IDEs like VS Code and Jupyter.
 
 ```{r}
 #| eval: false
@@ -54,9 +53,9 @@ The workshop covered three different kinds of "codebooks" that R users can work 
 
 Every `.qmd` file is made up of three main areas:
 
-1. **YAML header** — surrounded by three dashes (`---`) at the top and bottom. This controls the structure and settings of the rendered output, such as the title, author, date, format, table of contents, and other document options.
-2. **Code chunks** — begin with three backticks and curly braces containing the language, such as ` ```{r} `, and end with three backticks. This is where the code goes.
-3. **Text area** — everything outside of code chunks. This is where you write the narrative or prose using Markdown syntax, including headings, bold text, links, and other formatting.
+1.  **YAML header** — surrounded by three dashes (`---`) at the top and bottom. This controls the structure and settings of the rendered output, such as the title, author, date, format, table of contents, and other document options.
+2.  **Code chunks** — begin with three backticks and curly braces containing the language, such as ```` ```{r} ````, and end with three backticks. This is where the code goes.
+3.  **Text area** — everything outside of code chunks. This is where you write the narrative or prose using Markdown syntax, including headings, bold text, links, and other formatting.
 
 ::: callout-note
 One warning from the instructor that stuck with me: don't write code in the text area. RStudio will ignore it unless it is inside a code chunk or written as special *inline code*. It might look fine while you're typing, but it will not actually run when the document is rendered.
@@ -155,7 +154,6 @@ See @tbl-example above for a simple three-column, three-row example.
 
 By default, Quarto displays both the code and its output when the document is rendered. The `echo` chunk option controls whether the code itself appears in the final document.
 
-
 ```{r}
 #| label: fig-cars
 #| fig-cap: "Speed vs. stopping distance in the built-in cars dataset"
@@ -170,14 +168,12 @@ Setting `echo: false` for this chunk means that only the plot in @fig-cars appea
 
 One of the biggest advantages of Quarto highlighted in the workshop is that the **same `.qmd` file** can be rendered into multiple formats simply by changing the YAML, without having to change the code or text itself:
 
-* `html` — the default, web-ready output
-* `pdf` — requires TinyTeX to be installed first
-* `docx` — generates an actual Word document
-* `revealjs` — turns the same content into an HTML slide presentation
-* `pptx` — can also render the document as a PowerPoint presentation
-* `dashboard` — used for building interactive dashboards
-
-
+- `html` — the default, web-ready output
+- `pdf` — requires TinyTeX to be installed first
+- `docx` — generates an actual Word document
+- `revealjs` — turns the same content into an HTML slide presentation
+- `pptx` — can also render the document as a PowerPoint presentation
+- `dashboard` — used for building interactive dashboards
 
 A single document can also include multiple formats at once in the YAML, allowing Quarto to generate all of them side by side, such as an HTML page with a downloadable PDF version of the same content.
 
@@ -198,7 +194,7 @@ During the panel Q&A, Dr. Lang pointed out that Excel and Google Sheets are not 
 
 Sena also gave a digital marketing example of this problem: linking to or taking screenshots from Google Sheets and then having to redo everything whenever the data updates. With Quarto, the report can pull directly from the source, so the content stays current as the data changes.
 
-# Appendix 
+# Appendix
 
 - [Course repository](https://github.com/jakevns/IBM6500)
 - [Rendered assignment (GitHub Pages)](https://jakevns.github.io/IBM6500/M01/Evans,%20Jake-M01-1-Intro_Principle.html)
