@@ -1,0 +1,168 @@
+---
+title: "R Markdown: Reproducible Report in Data Science"
+author: "Jake"
+date: "`r Sys.time()`"
+output: 
+  html_document:
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: false
+    highlight: espresso
+    theme: journal
+    number_sections: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# R Markdown
+
+R Markdown is a format for writing reproducible, dynamic, reports with R. Use it embed R code and results into slideshow, pdfs, html documents, Word files and mroe.
+
+# Structure
+
+1.  YAML Header
+2.  Text Area
+3.  Code Chunk
+
+# WorkFlow
+
+1.  Open - Open a file that uses the .Rmd extension.
+2.  Write - Write content with the easy to use R Markdown syntax.
+3.  Embed - Embed R code that creates output to include in the report.
+4.  Render - Replace R code with its output and transform the report into a slideshow, pdf, html, or ms word file.
+
+# Text Area Formatting Tooks:
+
+Plain Text
+
+End a line with two spaces to start a new paragraph.
+
+*italic* and *italics* **bold** and **bold** superscript^2^ ~~strikethrough~~ Hyperlink: [CCIDM](https://www.cpp.edu/cba/customer-isnights-lab/index.shtml)
+
+# Header 1
+
+## Header 2
+
+### Header 3
+
+#### Header 4
+
+##### Header 5
+
+###### Header 6
+
+emdash: -- emdash: --- inline equation: $A = \pi*r^2$ slide break:
+
+------------------------------------------------------------------------
+
+> Block quote
+
+1.  Odered list 1
+2.  Ordered list 2
+    - sub-item 1
+    - sub-item 2
+
+| Table Header | Second Header |
+|:------------:|--------------:|
+|  Table Cell  |        Cell 2 |
+|    Cell 3    |        Cell 4 |
+
+# YAML Header
+
+> A YAML Header is a set of key: value pairs at the start of your file. Begin and end the header with the line of three dashes (---). (From the rmd Cheatsheet <https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf>)
+
+You will notice that *my YAML header* is difference from the default one Rmd file automatically created. That is because I Customized output option as aboe. This setting dictates how your html file that will be knitted will look like.
+
+- **date**: '`r format(Sys.time())`' -This allows to print the current time each time you knit the file.\
+  -Can be customized in various ways
+  - date-time: '`r Sys.time()`"
+  - Day, Month, Date, Year (e.g. Tuesday, Feburary 10, 2023): '`r format(Sys.time(),"%A, %B, %d, %Y")`'
+  - m/d/y (e.g., 10/15/2023): '`r format(Sys.time(),  "%m/%d/%Y")`'
+
+------------------------------------------------------------------------
+
+- **toc**: yes
+  - I Turned the table of contents on.  This will ahve hyperlinsk in HTML and allow readers to navigate the desired sections faster. 
+- **toc_depth**: 4
+  - I want to see up to four levels of headings
+- **toc_float**: true
+  -adding this move toc from the front end fo teh document to a left side floating when you scroll it down. 
+  -By Default, the floating toc headings are collapsed, not showing all headings.  We can turn it off using the following.
+  ```
+  toc_float:
+    collapsed: false
+  ```
+-**highlight**: espresso
+  -I want to see "espresso" style: black background of codes area.
+- **theme**: journal 
+  -journal style. Choose the style you like. 
+- **number_sections**: yes
+  -turned on automatic setion numbering, which is why I didn't add numbering manually below. 
+    -notice hwo this will nicely turn your HTML report much mroe organized. 
+  -Try this and other options to see which one you like the most in your HTML file. 
+    
+# Embed Codes
+
+## Code Chunk
+
+### Sample
+
+* Ctrl + alt + I
+
+```{r penguins}
+
+# use ctrl + Enter at the same time to execute a line. 
+# Use # to comment out a code
+# install.packages("tidyverse")
+library(tidyverse)
+
+#install.packages("palmerpenguins")
+library("palmerpenguins")
+penguins
+
+dim(penguins)
+skimr::skim(penguins)
+
+# Sex Distribution
+penguins %>%
+  count(sex) %>%
+  ggplot(aes(sex, n)) +
+  geom_col()
+
+# Number of male
+sum(penguins$sex == "male", na.rm = TRUE)
+
+# Total Observation
+nrow(penguins)
+
+# Percent of Males
+m_per <- round((sum(penguins$sex == "male, na.rm = TRUE") / nrow(penguins)) * 100, digits = 1)
+
+# Percent of Females
+f_per <- round((sum(penguins$sex == "female, na.rm = TRUE") / nrow(penguins)) * 100, digits = 1)
+
+```
+
+## Code chunk options
+
+For more details visit <https://vihui.org/knitr/options>
+
+## Inline Coding 
+
+* Sample Characteristics: 
+There are `r nrow(penguins)` penguins in the data, `r m_per` % of which are male and `r f_per` ^ of which are females.  
+
+# Navigation
+
+* Outline (right side)
+* Status Bar (bottom)
+
+#  Expectations for ORganizing your Assignment report with Rmd File.  
+## M01-1 Principle Assignment
+
+# References 
+
+Markdown Cheatsheet <https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf>
