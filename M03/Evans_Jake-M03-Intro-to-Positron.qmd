@@ -55,7 +55,7 @@ The bigger habit change is leaning on the **Command Palette** (`Ctrl/Cmd+Shift+P
 Per the assignment, here's a quick rundown of the formatting and Quarto features built into this document, beyond the obvious headings, bold/italic text formatting, and bullet/numbered lists used throughout:
 
 | Feature | Where It Shows Up |
-|------------------------------------|------------------------------------|
+|----|----|
 | Table of contents (`toc`, `toc-depth`, `toc-expand`) | Left-hand sidebar of the rendered HTML |
 | Section numbering | `number-sections: true` in the YAML — visible on every heading |
 | Self-contained output | `embed-resources: true` — the HTML is a single file, no external assets |
@@ -148,14 +148,14 @@ These two tools are already converging — Positron Assistant and Databot are be
 [^2]: Both tools are explicitly preview features, so behavior and provider support are still changing release to release.
 
 | Provider | What It's Used For | Cost |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | GitHub Copilot (Free tier) | Inline code completions, limited chat | Free with any GitHub account |
 | GitHub Copilot Pro (Student) | Completions + chat + agent mode, higher usage limits | Free through GitHub Education (Student Developer Pack) |
 | Anthropic Claude | Chat and agent mode — multi-step refactors, debugging | Requires your own paid account/API access |
 | Posit AI | Chat and completions, Posit-hosted | Free with a Posit sign-in |
 | OpenAI / Amazon Bedrock / Snowflake Cortex | Chat and completions | Bring your own paid API key |
 
-: AI model providers available inside Positron Assistant {#tbl-ai-options}
+: AI model providers available inside Positron Assistant
 
 As shown in @tbl-ai-options, the free entry point is GitHub Copilot's free tier — it works the moment you sign into GitHub inside Positron, no application required. The bigger upgrade (full chat, agent mode, and higher request limits) comes from GitHub Education's free Copilot Pro for verified students, which is the option this module recommends.[^3]
 
@@ -187,7 +187,7 @@ My GitHub Education application was approved, and after the standard 72-hour act
 
 > Play with it and do you find it helpful or distracting? Please elaborate.
 
-The AI tool I've actually used hands-on for this course, including putting this report together, has been **Claude**.  It's been helpful rather than distracting, and the main reason is how I used it: instead of asking it to write a reflection from nothing, I fed it the actual video transcripts and the official Positron documentation, then had it organize what I'd actually watched into the Quarto structure this assignment needed. That kept it closer to research assistance than to having an AI do the assignment for me. A concrete example — an early draft claimed Positron's Plots pane didn't have history navigation, based on a general blog post. Once I supplied the real video transcript, that turned out to be wrong, and the draft got corrected. That back-and-forth, where I supplied source material and caught errors, is what made the process feel more like assisted research than outsourced thinking. The parts that needed to stay genuinely mine were the personal reflection pieces — what I actually like about Positron, what I actually installed, whether I actually found something useful — since none of that can come from an AI assistant on my behalf.
+The AI tool I've actually used hands-on for this course, including putting this report together, has been **Claude**. It's been helpful rather than distracting, and the main reason is how I used it: instead of asking it to write a reflection from nothing, I fed it the actual video transcripts and the official Positron documentation, then had it organize what I'd actually watched into the Quarto structure this assignment needed. That kept it closer to research assistance than to having an AI do the assignment for me. A concrete example — an early draft claimed Positron's Plots pane didn't have history navigation, based on a general blog post. Once I supplied the real video transcript, that turned out to be wrong, and the draft got corrected. That back-and-forth, where I supplied source material and caught errors, is what made the process feel more like assisted research than outsourced thinking. The parts that needed to stay genuinely mine were the personal reflection pieces — what I actually like about Positron, what I actually installed, whether I actually found something useful — since none of that can come from an AI assistant on my behalf.
 
 ## Publishing to GitHub Pages
 
