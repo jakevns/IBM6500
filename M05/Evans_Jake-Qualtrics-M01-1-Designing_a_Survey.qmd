@@ -75,5 +75,5 @@ The third block begins with the Part 2 introduction (Q3.1). Q3.2 uses a **Side b
 
 # Appendix
 
-- **GitHub Repository:** <https://github.com/jakevns/IBM6500/tree/main/M04>
-- **GitHub Pages:** <https://jakevns.github.io/IBM6500/M04/Evans_Jake-Qualtrics-M01-1-Designing_a_Survey.html>
+- **GitHub Repository:** <https://github.com/jakevns/IBM6500/tree/main/M05>
+- **GitHub Pages:** <https://jakevns.github.io/IBM6500/M05/Evans_Jake-Qualtrics-M01-1-Designing_a_Survey.html>
