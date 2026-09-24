@@ -71,10 +71,6 @@ I added the following Qualtrics functions to match the logic and coding shown in
 * **Skip logic** was added to Q1.1 and Q1.2 so participants who do not consent or do not have market research experience are taken directly to the end of the survey.
 * **Display logic** was added to show certain questions only when they are relevant to the respondent. Q3.7 and Q3.9 appear only when a Master’s Degree is selected, Q4.9 appears only when enrollment is rated as unlikely, Q5.6 through Q5.8 depend on the respondent’s highest level of education, and Q5.12 and Q5.13 depend on the respondent’s state and California region.
 
-# 5. Notes and Remaining Refinements
-
-This section can be used to explain any formatting decisions, items that were intentionally left unchanged from the original survey, or any questions that still need clarification before the survey is finalized.
-
 # Appendix
 
 - **GitHub Repository:** <https://github.com/jakevns/IBM6500/tree/main/M06>
