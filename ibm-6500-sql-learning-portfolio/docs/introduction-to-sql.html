@@ -2276,18 +2276,13 @@ vertical-align: -.125em;
 <figcaption>DataCamp Statement of Accomplishment for Introduction to SQL</figcaption>
 </figure>
 </div>
-<p>I completed the DataCamp course <em>Introduction to SQL</em> on November 30, 2025. The course shows as <strong>Completed</strong> under the Introduction to SQL assignment in the IBM 6500 DataCamp classroom.</p>
+<p>I completed the DataCamp course <em>Introduction to SQL</em> on November 30, 2025. The course is marked as <strong>Completed</strong> under the Introduction to SQL assignment in the IBM 6500 DataCamp classroom.</p>
 </section>
 <section id="learning-notes-and-key-takeaways" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Learning Notes and Key Takeaways</h1>
-<p>The course is split into two chapters. Chapter 1 covers how relational databases are organized, and Chapter 2 covers how to write queries against them. Most examples in the course use a small library database with a <code>books</code> table and a <code>patrons</code> table, so my examples below use the same tables.</p>
-<div id="tbl-library" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-library-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table 1: Library database used in the course examples
-</figcaption>
-<div aria-describedby="tbl-library-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p>The course is split into two chapters. Chapter 1 explains how relational databases are organized, while Chapter 2 focuses on how to write queries and pull information from them. Most of the course examples use a small library database with <code>books</code>, <code>patrons</code>, and <code>checkouts</code> tables, and some of the Chapter 2 videos also use an <code>employees</code> table. I used the library tables for my examples below.</p>
 <table class="caption-top table">
+<caption>Library database used in the course examples</caption>
 <thead>
 <tr class="header">
 <th>Table</th>
@@ -2305,32 +2300,25 @@ Table 1: Library database used in the course examples
 </tr>
 </tbody>
 </table>
-</div>
-</figure>
-</div>
 <section id="relational-databases" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="relational-databases"><span class="header-section-number">2.1</span> Relational Databases</h2>
 <section id="main-ideas" class="level3" data-number="2.1.1">
 <h3 data-number="2.1.1" class="anchored" data-anchor-id="main-ideas"><span class="header-section-number">2.1.1</span> Main ideas</h3>
-<p>A <strong>relational database</strong> stores data in tables and defines how those tables relate to each other. Instead of putting everything into one huge spreadsheet, the data is split into separate tables, one for each kind of thing (books, patrons, checkouts), and the tables are connected through shared fields. This keeps the data from being duplicated and makes it easier to keep accurate.</p>
+<p>A <strong>relational database</strong> stores data in separate tables and connects those tables through shared fields. Instead of putting everything into one giant spreadsheet, the information is split up based on what it represents, such as books, patrons, or checkouts. This helps keep the data organized, avoids repeating the same information, and makes it easier to keep everything accurate.</p>
+<p>Databases can look a lot like spreadsheets, but they are much more powerful. They can handle much larger amounts of data and can also be more secure through things like encryption. Multiple people can query the same database at the same time without changing the original data. The database simply pulls and displays the information based on what the query asks for.</p>
 <p>Key vocabulary:</p>
 <ul>
-<li><strong>Table:</strong> holds data about one kind of entity, organized into rows and columns.</li>
-<li><strong>Record (row):</strong> one observation, such as one book or one patron.</li>
-<li><strong>Field (column):</strong> one attribute recorded for every observation, such as <code>title</code> or <code>member_year</code>.</li>
-<li><strong>Unique identifier (key):</strong> a value that identifies each record, such as a patron’s <code>card_num</code>. Names are not good keys because two people can share a name.</li>
-<li><strong>Schema:</strong> the “blueprint” of a database. It shows which tables exist, what fields and data types they contain, and how the tables relate.</li>
-<li><strong>Server:</strong> the computer where the database is physically stored and that handles requests for the data. This is what allows many people to access the same database at once.</li>
+<li><strong>Table:</strong> stores data about one type of thing using rows and columns.</li>
+<li><strong>Record (row):</strong> one individual entry, such as one book or one patron.</li>
+<li><strong>Field (column):</strong> one type of information recorded for each entry, such as <code>title</code> or <code>member_year</code>.</li>
+<li><strong>Unique identifier (key):</strong> a value used to identify each record, such as a patron’s <code>card_num</code>. Names are not great keys because more than one person can have the same name.</li>
+<li><strong>Schema:</strong> the overall structure or “blueprint” of the database. It shows the tables, the fields they contain, their data types, and how the tables connect to each other.</li>
+<li><strong>Server:</strong> the computer where the database is stored and where requests for the data are handled. This allows multiple people to access the same database.</li>
 </ul>
-<p><strong>Naming conventions.</strong> Table names should be lowercase, use underscores instead of spaces, and usually be plural (<code>patrons</code>, <code>book_checkouts</code>). Field names should be lowercase, singular, and descriptive, and a field name should not repeat the table name.</p>
-<p><strong>Data types.</strong> Every field has one data type, which controls what can be stored in it and how the database stores it efficiently:</p>
-<div id="tbl-types" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table 2: Common data types
-</figcaption>
-<div aria-describedby="tbl-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p><strong>Naming conventions.</strong> Table names should be clear about the data they contain, lowercase, and use underscores instead of spaces, such as <code>patrons</code> or <code>book_checkouts</code>. Field names follow the same lowercase and underscore rules, but should be singular because each field refers to the information for a single record. That is why the patrons table uses <code>card_num</code> and <code>name</code> instead of <code>card_nums</code> and <code>names</code>. Two fields in the same table cannot have the same name, and a field should never share a name with its table, so it is always clear whether a field or a table is being referred to.</p>
+<p><strong>Data types.</strong> Each field has a specific data type that controls what kind of information can be stored in it.</p>
 <table class="caption-top table">
+<caption>Common data types</caption>
 <thead>
 <tr class="header">
 <th>Data type</th>
@@ -2356,9 +2344,6 @@ Table 2: Common data types
 </tr>
 </tbody>
 </table>
-</div>
-</figure>
-</div>
 </section>
 <section id="important-sql-syntax" class="level3" data-number="2.1.2">
 <h3 data-number="2.1.2" class="anchored" data-anchor-id="important-sql-syntax"><span class="header-section-number">2.1.2</span> Important SQL syntax</h3>
@@ -2395,36 +2380,36 @@ Table 2: Common data types
 </section>
 <section id="example" class="level3" data-number="2.1.3">
 <h3 data-number="2.1.3" class="anchored" data-anchor-id="example"><span class="header-section-number">2.1.3</span> Example</h3>
-<p>This chapter focuses on database design rather than writing queries, so this example shows how the <code>patrons</code> table’s design would look as a table definition. It pulls together the chapter’s ideas about keys, naming, and data types.</p>
+<p>The course does not teach the syntax for creating tables, but it explains that when a table is created, each field is named and given a data type. This example shows what the <code>patrons</code> table’s design would look like, based on the data types covered in the chapter.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> patrons (</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    card_num     <span class="dt">VARCHAR</span>(<span class="dv">10</span>) <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    name         <span class="dt">VARCHAR</span>(<span class="dv">100</span>),</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    card_num     <span class="dt">INT</span>,       <span class="co">-- unique identifier</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    name         <span class="dt">VARCHAR</span>,</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    member_year  <span class="dt">INT</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    total_fine   <span class="dt">NUMERIC</span>(<span class="dv">6</span>, <span class="dv">2</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    total_fine   <span class="dt">NUMERIC</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="explanation-of-the-example" class="level3" data-number="2.1.4">
 <h3 data-number="2.1.4" class="anchored" data-anchor-id="explanation-of-the-example"><span class="header-section-number">2.1.4</span> Explanation of the example</h3>
-<p>The statement defines a table called <code>patrons</code> (lowercase and plural). <code>card_num</code> is the unique identifier, so no two patrons can share one. <code>name</code> is a string, <code>member_year</code> is an integer because years are whole numbers, and <code>total_fine</code> is a decimal number because fines include cents. Each field name is lowercase, singular, and does not repeat the word “patron.”</p>
+<p>This defines a table called <code>patrons</code> with four fields. <code>card_num</code> is the unique identifier, so every patron has their own value, and it is an integer because card numbers are whole numbers. <code>name</code> is a <code>VARCHAR</code> because names are strings, and <code>VARCHAR</code> can hold short or long text. <code>member_year</code> is an <code>INT</code> because years are whole numbers. <code>total_fine</code> is <code>NUMERIC</code> because fines, like Jasmin’s $2.05, include a decimal. The field names are lowercase, singular, and do not share a name with the table.</p>
 </section>
 <section id="cep-application" class="level3" data-number="2.1.5">
 <h3 data-number="2.1.5" class="anchored" data-anchor-id="cep-application"><span class="header-section-number">2.1.5</span> CEP application</h3>
-<p>For my CEP group’s work with the Collins College of Hospitality Management, the campaign data will come from several sources: GA4, social platform analytics, and a survey. Thinking of each source as its own table with a clear key (a session ID, a post ID, a survey response ID) and consistent field names and data types will make it easier to combine the sources later. It also helps me read the schema of any database I’m given before I start querying it, so I know which field connects one table to another.</p>
+<p>For my CEP group’s work with the Collins College of Hospitality Management, our campaign data will come from several places, including GA4, social platform analytics, and a survey. I can think of each source as its own table with a clear key, such as a session ID, post ID, or survey response ID. Keeping the field names and data types consistent should make it much easier to combine the data later. It also helps me understand the schema before I start querying anything, since I can see which fields connect one table to another.</p>
 </section>
 </section>
 <section id="querying" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="querying"><span class="header-section-number">2.2</span> Querying</h2>
 <section id="main-ideas-1" class="level3" data-number="2.2.1">
 <h3 data-number="2.2.1" class="anchored" data-anchor-id="main-ideas-1"><span class="header-section-number">2.2.1</span> Main ideas</h3>
-<p>A <strong>query</strong> is a request for data from a database. Every query starts with the keyword <code>SELECT</code> and names the fields to return, then uses <code>FROM</code> to name the table. <strong>Keywords</strong> are reserved words that tell SQL what operation to perform. By convention they are written in uppercase, and field and table names in lowercase, so the query is easier to read. A query should end with a semicolon.</p>
-<p>Beyond basic selection, the chapter covered four ways to shape the result:</p>
+<p>A <strong>query</strong> is basically a request for specific data from a database. Most queries start with <code>SELECT</code>, which tells SQL which fields you want to return, and then <code>FROM</code>, which tells it which table to pull the data from. <strong>Keywords</strong> are the reserved words that tell SQL what action to perform. They are usually written in uppercase, while field and table names are written in lowercase, which makes the query easier to read. Queries should also end with a semicolon. The rows returned by a query are called the <strong>result set</strong>.</p>
+<p>The chapter also covered a few ways to control what the final results look like:</p>
 <ul>
-<li><strong><code>DISTINCT</code></strong> removes duplicate values, so each unique value (or unique combination of values) appears once.</li>
-<li><strong>Aliasing (<code>AS</code>)</strong> renames a field in the result without changing the underlying table.</li>
-<li><strong>Views (<code>CREATE VIEW</code>)</strong> save a query so it can be reused like a table. A view is a <em>virtual table</em>: the database stores the query, not a copy of the data, so the view always reflects the current data.</li>
-<li><strong>Limiting results</strong> returns only the first few rows, which is useful for previewing a large table.</li>
+<li><strong><code>DISTINCT</code></strong> removes duplicates so each value, or combination of values, only appears once.</li>
+<li><strong>Aliasing (<code>AS</code>)</strong> gives a field a different name in the results without changing the actual table.</li>
+<li><strong>Views (<code>CREATE VIEW</code>)</strong> save a query so it can be reused later almost like a table. A view is considered a <em>virtual table</em> because SQL saves the query instead of making a separate copy of the data, so the results are always up to date. Creating a view does not return a result set. It just saves the query so I can select from it later.</li>
+<li><strong>Limiting results</strong> only returns a certain number of rows, which is useful when you just want to preview a large table. It is also helpful when testing code, since some result sets can have thousands of rows. It is best to test a query on just a few results first and then remove the limit for the final version.</li>
 </ul>
-<p><strong>SQL flavors.</strong> All versions of SQL follow the same ANSI/ISO standards, so most keywords work everywhere. Flavors add their own features on top. The two covered in the course are <strong>PostgreSQL</strong> (free and open source, originally from UC Berkeley) and <strong>SQL Server</strong> (from Microsoft, which uses its own flavor, T-SQL). One visible difference is how results are limited: PostgreSQL uses <code>LIMIT</code> at the end of the query, and SQL Server uses <code>TOP</code> right after <code>SELECT</code>.</p>
+<p><strong>SQL flavors.</strong> Different versions of SQL follow the same general ANSI and ISO standards, so most basic commands work the same way. The main differences come from extra features or slightly different syntax. The course focused on <strong>PostgreSQL</strong>, which is free and open source, and <strong>SQL Server</strong>, which is made by Microsoft and uses T-SQL. One easy difference to see is how each one limits results. PostgreSQL uses <code>LIMIT</code> at the end of the query, while SQL Server uses <code>TOP</code> right after <code>SELECT</code>. The name PostgreSQL refers to both the database system and the SQL flavor used with it. The course also pointed out that the differences between flavors are pretty minor, so learning the fundamentals in one flavor makes it easy to pick up another by learning just a few extra keywords.</p>
 </section>
 <section id="important-sql-syntax-1" class="level3" data-number="2.2.2">
 <h3 data-number="2.2.2" class="anchored" data-anchor-id="important-sql-syntax-1"><span class="header-section-number">2.2.2</span> Important SQL syntax</h3>
@@ -2472,15 +2457,15 @@ Table 2: Common data types
 <p><strong>Selecting fields</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> title, author</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> books;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Returns the title and author of every book in the <code>books</code> table. Other fields such as <code>year</code> and <code>genre</code> are left out.</p>
+<p>This returns the title and author for every book in the <code>books</code> table. Other fields like <code>year</code> and <code>genre</code> are not included in the results.</p>
 <p><strong>Returning unique values</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> author, genre</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> books;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Returns each unique combination of author and genre. If an author wrote three fantasy books, the pair appears only once, but if the same author also wrote a mystery, that pair appears as a second row.</p>
+<p>This returns each unique author and genre combination. For example, George R. R. Martin has more than one Fiction book in the table, but the George R. R. Martin and Fiction combination would only show once. If an author had both Fiction and Non Fiction books, each combination would appear as its own row.</p>
 <p><strong>Aliasing</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> genre <span class="kw">AS</span> unique_genres</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> books;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Returns the list of genres with no duplicates, and labels the result column <code>unique_genres</code>. The <code>books</code> table itself is unchanged.</p>
+<p>This returns a list of genres without duplicates and renames the result column <code>unique_genres</code>. This only changes how the result is displayed and does not change anything in the original <code>books</code> table.</p>
 <p><strong>Saving a view</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">VIEW</span> library_authors <span class="kw">AS</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> author <span class="kw">AS</span> unique_author</span>
@@ -2488,7 +2473,7 @@ Table 2: Common data types
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> library_authors;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The first statement saves the query as a view called <code>library_authors</code>. The second statement queries the view the same way I would query a table. Because a view stores the query rather than the results, if new books are added to <code>books</code>, the view will include their authors the next time it is queried.</p>
+<p>The first statement saves the query as a view called <code>library_authors</code>. The second statement lets me query that view the same way I would query a regular table. Since the view saves the query instead of saving a separate copy of the results, any new authors added to <code>books</code> will also appear the next time the view is queried.</p>
 <p><strong>Limiting results in two flavors</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- PostgreSQL</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> genre</span>
@@ -2498,33 +2483,33 @@ Table 2: Common data types
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">-- SQL Server (T-SQL)</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> TOP(<span class="dv">10</span>) genre</span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> books;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Both queries return the <code>genre</code> of only the first 10 rows. They do the same thing, but PostgreSQL puts <code>LIMIT</code> at the end, and SQL Server puts <code>TOP</code> right after <code>SELECT</code>. Lines that start with <code>--</code> are comments that SQL ignores.</p>
+<p>Both queries return the <code>genre</code> from only the first 10 rows. They do the same thing, but PostgreSQL puts <code>LIMIT</code> at the end of the query, while SQL Server puts <code>TOP</code> right after <code>SELECT</code>. Any line that starts with <code>--</code> is a comment, so SQL ignores it.</p>
 </section>
 <section id="cep-application-1" class="level3" data-number="2.2.4">
 <h3 data-number="2.2.4" class="anchored" data-anchor-id="cep-application-1"><span class="header-section-number">2.2.4</span> CEP application</h3>
-<p>These are the commands I will use most often to pull data before analyzing it. My part of the CEP (AO4) looks at which digital channels and content themes best drive awareness and inquiries from prospective students. For example:</p>
+<p>These are probably the commands I will use the most when I start pulling data for analysis. My part of the CEP, AO4, looks at which digital channels and content themes do the most to build awareness and generate inquiries from prospective students. A few ways I could use these commands are:</p>
 <ul>
-<li><code>SELECT DISTINCT</code> could list every traffic source or campaign name that appears in the data, which is a quick way to check for inconsistent labels (like “Instagram” vs. “instagram”) before grouping them.</li>
-<li>Aliasing makes exported columns readable for charts and tables in the CEP report, such as renaming <code>session_source</code> to <code>channel</code>.</li>
-<li>A view could save a standard “campaign sessions” query so everyone in my group pulls the same definition of the data instead of each person writing their own version.</li>
-<li><code>LIMIT</code> lets me preview a large export before running a full query.</li>
+<li><code>SELECT DISTINCT</code> could show every traffic source or campaign name that appears in the data. This would make it easier to catch inconsistent labels, like “Instagram” and “instagram”, before I start grouping the data.</li>
+<li>Aliasing can make exported columns easier to read in charts and tables, such as changing <code>session_source</code> to <code>channel</code>.</li>
+<li>A view could save one standard campaign sessions query so everyone in my group is using the same definition of the data instead of writing slightly different versions.</li>
+<li><code>LIMIT</code> would let me quickly preview a large dataset before running a bigger query.</li>
 </ul>
-<p>Knowing that flavors differ also matters, since the upcoming BigQuery course uses Google’s flavor of SQL, which is where GA4 data can be exported.</p>
+<p>Knowing that SQL flavors are different will also matter later because the upcoming BigQuery course uses Google’s version of SQL, which is also where GA4 data can be exported.</p>
 </section>
 </section>
 </section>
 <section id="overall-reflection-and-future-reference" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Overall Reflection and Future Reference</h1>
-<p><strong>Most useful skills.</strong> The most useful part was learning to read a database’s structure before querying it: identifying tables, keys, and data types. The basic <code>SELECT … FROM</code> pattern, together with <code>DISTINCT</code> and aliasing, covers a lot of the everyday work of pulling a clean list or column out of a larger dataset.</p>
-<p><strong>Most challenging concepts.</strong> Views took the most thought, because a view looks like a table but doesn’t store data itself. Remembering which flavor uses <code>LIMIT</code> and which uses <code>TOP</code> was also easy to mix up. I also had to be careful that <code>DISTINCT</code> on two fields returns unique <em>combinations</em>, not unique values of each field separately.</p>
-<p><strong>How SQL supports marketing analytics and the CEP.</strong> Most marketing data (web analytics, CRM records, transactions, survey responses) ends up in relational tables. SQL lets me pull exactly the fields I need directly from the source instead of relying on pre-built dashboards or exports. For the CEP, that means being able to pull GA4 and campaign data by channel and prepare it for analysis in R.</p>
-<p><strong>What I expect to review again.</strong> Views, the differences between SQL flavors (especially once I start BigQuery), and the naming and data-type conventions when I set up or inspect new tables. I also expect to build on these basics with filtering, sorting, and aggregation in Intermediate SQL.</p>
+<p><strong>Most useful skills.</strong> The most useful part for me was learning how to understand the structure of a database before I start querying it. Being able to identify the tables, keys, and data types first makes the rest much easier. The basic <code>SELECT ... FROM</code> structure, along with <code>DISTINCT</code> and aliasing, also seems like something I will use constantly when pulling clean data from a larger dataset.</p>
+<p><strong>Most challenging concepts.</strong> Views probably took the most time for me to understand because they act like a table even though they do not actually store their own copy of the data. I also had to keep reminding myself which SQL flavor uses <code>LIMIT</code> and which one uses <code>TOP</code>. Another thing that could be easy to mess up is remembering that <code>DISTINCT</code> with two fields returns unique combinations of those fields, not separate unique values from each one.</p>
+<p><strong>How SQL supports marketing analytics and the CEP.</strong> A lot of marketing data comes from sources like web analytics, CRM systems, transactions, and surveys, and that information is usually stored in tables. SQL gives me a way to pull exactly what I need instead of only relying on dashboards or premade exports. For the CEP, this should make it easier to pull GA4 and campaign data by channel and then bring that data into R for analysis.</p>
+<p><strong>What I expect to review again.</strong> I will probably need to review views, the differences between SQL flavors, and naming and data type conventions when I start working with new databases. I also expect to build on these basics later with filtering, sorting, and aggregation in Intermediate SQL.</p>
 </section>
 <section id="appendix-publication-links" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Appendix: Publication Links</h1>
 <ul>
-<li><a href="https://github.com/jakevns/ibm-6500-sql-learning-portfolio">GitHub Repository</a></li>
-<li><a href="https://jakevns.github.io/ibm-6500-sql-learning-portfolio/introduction-to-sql.html">Published Introduction to SQL Report</a></li>
+<li><a href="https://github.com/jakevns/IBM6500/tree/main/ibm-6500-sql-learning-portfolio">GitHub Repository</a></li>
+<li><a href="https://jakevns.github.io/IBM6500/ibm-6500-sql-learning-portfolio/docs/introduction-to-sql.html">Published Introduction to SQL Report</a></li>
 </ul>
 </section>
 
