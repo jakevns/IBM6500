@@ -1,0 +1,199 @@
+---
+title: "Introduction to SQL: Course Completion and Learning Notes"
+author: "Jake Evans"
+subtitle: "IBM 6500 — Cal Poly Pomona"
+date: today
+format:
+  html:
+    toc: true
+    toc-title: "Contents"
+    toc-depth: 3
+    number-sections: true
+    smooth-scroll: true
+    embed-resources: true
+---
+
+# Course-Completion Evidence
+
+![DataCamp Statement of Accomplishment for Introduction to SQL](images/introduction-to-sql-certificate.png){fig-alt="DataCamp Statement of Accomplishment awarded to Jake Evans for completing Introduction to SQL on November 30, 2025" width="85%"}
+
+I completed the DataCamp course *Introduction to SQL* on November 30, 2025. The course shows as **Completed** under the Introduction to SQL assignment in the IBM 6500 DataCamp classroom.
+
+# Learning Notes and Key Takeaways
+
+The course is split into two chapters. Chapter 1 covers how relational databases are organized, and Chapter 2 covers how to write queries against them. Most examples in the course use a small library database with a `books` table and a `patrons` table, so my examples below use the same tables.
+
+| Table | Example fields |
+|---|---|
+| `books` | `id`, `title`, `author`, `year`, `genre` |
+| `patrons` | `card_num`, `name`, `member_year`, `total_fine` |
+
+: Library database used in the course examples {#tbl-library}
+
+## Relational Databases
+
+### Main ideas
+
+A **relational database** stores data in tables and defines how those tables relate to each other. Instead of putting everything into one huge spreadsheet, the data is split into separate tables, one for each kind of thing (books, patrons, checkouts), and the tables are connected through shared fields. This keeps the data from being duplicated and makes it easier to keep accurate.
+
+Key vocabulary:
+
+- **Table:** holds data about one kind of entity, organized into rows and columns.
+- **Record (row):** one observation, such as one book or one patron.
+- **Field (column):** one attribute recorded for every observation, such as `title` or `member_year`.
+- **Unique identifier (key):** a value that identifies each record, such as a patron's `card_num`. Names are not good keys because two people can share a name.
+- **Schema:** the "blueprint" of a database. It shows which tables exist, what fields and data types they contain, and how the tables relate.
+- **Server:** the computer where the database is physically stored and that handles requests for the data. This is what allows many people to access the same database at once.
+
+**Naming conventions.** Table names should be lowercase, use underscores instead of spaces, and usually be plural (`patrons`, `book_checkouts`). Field names should be lowercase, singular, and descriptive, and a field name should not repeat the table name.
+
+**Data types.** Every field has one data type, which controls what can be stored in it and how the database stores it efficiently:
+
+| Data type | Stores | Example |
+|---|---|---|
+| String (`VARCHAR`) | Text | `'Jake Evans'` |
+| Integer (`INT`) | Whole numbers | `2025` |
+| Float (`NUMERIC`) | Numbers with decimals | `2.50` |
+
+: Common data types {#tbl-types}
+
+### Important SQL syntax
+
+| Concept | Syntax / term |
+|---|---|
+| Choose fields from a table | `SELECT field FROM table;` |
+| Text data type | `VARCHAR` |
+| Whole number data type | `INT` |
+| Decimal data type | `NUMERIC` / float |
+| End a statement | `;` |
+
+### Example
+
+This chapter focuses on database design rather than writing queries, so this example shows how the `patrons` table's design would look as a table definition. It pulls together the chapter's ideas about keys, naming, and data types.
+
+```sql
+CREATE TABLE patrons (
+    card_num     VARCHAR(10) PRIMARY KEY,
+    name         VARCHAR(100),
+    member_year  INT,
+    total_fine   NUMERIC(6, 2)
+);
+```
+
+### Explanation of the example
+
+The statement defines a table called `patrons` (lowercase and plural). `card_num` is the unique identifier, so no two patrons can share one. `name` is a string, `member_year` is an integer because years are whole numbers, and `total_fine` is a decimal number because fines include cents. Each field name is lowercase, singular, and does not repeat the word "patron."
+
+### CEP application
+
+For my CEP group's work with the Collins College of Hospitality Management, the campaign data will come from several sources: GA4, social platform analytics, and a survey. Thinking of each source as its own table with a clear key (a session ID, a post ID, a survey response ID) and consistent field names and data types will make it easier to combine the sources later. It also helps me read the schema of any database I'm given before I start querying it, so I know which field connects one table to another.
+
+## Querying
+
+### Main ideas
+
+A **query** is a request for data from a database. Every query starts with the keyword `SELECT` and names the fields to return, then uses `FROM` to name the table. **Keywords** are reserved words that tell SQL what operation to perform. By convention they are written in uppercase, and field and table names in lowercase, so the query is easier to read. A query should end with a semicolon.
+
+Beyond basic selection, the chapter covered four ways to shape the result:
+
+- **`DISTINCT`** removes duplicate values, so each unique value (or unique combination of values) appears once.
+- **Aliasing (`AS`)** renames a field in the result without changing the underlying table.
+- **Views (`CREATE VIEW`)** save a query so it can be reused like a table. A view is a *virtual table*: the database stores the query, not a copy of the data, so the view always reflects the current data.
+- **Limiting results** returns only the first few rows, which is useful for previewing a large table.
+
+**SQL flavors.** All versions of SQL follow the same ANSI/ISO standards, so most keywords work everywhere. Flavors add their own features on top. The two covered in the course are **PostgreSQL** (free and open source, originally from UC Berkeley) and **SQL Server** (from Microsoft, which uses its own flavor, T-SQL). One visible difference is how results are limited: PostgreSQL uses `LIMIT` at the end of the query, and SQL Server uses `TOP` right after `SELECT`.
+
+### Important SQL syntax
+
+| Purpose | Syntax |
+|---|---|
+| Select one or more fields | `SELECT field1, field2 FROM table;` |
+| Select all fields | `SELECT * FROM table;` |
+| Unique values only | `SELECT DISTINCT field FROM table;` |
+| Rename a result field | `SELECT field AS new_name FROM table;` |
+| Save a query as a view | `CREATE VIEW view_name AS SELECT ...;` |
+| Limit rows (PostgreSQL) | `SELECT field FROM table LIMIT 10;` |
+| Limit rows (SQL Server) | `SELECT TOP(10) field FROM table;` |
+
+### Examples
+
+**Selecting fields**
+
+```sql
+SELECT title, author
+FROM books;
+```
+
+Returns the title and author of every book in the `books` table. Other fields such as `year` and `genre` are left out.
+
+**Returning unique values**
+
+```sql
+SELECT DISTINCT author, genre
+FROM books;
+```
+
+Returns each unique combination of author and genre. If an author wrote three fantasy books, the pair appears only once, but if the same author also wrote a mystery, that pair appears as a second row.
+
+**Aliasing**
+
+```sql
+SELECT DISTINCT genre AS unique_genres
+FROM books;
+```
+
+Returns the list of genres with no duplicates, and labels the result column `unique_genres`. The `books` table itself is unchanged.
+
+**Saving a view**
+
+```sql
+CREATE VIEW library_authors AS
+SELECT DISTINCT author AS unique_author
+FROM books;
+
+SELECT *
+FROM library_authors;
+```
+
+The first statement saves the query as a view called `library_authors`. The second statement queries the view the same way I would query a table. Because a view stores the query rather than the results, if new books are added to `books`, the view will include their authors the next time it is queried.
+
+**Limiting results in two flavors**
+
+```sql
+-- PostgreSQL
+SELECT genre
+FROM books
+LIMIT 10;
+
+-- SQL Server (T-SQL)
+SELECT TOP(10) genre
+FROM books;
+```
+
+Both queries return the `genre` of only the first 10 rows. They do the same thing, but PostgreSQL puts `LIMIT` at the end, and SQL Server puts `TOP` right after `SELECT`. Lines that start with `--` are comments that SQL ignores.
+
+### CEP application
+
+These are the commands I will use most often to pull data before analyzing it. My part of the CEP (AO4) looks at which digital channels and content themes best drive awareness and inquiries from prospective students. For example:
+
+- `SELECT DISTINCT` could list every traffic source or campaign name that appears in the data, which is a quick way to check for inconsistent labels (like "Instagram" vs. "instagram") before grouping them.
+- Aliasing makes exported columns readable for charts and tables in the CEP report, such as renaming `session_source` to `channel`.
+- A view could save a standard "campaign sessions" query so everyone in my group pulls the same definition of the data instead of each person writing their own version.
+- `LIMIT` lets me preview a large export before running a full query.
+
+Knowing that flavors differ also matters, since the upcoming BigQuery course uses Google's flavor of SQL, which is where GA4 data can be exported.
+
+# Overall Reflection and Future Reference
+
+**Most useful skills.** The most useful part was learning to read a database's structure before querying it: identifying tables, keys, and data types. The basic `SELECT … FROM` pattern, together with `DISTINCT` and aliasing, covers a lot of the everyday work of pulling a clean list or column out of a larger dataset.
+
+**Most challenging concepts.** Views took the most thought, because a view looks like a table but doesn't store data itself. Remembering which flavor uses `LIMIT` and which uses `TOP` was also easy to mix up. I also had to be careful that `DISTINCT` on two fields returns unique *combinations*, not unique values of each field separately.
+
+**How SQL supports marketing analytics and the CEP.** Most marketing data (web analytics, CRM records, transactions, survey responses) ends up in relational tables. SQL lets me pull exactly the fields I need directly from the source instead of relying on pre-built dashboards or exports. For the CEP, that means being able to pull GA4 and campaign data by channel and prepare it for analysis in R.
+
+**What I expect to review again.** Views, the differences between SQL flavors (especially once I start BigQuery), and the naming and data-type conventions when I set up or inspect new tables. I also expect to build on these basics with filtering, sorting, and aggregation in Intermediate SQL.
+
+# Appendix: Publication Links
+
+- [GitHub Repository](https://github.com/jakevns/ibm-6500-sql-learning-portfolio)
+- [Published Introduction to SQL Report](https://jakevns.github.io/ibm-6500-sql-learning-portfolio/introduction-to-sql.html)

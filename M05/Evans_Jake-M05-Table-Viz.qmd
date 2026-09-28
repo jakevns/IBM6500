@@ -1,0 +1,496 @@
+---
+title: "M05-Visualizing Data with Tables for MSDM CEP"
+subtitle: "IBM 6500 · AO4: Digital Channels and Content Themes Driving Awareness and Inquiry"
+author: "Jake Evans"
+date: '`r format(Sys.time())`'
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-expand: 2
+    toc-location: left
+    number-sections: true
+    code-link: true
+    code-fold: true
+    code-summary: "Show the code"
+    code-overflow: wrap
+    code-tools: true
+    embed-resources: true
+    smooth-scroll: true
+    link-external-icon: true
+    link-external-newwindow: true
+    theme:
+      light: flatly
+      dark: darkly
+editor: visual
+execute:
+  freeze: auto
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+#| code-summary: "Setup: packages and brand colors"
+
+# First time only:
+# install.packages(c("gt", "gtExtras", "dplyr", "tibble", "svglite"))
+
+library(gt)        # grammar of tables
+library(gtExtras)  # inline plots, badges, highlights for gt
+library(dplyr)     # data wrangling
+library(tibble)    # tribble() for entering the evidence data
+
+# Cal Poly Pomona palette (matches the CEP report template)
+cpp_green <- "#1E4D2B"
+cpp_gold  <- "#FFB81C"
+cpp_cream <- "#FFF6DD"
+```
+
+# Overview
+
+::: callout-note
+## About this report
+
+This report covers two parts of Module 5. The first part is a short reflection on what I learned from the {gt} and {gtExtras} videos. The second part includes two tables I created using both packages for my CEP analytics objective. I also included each prompt before my response so it is clear what I am answering.
+:::
+
+## Project Context
+
+I am part of CEP Group 3 and we are working on the Collins College Enrollment & Retention project for The Collins College of Hospitality Management under Dr. Linchi Kwok. My part of the project is AO4, which looks at which digital channels and content themes are doing the most to build awareness and generate inquiries from prospective students.
+
+## Data Choice
+
+AO4 will mainly use GA4 data, platform analytics, and an IRB approved survey. Since the campaign does not start until Fall 2026 and Spring 2027, we do not have that data yet. Instead of using a random practice dataset that has nothing to do with my project, I used the quantitative findings from my Progress Report 1 evidence review to build the tables. These findings already connect directly to AO4 and can also be used later in Chapter 2. \## Project Setup
+
+**Prompt 1.** Start a new project and Quarto file (.qmd) as you learned previously. Create a folder for this assignment ("M05"), start a new project in RStudio/Positron, start a QMD file, save it appropriately, and add the YAML header.
+
+I created an `M05/` folder inside my `IBM6500` repository and opened it as its own project. I named the file using my usual format with underscores and no spaces so everything stays organized and the GitHub Pages URL stays clean.
+
+```         
+IBM6500/
+├── .nojekyll
+├── M01/ … M04/
+└── M05/
+    ├── Evans_Jake-M05-Table-Viz.qmd
+    └── Evans_Jake-M05-Table-Viz.html
+```
+
+**Prompt 2.** Prepare your report (HTML file) using Quarto, implementing as many HTML features as you can. ::: {.callout-tip collapse="true"}
+
+## Quarto features used in this report (click to expand)
+
+| Feature | Where to find it |
+|----|----|
+| Text formatting, headings, and lists | Used throughout the report |
+| Blockquotes | Each assignment prompt is shown in a blockquote |
+| Panel tabset | See @sec-table |
+| Tables and cross-referencing | See @tbl-channels, @tbl-evidence, and @sec-essay |
+| Footnotes | Used in the essay section[^1] |
+| Callout blocks | Note, tip, important, and warning callouts are used throughout |
+| Table of contents (TOC, toc-depth, toc-expand) | Located in the left sidebar |
+| Section numbering | Enabled with `number-sections: true` |
+| Self-contained HTML | Enabled with `embed-resources: true` |
+| HTML theme with light/dark toggle | Uses `flatly` for light mode and `darkly` for dark mode |
+| Code folding, overflow, and tools | Controlled with `code-fold` and `code-overflow: wrap`, along with the `</> Code` menu in the top right |
+| External link icons | Enabled with `link-external-icon: true` (see the Appendix) |
+
+[^1]: Quarto automatically numbers footnotes and places them at the end of the document. This works a lot like `tab_footnote()` in a gt table, where the program handles the footnote marks for you. \# Reflection Essay {#sec-essay}
+
+:::
+
+> **Task 1.** Write a short essay on the following:
+>
+> - Summarize what you learned from the videos you watched.
+> - What did you like about the gt and gtExtras packages demonstrated in the videos?
+> - How do tables complement charts for data visualization?
+> - Under what circumstances would you prefer to use tables rather than charts to visualize data?
+
+## What I learned from the videos
+
+The main idea I took away from all four videos is that a table is built in layers, similar to the way a ggplot is built. Emmanuel Teitelbaum describes this as the *grammar of tables*. A gt table has six main parts: the **header**, **column labels**, **stub**, **stubhead**, **body**, and **footer**. Each part has its own functions, and you can keep adding to a basic `gt()` table one step at a time.
+
+Rich Iannone's walkthrough using `palmerpenguins` helped make the basic workflow much clearer:
+
+1.  **Wrangle first, then present.** Before using `gt()`, summarize and organize the raw data with functions like `group_by()` and `summarize()`.
+2.  **Label everything clearly.** Add a title and subtitle with `tab_header()` and use `md()` when Markdown formatting is needed. Columns can be renamed with `cols_label()`, a stub can be created with `rowname_col`, and `tab_stubhead()` can be used to fill the empty top-left corner.
+3.  **Format the numbers.** Functions like `fmt_number()` and `fmt_currency()` make the values easier to read. You can also use `scale_by` to convert units, such as grams into kilograms.
+4.  **Add notes and context.** `tab_source_note()` can be used to credit the data source, while `tab_footnote()` adds notes to specific cells. gt also handles the numbering and order of the footnotes automatically.
+5.  **Style the table.** The appearance can be adjusted with `tab_style()`, along with options like `cell_fill()` and `cell_text()`. Fonts can be changed with `opt_table_font()`, column widths can be controlled with `cols_width()`, and `data_color()` can be used to shade cells based on their values.
+
+The conversation with Tom Mock went more into *why* these design choices matter. Using Jon Schwabish's table guidelines, they explained that headers should be clearly separated from the body, dividers should stay subtle, numbers should be right aligned so the decimals line up, and text should usually be left aligned. Numbers should also be rounded to a level of precision that actually makes sense for the data, and similar rows should be grouped together when possible.
+
+One point that really stood out to me was that tidy long data is great for analysis, but it is not always the best format for presentation. Because of that, it is completely fine to "bend the rules" and pivot the data wider when the goal is to create a table that is easier for people to read.
+
+## What I liked about gt and gtExtras
+
+The first thing I liked about **gt** is that it already has really solid defaults. Tom Mock mentioned that he actually had to write *extra* code to make his "bad" table examples look bad, which I thought was pretty funny. Even a basic `gt()` table already right-aligns numbers, uses light dividers, and has a clean font that is easy to read. I also liked that `tab_footnote()` handles the numbering automatically and that `tab_style()` can be based on conditions, like only highlighting values that are negative.
+
+**gtExtras** also stood out to me because it cuts down on a lot of repeated styling code. A theme like `gt_theme_538()` can do in one line what would otherwise take dozens of lines to build manually. Functions like `gt_badge()` and `gt_highlight_rows()` make smaller styling changes just as easy.
+
+My favorite part was probably the inline plots. Functions like `gt_plt_bar_pct()`, `gt_plt_sparkline()`, and `gt_plt_dist()` let you place a small chart directly inside a table cell. I like this because you can see the exact value while also getting a quick visual of the pattern or distribution at the same time.
+
+## How tables complement charts
+
+Charts are best when you want to quickly show **patterns**, such as trends, clusters, or outliers. Tables are better when the reader needs **exact values**. Tom Mock explained it well: with a chart, you usually estimate the value, while with a table, you can read the exact number.
+
+I think the two work best when they are used together. A chart helps show the overall story or pattern, and then the table gives the exact numbers behind it. gtExtras takes that idea even further by letting you place small charts directly inside the table.
+
+## When I would choose a table over a chart
+
+I would choose a table when:
+
+- **The audience needs exact numbers.** This is useful for things like KPI baselines, targets, or values that a client may need to reference later.
+- **The data includes several measures with different units.** For example, a usage percentage and a mean rank would be difficult to compare on the same chart axis, but they can easily sit next to each other in a table.
+- **The information is partly text.** A literature matrix can include citations, settings, methods, and sample sizes, which would not work well in a chart.
+- **The summary is meant to be used as a reference.** This could include descriptive statistics in a methods section or supporting information in an appendix.
+
+::: callout-important
+## Takeaway
+
+For my CEP, I plan to use charts to help tell the story and tables to support it with the exact numbers. When it makes sense, I also want to combine both in one visual using gtExtras.
+:::
+
+# Tables for AO4 with gt + gtExtras {#sec-table}
+
+> **Task 2.** Use the data for your MSDM CEP. If you don't have data yet, use the "pizzaplace" dataset. Pick some variables relevant to your Analytics Objectives and share descriptive statistics using gt and gtExtras functions together to show numbers and small charts in one table. At a minimum, include: titles and subtitles, stub head label, relabeled variables, source notes, footnotes, a spanner column label, numbers with 2 decimals and currency signs, and color on numeric data where applicable.
+
+## Connection to AO4
+
+One of the main independent variables in AO4 is **channel and medium**. Since the Collins College campaign has not started producing its own data yet, the best benchmark I currently have comes from the published research I reviewed in Progress Report 1.
+
+The two tables below turn that research into two useful summaries:
+
+1.  A **channel benchmark** (@tbl-channels) showing which information sources prospective students use and how those sources rank.
+2.  An **evidence-base profile** (@tbl-evidence) showing the types of studies supporting AO4 and where there are still gaps in the research.
+
+::: {.callout-warning collapse="true"}
+## Data caveat
+
+All of the figures shown here come from the published sources cited in each table. They are not Collins College results. For now, they serve as a benchmark for AO4. Once the campaign begins producing data, the same general code can be updated to use GA4 and platform exports instead.
+:::
+
+## Data entry
+
+```{r}
+#| label: data
+
+# Shields & Peruta (2019): n = 364 U.S. undergraduates.
+# pct_used  = % of respondents who used the source
+# mean_rank = mean importance rank among nine sources (1 = most important)
+channels <- tribble(
+  ~group,              ~channel,                    ~pct_used, ~mean_rank,
+  "Owned web",         "Official .edu website",      90.3,      2.7,
+  "In-person",         "Campus visit",               0,        1.5,
+  "Social media",      "Facebook",                   25.7,      4.4,
+  "Social media",      "Instagram",                  16.6,      5.2,
+  "Social media",      "Twitter (now X)",            14.9,      5.9
+)
+
+# Evidence Matrices A and B from Progress Report 1 (AO4)
+evidence <- tribble(
+  ~matrix,                       ~study,                       ~year, ~setting,         ~n,   ~unit,          ~method,                       ~outcome,
+  "A · Supports the approach",   "Peruta & Shields",            2018, "U.S.",           5932, "posts",        "Content analysis; ANOVA",      "Engagement",
+  "A · Supports the approach",   "Shields & Peruta",            2019, "U.S.",           364,  "students",     "Survey + interviews; ANOVA",   "Self-report",
+  "A · Supports the approach",   "Mishnick & Wise",             2024, "U.S.",           58,   "posts",        "Campaign; Welch's ANOVA",      "Engagement",
+  "A · Supports the approach",   "Ozelie & Knuth",              2025, "U.S.",           161,  "students",     "Descriptive survey",           "Self-report",
+  "A · Supports the approach",   "de los Reyes",                2023, "U.S.",           NA,   "students",     "Survey; chi-square",           "Self-report",
+  "B · Challenges or alternative","Lund",                       2019, "International",  50,   "universities", "Correlation; ANOVA",           "Engagement",
+  "B · Challenges or alternative","Ng",                         2023, "Hong Kong",      5494, "students",     "Survey; ANOVA (3 cohorts)",    "Self-report",
+  "B · Challenges or alternative","Bélanger, Bali & Longden",   2014, "Canada",         106,  "institutions", "Qualitative content analysis", "Messaging",
+  "B · Challenges or alternative","Taylor & Bicak",             2020, "U.S.",           100,  "universities", "Regression",                   "Web traffic",
+  "B · Challenges or alternative","Eveleth et al.",             2015, "U.S.",           199,  "respondents",  "SEM",                          "Intention",
+  "B · Challenges or alternative","Cingillioglu et al.",        2024, "Literature",     43,   "articles",     "Algorithmic review",           "Review"
+) |>
+  mutate(age = 2026 - year) |>
+  relocate(age, .after = year)
+```
+
+## The tables
+
+::: panel-tabset
+### Table 1: Channel Benchmark
+
+```{r}
+#| label: tbl-channels
+#| tbl-cap: "Information sources used and ranked by prospective undergraduates"
+
+channels |>
+  gt(rowname_col = "channel", groupname_col = "group") |>
+
+  # ---- Header & stubhead ----
+  tab_header(
+    title    = md("**The .edu Website Dominates Search; Social Media Trails**"),
+    subtitle = md("Share of students who used each source and its importance rank · *Benchmark for AO4's channel variable*")
+  ) |>
+  tab_stubhead(label = "Information Source") |>
+
+  # ---- Spanner & labels ----
+  tab_spanner(
+    label   = md("Shields & Peruta (2019) · U.S. undergraduates, *n* = 364"),
+    columns = c(pct_used, mean_rank)
+  ) |>
+  cols_label(
+    pct_used  = "Used the Source",
+    mean_rank = "Mean Importance Rank"
+  ) |>
+
+  # ---- Formatting ----
+  fmt_number(columns = mean_rank, decimals = 2) |>
+
+  # ---- Color on numeric data (lower rank = more important = darker green) ----
+  data_color(
+    columns = mean_rank,
+    method  = "numeric",
+    palette = c(cpp_green, "#A7C4A0", cpp_cream),
+    domain  = c(1, 6)
+  ) |>
+
+  # ---- gtExtras inline bar ----
+  gt_plt_bar_pct(
+    column = pct_used, scaled = TRUE,
+    fill = cpp_green, background = "#E3EBE2",
+    labels = TRUE, decimals = 1
+  ) |>
+
+  # ---- Footnotes ----
+  tab_footnote(
+    footnote  = "Rank among nine information sources; 1 = most important. Shading darkens as importance rises.",
+    locations = cells_column_labels(columns = mean_rank)
+  ) |>
+  tab_footnote(
+    footnote  = "Campus visit ranked most influential overall but is a visit source, so a usage share for non-visit sources does not apply.",
+    locations = cells_stub(rows = "Campus visit")
+  ) |>
+  tab_footnote(
+    footnote  = "Interviews in the same study found students consulted institutional social media more than the survey suggested, often arriving through friends' photos or hashtags.",
+    locations = cells_row_groups(groups = "Social media")
+  ) |>
+  opt_footnote_marks(marks = "letters") |>
+
+  # ---- Source note ----
+  tab_source_note(md(
+    "**Source:** Shields, A. B., & Peruta, A. (2019). Social media and the university decision. Do prospective students really care? *Journal of Marketing for Higher Education, 29*(1), 67–83. Table: Jake Evans, CEP Group 3, AO4."
+  )) |>
+
+  # ---- Brand styling ----
+  tab_style(
+    style     = list(cell_fill(cpp_green), cell_text(color = "white", weight = "bold")),
+    locations = list(cells_column_spanners(), cells_column_labels(), cells_stubhead())
+  ) |>
+  tab_style(
+    style     = list(cell_fill(cpp_cream), cell_text(weight = "bold", color = cpp_green)),
+    locations = cells_row_groups()
+  ) |>
+  tab_style(
+    style     = cell_text(weight = "bold"),
+    locations = cells_stub()
+  ) |>
+  cols_width(channel ~ px(200), pct_used ~ px(220), mean_rank ~ px(160)) |>
+  cols_align(align = "center", columns = mean_rank) |>
+  opt_table_font(font = list(google_font("Inter"), default_fonts())) |>
+  tab_options(
+    heading.align                 = "left",
+    heading.title.font.size       = px(20),
+    table.border.top.color        = cpp_gold,
+    table.border.top.width        = px(4),
+    table.border.bottom.color     = cpp_gold,
+    table.border.bottom.width     = px(4),
+    column_labels.border.bottom.color = cpp_gold,
+    table.font.size               = px(14)
+  )
+```
+
+### Table 2: AO4 Evidence Base
+
+```{r}
+#| label: tbl-evidence
+#| tbl-cap: "Profile of the 11 empirical sources in AO4's evidence matrices"
+
+evidence |>
+  gt(rowname_col = "study", groupname_col = "matrix") |>
+
+  tab_header(
+    title    = md("**None of the 11 Studies Measures Inquiry, AO4's Dependent Variable**"),
+    subtitle = md("Sources from Progress Report 1, grouped by evidence matrix · *Gap check before finalizing the method*")
+  ) |>
+  tab_stubhead(label = "Study") |>
+
+  # ---- Spanners ----
+  tab_spanner(label = "Recency",       columns = c(year, age)) |>
+  tab_spanner(label = "Sample",        columns = c(setting, n, unit)) |>
+  tab_spanner(label = "Design",        columns = c(method, outcome)) |>
+
+  cols_label(
+    year    = "Published",
+    age     = "Years Old",
+    setting = "Setting",
+    n       = md("*n*"),
+    unit    = "Unit",
+    method  = "Method",
+    outcome = "Outcome Measured"
+  ) |>
+
+  fmt_number(columns = n, decimals = 0) |>
+  sub_missing(columns = n, missing_text = "n/r") |>
+
+  # ---- Color: older evidence turns warmer ----
+  data_color(
+    columns = age,
+    method  = "numeric",
+    palette = c(cpp_green, cpp_cream, "#C0392B"),
+    domain  = c(0, 12)
+  ) |>
+
+  # ---- gtExtras: badge the outcome type, highlight the closest design match ----
+  gt_badge(
+    column  = outcome,
+    palette = c(
+      "Engagement"  = "#2E86AB",
+      "Self-report" = "#E07A1F",
+      "Web traffic" = "#6C5B7B",
+      "Intention"   = "#8E44AD",
+      "Messaging"   = "#7F8C8D",
+      "Review"      = "#34495E"
+    )
+  ) |>
+  gt_highlight_rows(
+    rows = study == "Mishnick & Wise",
+    fill = "#FFF1C1", font_weight = "normal"
+  ) |>
+
+  # ---- Footnotes ----
+  tab_footnote(
+    footnote  = "Years since publication as of 2026. Several studies use data from 2013–2018, before short-form video and major algorithm changes.",
+    locations = cells_column_labels(columns = age)
+  ) |>
+  tab_footnote(
+    footnote  = "Units differ by design (posts, students, institutions, articles), so n is not comparable across rows.",
+    locations = cells_column_labels(columns = n)
+  ) |>
+  tab_footnote(
+    footnote  = "No study measures inquiry (form submissions, portal referrals, event registrations, email sign-ups). This is the gap AO4 addresses.",
+    locations = cells_column_labels(columns = outcome)
+  ) |>
+  tab_footnote(
+    footnote  = "Highlighted: the closest design match to AO4. One U.S. academic unit, an eight-week campaign, post-level measurement, IRB exempt.",
+    locations = cells_stub(rows = "Mishnick & Wise")
+  ) |>
+  tab_footnote(
+    footnote  = "Sample size not reported in the sources available to me (n/r).",
+    locations = cells_body(columns = n, rows = study == "de los Reyes")
+  ) |>
+  opt_footnote_marks(marks = "letters") |>
+
+  tab_source_note(md(
+    "**Source:** Evans, J. (2026). *Progress Report 1: Evidence Search and Approach Challenge, AO4*. Collins College CEP, Cal Poly Pomona. Full citations in the report's reference list."
+  )) |>
+
+  # ---- Brand styling ----
+  tab_style(
+    style     = list(cell_fill(cpp_green), cell_text(color = "white", weight = "bold")),
+    locations = list(cells_column_spanners(), cells_column_labels(), cells_stubhead())
+  ) |>
+  tab_style(
+    style     = list(cell_fill(cpp_cream), cell_text(weight = "bold", color = cpp_green)),
+    locations = cells_row_groups()
+  ) |>
+  tab_style(style = cell_text(weight = "bold"), locations = cells_stub()) |>
+  cols_align(align = "center", columns = c(year, age, outcome)) |>
+  cols_width(study ~ px(190), method ~ px(200), outcome ~ px(130)) |>
+  opt_table_font(font = list(google_font("Inter"), default_fonts())) |>
+  tab_options(
+    heading.align             = "left",
+    heading.title.font.size   = px(20),
+    table.border.top.color    = cpp_gold,
+    table.border.top.width    = px(4),
+    table.border.bottom.color = cpp_gold,
+    table.border.bottom.width = px(4),
+    table.font.size           = px(13)
+  )
+```
+:::
+
+::: {.callout-warning collapse="true"}
+## Rendering note
+
+The inline bar created with `gt_plt_bar_pct()` is rendered as HTML. The `google_font("Inter")` call also needs an internet connection while the document is rendering. If there is no connection, the table will simply fall back to the available system fonts.
+
+If `gt_badge()` or `gt_highlight_rows()` returns an error, updating gtExtras should fix the issue. You can update it by running `install.packages("gtExtras")`.
+:::
+
+## Checklist of required elements
+
+| Requirement | How it's met |
+|----|----|
+| Title and subtitle | Both tables use `tab_header()` with `md()` |
+| Stubhead label | Added with `tab_stubhead()` in both tables |
+| Relabeled variables | Column names are cleaned up with `cols_label()` |
+| Source notes | Full citations are included with `tab_source_note()` |
+| Footnotes | Table 1 includes 3 footnotes and Table 2 includes 5 using `tab_footnote()`, along with `opt_footnote_marks()` |
+| Spanner column labels | `tab_spanner()` is used once in Table 1 and three times in Table 2 |
+| 2 decimals / currency | `fmt_number(decimals = 2)` is used for mean rank. **Currency does not apply** because the AO4 benchmark data does not include any dollar values. |
+| Color on numeric data | `data_color()` is used for mean rank and evidence age |
+| Row groups | `groupname_col` separates channel type in Table 1 and Matrix A vs. Matrix B in Table 2 |
+| **gtExtras** | The tables use `gt_plt_bar_pct()`, `gt_badge()`, and `gt_highlight_rows()` |
+| Other gt functions | Additional formatting uses `tab_style()`, `sub_missing()`, `cols_align()`, `cols_width()`, `opt_table_font()`, and `tab_options()` |
+
+# Why These Tables Belong in My CEP Deliverables
+
+> **Task 3.** Explain why the table is worth adding to your MSDM project written report or presentation slides.
+
+@tbl-channels **belongs in Chapter 2 as part of the AO4 research framework and could also be used in our client presentation.** It gives a clear overview of why certain channels should be prioritized in AO4. Almost every student used the official .edu website, and it ranked higher than every social platform. Because of that, program information pages and GA4 website data should be some of the strongest evidence used in AO4.
+
+The lower social media numbers are also useful, especially when combined with the footnote showing that the interview findings did not completely match the survey results. This helps explain why AO4 should place more weight on observed behavior instead of relying only on self-reported responses. The table also gives the Collins College team an outside benchmark to compare against until we have our own GA4 baseline for Section 5.8.
+
+@tbl-evidence **belongs in the Chapter 2 evidence review and could also work well as a backup slide during the defense.** It does three important things in one view:
+
+1.  **It shows the gap.** The "Outcome Measured" column makes it clear that none of the studies use inquiry as the dependent variable, which helps show where AO4 adds something different.
+2.  **It shows possible transferability issues.** The age shading and Setting column make it easy to see which studies are older, international, or based on elite institutions. These are the same limitations discussed in PR1 §5.2.
+3.  **It supports the research design.** The highlighted row points to Mishnick & Wise (2024) as the main design model. Its small sample of *n* = 58 posts also supports using nonparametric tests if the final campaign produces a low number of posts.
+
+Both tables use CPP green and gold so they match the rest of our report template. I used Claude to help with some of the visual color choices, but I created and coded the tables myself. Since both tables are built with code, I can easily update them once the campaign data starts coming in. Instead of redesigning everything, I can simply add the Collins College results next to the existing benchmark data.
+
+# Appendix {.appendix}
+
+> **Tasks 4–5.** Push your project folder to GitHub and publish the HTML file to GitHub Pages. Add an Appendix section with clickable links to both URLs.
+
+- **GitHub repository:** <https://github.com/jakevns/IBM6500/tree/main/M05>
+- **Published report (GitHub Pages):** <https://jakevns.github.io/IBM6500/M05/Evans_Jake-M05-Table-Viz.html>
+- **CEP Group 3 project site:** <https://jakevns.github.io/cep-group3-collins-enrollment-retention/>
+
+**Videos referenced**
+
+- Iannone, R. *Making Beautiful Tables with {gt}.* Posit.
+- Teitelbaum, E. *Making Beautiful Tables with {gt}.*
+- Keyes, D. & Mock, T. *Making high-quality tables in R with the gt package.* R for the Rest of Us.
+- Martin, G. *Create Fantastic Tables using gtExtras in R.* R Programming 101.
+- {gt} documentation: <https://gt.rstudio.com/> · {gtExtras} documentation: <https://jthomasmock.github.io/gtExtras/>
+
+**Research references**
+
+Table 1 draws on Shields and Peruta (2019). Table 2 profiles the 11 empirical sources from my Progress Report 1 evidence matrices.
+
+Bélanger, C. H., Bali, S., & Longden, B. (2014). How Canadian universities use social media to brand themselves. *Tertiary Education and Management, 20*(1), 14–29. <https://doi.org/10.1080/13583883.2013.852237>
+
+Cingillioglu, I., Gal, U., & Prokhorov, A. (2024). Social media marketing for student recruitment: An algorithmically sequenced literature review. *Journal of Marketing for Higher Education, 34*(2), 1101–1123. <https://doi.org/10.1080/08841241.2023.2177789>
+
+de los Reyes, J. (2023). The influence of Instagram and social media marketing engagement on prospective college students' university selection. *Strategic Enrollment Management Quarterly, 11*(2), 3–17.
+
+Evans, J. (2026). *Progress report 1: Evidence search and approach challenge, Analytics Objective 4* \[Unpublished CEP report\]. Collins College of Hospitality Management, Cal Poly Pomona. <https://jakevns.github.io/cep-group3-collins-enrollment-retention/assignments/progress-reports/>
+
+Eveleth, D. M., Baker-Eveleth, L. J., & Stone, R. W. (2015). Potential applicants' expectation-confirmation and intentions. *Computers in Human Behavior, 44*, 183–190. <https://doi.org/10.1016/j.chb.2014.11.025>
+
+Lund, B. (2019). Universities engaging social media users: An investigation of quantitative relationships between universities' Facebook followers/interactions and university attributes. *Journal of Marketing for Higher Education, 29*(2), 251–267. <https://doi.org/10.1080/08841241.2019.1641875>
+
+Mishnick, N., & Wise, D. (2024). Social media engagement: An analysis of the impact of social media campaigns on Facebook, Instagram, and LinkedIn. *International Journal of Technology in Education, 7*(3), 535–549.
+
+Ng, A. W. Y. (2023). Changes in the usefulness of communication channels for prospective undergraduates about university studying: Afore and during the pandemic. *International Journal of Educational Management, 37*(2), 361–372. <https://doi.org/10.1108/IJEM-04-2022-0154>
+
+Ozelie, R., & Knuth, A. (2025). Harnessing social media for occupational therapy graduate program recruitment. *Journal of Occupational Therapy Education, 9*(4), Article 1.
+
+Peruta, A., & Shields, A. B. (2018). Marketing your university on social media: A content analysis of Facebook post types and formats. *Journal of Marketing for Higher Education, 28*(2), 175–191. <https://doi.org/10.1080/08841241.2018.1442896>
+
+Shields, A. B., & Peruta, A. (2019). Social media and the university decision. Do prospective students really care? *Journal of Marketing for Higher Education, 29*(1), 67–83. <https://doi.org/10.1080/08841241.2018.1557778>
+
+Taylor, Z. W., & Bicak, I. (2020). Buying search, buying students: How elite U.S. institutions employ paid search to practice academic capitalism online. *Journal of Marketing for Higher Education, 30*(2), 271–296. <https://doi.org/10.1080/08841241.2020.1731910>

@@ -1,0 +1,345 @@
+---
+title: "Class Notes for Week 05"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-expand: 1
+    toc-location: right-body
+    embed-resources: true
+    theme: cosmo
+execute:
+  freeze: auto
+---
+
+# Review Syllabus
+
+Professor started the class by reviewing the syllabus
+
+## Reviewed CEP project
+
+Went through chapter one and he discussed chapter 2 slightly. We will be working with the other professor to finish it up.\
+\
+"Take a look at the guideline for the MSDM Culminating Experience Project Copy Create a Quarto doc with the same content as the MSDM Culminating Experience Project guideline introduced in the CEP00 module. <https://www.cppmsdm.com/cep_guidelinesLinks> to an external site."
+
+## Started the presentations Class Presentations for week5 notes: Group 9:
+
+1.  
+
+2.  Was the problem clearly defined? (your response can vary: e.g., yes, no, unsure, not clear)
+
+3.  
+
+ Yes, they’ll be using upwards of 5 channels to get more “butts in seats” at the restaurant.
+
+2.  
+
+3.  Was the research interesting?
+
+4.  
+
+ Yes, they’re using different avenues to get people in the store and are being creative.  Canva, UTM Tracked links, Opentable, Canva page views, and offer codes that are logged at POS for walkins.  Its fascinating to see all of the difference marketing platforms they are able to use to increase “butss in seats”
+
+2.  
+
+    1.  
+
+    2.  Newsletters incentivizing store visits through promotional advertising.
+
+    3.  
+
+    4.  Customer Satisfactions correlation with repeat customers.
+
+    5.  
+
+    6.  How effective the website is to compete three tests: Menu, operating hours, reservation process
+
+    7.  
+
+    8.  Instagram Content Engagement Analysis.
+
+    9.  
+
+    10. Facebook Content effectiveness and reservation behavior.  
+
+    11. 
+
+3.  Would the research contribute significantly to the literature?
+
+4.  
+
+I didn’t see much of the literature that they used in the presentation.
+
+4.  
+
+5.  Was the coverage in the literature sufficient enough to make you feel that you were entertained enough about the topic?
+
+6.  
+
+Once again, I did not see the literature in the presentation.
+
+5.  
+
+6.  Do you agree or disagree with the hypothesis?
+
+7.  
+
+Yes, I think the avanues that they’re researching and exploring with assist in gaining clientele.
+
+6.  
+
+7.  Was the logic explained well enough for you to feel that the hypothesis makes sense?
+
+8.  
+
+Absolutely.
+
+7.  
+
+8.  Did the hypothesis make too common sense? In other words, would it be unlikely that no one already investigated the hypothesis because it is so basic?  
+
+9.  
+
+No, if this was a basic hypothesis, then the Restaurant would already be taking advantage of the data.  Right now they aren’t focusing on the best content to post, and where they can advertise promotions effectively. 
+
+Group 8:\
+\
+
+1.  
+
+2.  Was the problem clearly defined? (your response can vary: e.g., yes, no, unsure, not clear) Yes they want to create a synthetic research workflow that can compensate for the slow results you get from live demos to show clients. 
+
+3.  
+
+4.  Was the research interesting? Absoolutely
+
+5.  
+
+6.  Would the research contribute significantly to the literature? YES!  They had a great use of sources. 
+
+7.  
+
+8.  Was the coverage in the literature sufficient enough to make you feel that you were entertained enough about the topic? Yes they are backing up their decisions with literature
+
+9.  
+
+10. Do you agree or disagree with the hypothesis? I agree that having a faster research method that’s more affordable would be better.
+
+11. 
+
+12. Was the logic explained well enough for you to feel that the hypothesis makes sense?  Yes it does make sense.
+
+13. 
+
+14. Did the hypothesis make too common sense? In other words, would it be unlikely that no one already investigated the hypothesis because it is so basic?   
+
+15. 
+
+No, this is a whole new type of research that’s taking advantage of AI technology.  Very forward thinking.   They don’t have AO yet, but that’s the only issue that I can see.  But they are handling it safely so its understandable that they don’t have it set in stone.
+
+Group 7:\
+\
+
+1.  
+
+2.  Was the problem clearly defined? (your response can vary: e.g., yes, no, unsure, not clear)
+
+3.  
+
+Yes! They are creating marketing for a restaurant in huntington beach.  It was hard to figure out each individual PO.
+
+2.  
+
+3.  Was the research interesting?
+
+4.  
+
+Yes! I love how they are combining the social media/marketing with whatshappening in the back end of the restaurant.   Great example was used when it came to see what foods are more popular vs others. 
+
+3.  
+
+4.  Would the research contribute significantly to the literature?
+
+5.  
+
+I don’t see literature to back up the research
+
+4.  
+
+5.  Was the coverage in the literature sufficient enough to make you feel that you were entertained enough about the topic?
+
+6.  
+
+No literature was included as far as I could see.
+
+5.  
+
+6.  Do you agree or disagree with the hypothesis?
+
+7.  
+
+Yes it makes sense to link the marketing with the back end of the restaurant.  They’re combining all aspects of the restaurant from promo, to menu, to the social media.  Touching all keypoints!
+
+6.  
+
+7.  Was the logic explained well enough for you to feel that the hypothesis makes sense?
+
+8.  
+
+Yes it was.
+
+7.  
+
+8.  Did the hypothesis make too common sense? In other words, would it be unlikely that no one already investigated the hypothesis because it is so basic?   
+
+9.  
+
+No they are going beyond the marketing research that an average restaurant will go through,.
+
+Group 6:\
+\
+
+1.  
+
+2.  Was the problem clearly defined? (your response can vary: e.g., yes, no, unsure, not clear)
+
+3.  
+
+Absolutely
+
+2.  
+
+3.  Was the research interesting?
+
+4.  
+
+Yes! I love how they are combining the social media/marketing with whatshappening in the back end of the restaurant.   Great example was used when it came to see what foods are more popular vs others. 
+
+3.  
+
+4.  Would the research contribute significantly to the literature?
+
+5.  
+
+Yes, even their PO were backed up by sources.
+
+4.  
+
+5.  Was the coverage in the literature sufficient enough to make you feel that you were entertained enough about the topic?
+
+6.  
+
+Asboltuely they killed it!
+
+5.  
+
+6.  Do you agree or disagree with the hypothesis?
+
+7.  
+
+Yes it makes sense to link the marketing with the back end of the restaurant.  They’re combining all aspects of the restaurant from promo, to menu, to the social media.  Touching all keypoints!
+
+6.  
+
+7.  Was the logic explained well enough for you to feel that the hypothesis makes sense?
+
+8.  
+
+Yes it was. And once again they backed up everything with great erreferences.
+
+7.  
+
+8.  Did the hypothesis make too common sense? In other words, would it be unlikely that no one already investigated the hypothesis because it is so basic?   
+
+9.  
+
+Very comprehensive marketing project. 
+
+Group 5:
+
+1.      Was the problem clearly defined? (your response can vary: e.g., yes, no, unsure, not clear)
+
+Yes they are working on an online store for the CP Farmstore
+
+2.      Yes they are creating an online store front for the CPP farmstore.
+
+3.      Was the research interesting?
+
+4.      Would the research contribute significantly to the literature?
+
+They didn’t include literature
+
+5.      Was the coverage in the literature sufficient enough to make you feel that you were entertained enough about the topic?
+
+No literature
+
+6.      Do you agree or disagree with the hypothesis?
+
+Yes an online store will help the CPP farm store for sure.
+
+7.      Was the logic explained well enough for you to feel that the hypothesis makes sense?
+
+Yes the PO and AO make sense for the project.
+
+8.      Did the hypothesis make too common sense? In other words, would it be unlikely that no one already investigated the hypothesis because it is so basic?   
+
+No this isn’t a basic project although its very similar to the project we did in class last semester but that’s not the groups choice.
+
+Group 4:
+
+1.      Was the problem clearly defined? (your response can vary: e.g., yes, no, unsure, not clear)
+
+Yes they are doing marketing for Wellness Ranch therapy
+
+2.      Was the research interesting?
+
+Yes it was
+
+3.      Would the research contribute significantly to the literature?
+
+They didn’t include literature
+
+4.      Was the coverage in the literature sufficient enough to make you feel that you were entertained enough about the topic?
+
+No literature was mentioned
+
+5.      Do you agree or disagree with the hypothesis?
+
+A Digital Marketing plan for wellness ranch make sense
+
+6.      Was the logic explained well enough for you to feel that the hypothesis makes sense?
+
+Yes the PO and AO make sense for the project.
+
+7.      Did the hypothesis make too common sense? In other words, would it be unlikely that no one already investigated the hypothesis because it is so basic?   
+
+I don’t think its very basic as it’s the foundation of our degree but we did create digital marketing plans for wellness ranch alast fall as well as SEO research during the microinternship so the work has already been done but that’s not the teams choice.
+
+Group 2:
+
+1.      Was the problem clearly defined? (your response can vary: e.g., yes, no, unsure, not clear)
+
+2.      Yes they are creating an online store front for the CPP farmstore.
+
+3.      Was the research interesting?
+
+4.      Would the research contribute significantly to the literature?
+
+They didn’t include literature
+
+5.      Was the coverage in the literature sufficient enough to make you feel that you were entertained enough about the topic?
+
+No literature
+
+6.      Do you agree or disagree with the hypothesis?
+
+Yes an online store will help the CPP farm store for sure.
+
+7.      Was the logic explained well enough for you to feel that the hypothesis makes sense?
+
+Yes the PO and AO make sense for the project.
+
+8.      Did the hypothesis make too common sense? In other words, would it be unlikely that no one already investigated the hypothesis because it is so basic?   
+
+No this isn’t a basic project although its very similar to the project we did in class last semester but that’s not the groups choice.

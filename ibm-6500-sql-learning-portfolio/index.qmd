@@ -1,0 +1,16 @@
+---
+title: "IBM 6500 SQL Learning Portfolio"
+number-sections: false
+toc: false
+---
+
+**Student:** Jake Evans
+**Course:** IBM 6500
+
+This portfolio contains my DataCamp course-completion evidence and learning notes for SQL and BigQuery. Each report summarizes the main concepts, key syntax, and worked examples from one course, and serves as a reference I can return to for the MSDM Culminating Experience Project (CEP).
+
+## Reports
+
+- [Introduction to SQL](introduction-to-sql.html)
+- Introduction to BigQuery (to be completed)
+- Intermediate SQL (to be completed)
