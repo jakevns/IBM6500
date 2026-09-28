@@ -199,3 +199,4 @@ Knowing that SQL flavors are different will also matter later because the upcomi
 
 - [GitHub Repository](https://github.com/jakevns/IBM6500/tree/main/ibm-6500-sql-learning-portfolio)
 - [Published Introduction to SQL Report](https://jakevns.github.io/IBM6500/ibm-6500-sql-learning-portfolio/docs/introduction-to-sql.html)
+- [SQL Learning Portfolio Landing Page](https://jakevns.github.io/IBM6500/ibm-6500-sql-learning-portfolio/docs/index.html)
