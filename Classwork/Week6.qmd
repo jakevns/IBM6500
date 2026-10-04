@@ -1,0 +1,72 @@
+---
+title: "Class Notes for Week 06"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-expand: 1
+    toc-location: right-body
+    embed-resources: true
+    theme: cosmo
+execute:
+  freeze: auto
+---
+
+# Class Overview
+
+For this class we are doing two activities: taking notes during the class and peer reviewing everyone's presentations.
+
+## Positron Setup
+
+Professor is using Positron to keep notes on the class and showed how to open a new folder in Positron and set up the folder.
+
+Professor reviewed how to properly set up the YAML.
+
+# Announcements
+
+## CPP Coursera
+
+Professor reviewed the CPP Coursera access we have for professional trainings. Google Advanced Analytics is one we should really consider enrolling in. Look at the topics and make sure you already know what you need. **Take advantage of this!**
+
+# PO and AO Best Practices
+
+Professor reviewed the best practices for POs and AOs and the relationship between the two. He separated them to make it easier for readers to find what they need and move on.
+
+He also reviewed expectations when sourcing literature and went over the updates.
+
+# Overview
+
+- Listen to the podcast *Communicating Complex Statistical Findings* by Liz Eisenhauer.
+- Reviewed Module 3, Case 31: construct and measurement table.
+- The IRB survey application.
+
+# CEP Presentations: CEP 03 – Revision of Ch1 and Lit Review of Ch2
+
+## Group 9
+
+**Strengths:** I thought Group 9 did a good job connecting each AO to a PO. Their AOs covered newsletter clicks, the dining experience, Facebook reservations, website navigation, and Instagram engagement, so none of the listed POs seemed left out. Everyone also had an AO assigned, and each one had a clear purpose. The literature gave me enough background to understand the topic and why they chose these analyses. I agree with the hypotheses because the reasoning makes sense, and looking at RKR's own customers could give the restaurant useful information.
+
+**Weaknesses:** They did not get much time to talk outside of the second part, so it was harder to get a full understanding of their project from the presentation. I would have liked more explanation of how Instagram engagement and customers saying they would return connect to actual reservations and repeat visits. Some of the hypotheses felt fairly obvious, like better food and service leading to higher satisfaction, and their sources show that these relationships have already been studied. Still, applying them to RKR has value. Explaining what they hope to learn specifically about RKR and how the restaurant could use those findings would make their project stronger.
+
+## Group 8
+
+**Strengths:** I thought Group 8 had an interesting topic, especially the idea of making market research more accessible to small businesses. All four POs have supporting AOs: AO1, AO2, and AO3 support the insights dashboard, AO4 supports the simulator and consultant training, and AO5 supports the marketing plan. None of the AOs seemed unrelated to the project. I also liked that they plan to compare AI responses with real people instead of assuming the AI results are accurate. The completed literature sections gave me a good understanding of their reasoning. I agree with testing whether the simulator improves performance and whether AI panels provide useful insights, since neither outcome should be taken for granted.
+
+**Weaknesses:** The member assignments need clarification because the overview table and individual sections switch Yushan and Alondra's AOs. Everyone appears to have an assignment, but the document should be consistent. The literature review is also unfinished for AO1 and AO3, which leaves gaps, especially because validating the AI data is central to the dashboard. I would have liked clearer hypotheses or research questions explaining what results would count as success. The topic does not feel too obvious, but they could explain more clearly what their project adds to existing AI research. They also acknowledge that higher simulator scores alone would not show whether consultants can apply those skills with real clients.
+
+## Group 4
+
+**Strengths:** I thought Group 4 did a good job explaining how their AOs connect to their POs. AO1 supports website and SEO improvements, AO2 focuses on analytics and conversions, AO3 evaluates Google Ad Grants readiness, and AO4 measures the results of their changes. PO5 does not have its own AO, but they clearly explain how all four AOs contribute to the final sustainable marketing strategy, so it is still covered. Each member has an AO assigned, and none seems unnecessary. I also liked that they considered what Wellness Ranch can realistically maintain after the project ends. Their discussion of measurement and organizational readiness helped me understand why the project matters.
+
+**Weaknesses:** The literature review has a useful foundation, but some sections are still unfinished and several citations need to be corrected, which made the research harder to evaluate. I agree with the idea that better SEO and website experiences could improve meaningful engagement, but I did not see clearly stated hypotheses to assess. Explaining which changes they expect to affect donations or inquiries would make the logic stronger. The general idea of improving digital marketing is familiar, but testing what works for this nonprofit still has value. They also need to secure reliable baseline data before making changes so they can better separate their results from seasonal patterns or other influences.
+
+## Group 2
+
+**Strengths:** I thought Team 2 did a good job connecting their AOs to the Foundation's goals. AO1 supports campaign performance and tracking under PO1 and PO2, AO2 adds awareness information to PO3, AO3 tracks repeat giving and event participation for PO4 and PO5, and AO4 supports donor comparisons and segmentation for PO3 and PO6. All six POs have analytical support, everyone has an AO assigned, and none seems unrelated. I especially liked that they follow members beyond the initial $25 contribution to see whether they donate again or attend an event. The donor journey and relationship marketing discussion helped me understand their reasoning, and I agree that continued communication is worth examining as a way to encourage deeper engagement.
+
+**Weaknesses:** I would have liked more supporting studies and clearer hypotheses or research questions. The frameworks make sense, but parts of the literature review explain the general approach without much detail about research findings. PO4 and PO6 also include testing cultivation and developing CRM automations, so the group should explain how they will carry out and evaluate those activities beyond tracking donors and creating segments. Their ability to connect campaign touchpoints to the same supporter still needs confirmation, which could limit the attribution analysis. The idea that communication can encourage repeat giving is familiar, but finding out what works for this Foundation gives the project value. More specific expectations and success measures would make that contribution clearer.
+
+# CEP Meeting
+
+My group texts everyday about what we need and maintain a good communication so we don't need to meet. 
