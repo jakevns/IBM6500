@@ -19,7 +19,6 @@ format:
 
 # Course-Completion Evidence
 
-<!-- PLACEHOLDER: paste the certificate screenshot here in the Visual Editor, or keep this line and save the image as images/introduction-to-bigquery-certificate.png -->
 ![DataCamp Introduction to BigQuery certificate](images/introduction-to-bigquery-certificate.png){fig-alt="DataCamp certificate showing Jake Evans completed Introduction to BigQuery"}
 
 I completed the Introduction to BigQuery course in the IBM 6500 DataCamp classroom on **[COMPLETION DATE]**. The certificate above shows my name and the course title as proof that I completed the course.
