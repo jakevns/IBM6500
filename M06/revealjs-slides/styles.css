@@ -1,0 +1,42 @@
+/* Extra classes used inside the slides */
+
+/* Big headline number */
+.stat {
+  font-size: 2.6em;
+  font-weight: 700;
+  color: #1e4d2b;
+  line-height: 1.1;
+}
+
+.stat-label {
+  font-size: 0.85em;
+  color: #6b7466;
+}
+
+/* Soft card behind a column */
+.card {
+  background: #ffffff;
+  border-left: 6px solid #c99700;
+  border-radius: 10px;
+  padding: 0.6em 0.9em;
+  margin: 0.3em 0;
+}
+
+/* Custom fragment: text turns gold when it appears */
+.reveal .slides section .fragment.highlight-gold {
+  opacity: 1;
+  visibility: inherit;
+}
+.reveal .slides section .fragment.highlight-gold.visible {
+  color: #c99700;
+  font-weight: 700;
+}
+
+/* Gap callout on the adequacy slide */
+.gap {
+  background: #1e4d2b;
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 0.5em 0.9em;
+  font-size: 1.1em;
+}

@@ -1,0 +1,12 @@
+source,year,matrix,outcome_type,measures_inquiry,sample_n,sample_unit,setting,iv_channel,iv_theme,iv_format,iv_timing
+Peruta & Shields,2018,Supporting,Platform engagement,FALSE,5932,Facebook posts,US national (66 institutions),FALSE,TRUE,TRUE,TRUE
+Shields & Peruta,2019,Supporting,Self-report,FALSE,364,Students surveyed,US (3 institutions + referrals),TRUE,FALSE,FALSE,FALSE
+Mishnick & Wise,2024,Supporting,Platform engagement,FALSE,58,Campaign posts,US single department,TRUE,FALSE,FALSE,FALSE
+Ozelie & Knuth,2025,Supporting,Self-report,FALSE,161,Graduate students,US professional programs,FALSE,TRUE,TRUE,FALSE
+de los Reyes,2023,Supporting,Self-report,FALSE,NA,First-year students,US single private university,TRUE,FALSE,FALSE,FALSE
+Lund,2019,Challenging,Platform engagement,FALSE,50,Universities,International (QS top 1000),TRUE,FALSE,FALSE,FALSE
+Ng,2023,Challenging,Self-report,FALSE,5494,Admitted students,Hong Kong single university,TRUE,FALSE,FALSE,FALSE
+Bélanger et al.,2014,Challenging,Messaging patterns,FALSE,106,Universities,Canada (all universities),TRUE,TRUE,FALSE,FALSE
+Taylor & Bicak,2020,Challenging,Web traffic,FALSE,100,Universities,US national (top 100),TRUE,FALSE,FALSE,FALSE
+Eveleth et al.,2015,Challenging,Behavioral intention,FALSE,199,Respondents,Job-recruitment context,FALSE,FALSE,FALSE,FALSE
+Cingillioglu et al.,2024,Challenging,Literature review,FALSE,43,Articles,Review (mostly international),FALSE,FALSE,FALSE,FALSE

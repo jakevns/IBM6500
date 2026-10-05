@@ -1,0 +1,45 @@
+/*-- scss:defaults --*/
+
+// Sass variables: change a color once here and it updates everywhere
+$brand-green: #1e4d2b;
+$brand-gold:  #c99700;
+$brand-cream: #fbf8f1;
+$brand-ink:   #22301f;
+$brand-mute:  #6b7466;
+
+// Override reveal.js theme variables (stacked on top of `serif`)
+$body-bg:                   $brand-cream;
+$body-color:                $brand-ink;
+$link-color:                $brand-green;
+$presentation-heading-color: $brand-green;
+$presentation-heading-font: "Georgia", "Times New Roman", serif;
+$presentation-h1-font-size: 2.4em;
+$code-block-bg:             #f1ede2;
+
+/*-- scss:rules --*/
+
+.reveal h2 {
+  border-bottom: 3px solid $brand-gold;
+  padding-bottom: 0.15em;
+}
+
+.reveal .slide-number {
+  color: $brand-mute;
+}
+
+.reveal .progress span {
+  background: $brand-gold;
+}
+
+.reveal .footer {
+  color: $brand-mute;
+}
+
+// Section slides use a dark green background; reveal.js adds
+// .has-dark-background automatically, so headings flip to cream
+.reveal .slides section.has-dark-background,
+.reveal .slides section.has-dark-background h1,
+.reveal .slides section.has-dark-background h2,
+.reveal .slides section.has-dark-background p {
+  color: $brand-cream;
+}

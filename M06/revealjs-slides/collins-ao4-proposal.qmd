@@ -1,0 +1,419 @@
+---
+title: "Reaching Future Hospitality Leaders"
+subtitle: "Collins College Enrollment & Retention · AO4 Proposal Presentation"
+author: "Jake Evans"
+institute: "IBM 6500, Cal Poly Pomona"
+date: "`r Sys.Date()`"
+format:
+  revealjs:
+    theme: [serif, custom.scss]
+    width: 1600
+    height: 900
+    logo: images/ao4-badge.svg
+    footer: "CEP Group 3 · Digital Channels & Inquiry (AO4)"
+    transition: slide
+    transition-speed: default
+    incremental: false
+    toc: true
+    toc-depth: 1
+    toc-title: "Roadmap"
+    slide-number: true
+    scrollable: true
+    smaller: true
+    code-fold: false
+    code-overflow: wrap
+    code-copy: true
+    number-sections: false
+    number-depth: 5
+    embed-resources: true
+    preview-links: auto
+    css: styles.css
+bibliography: references.bib
+editor: visual
+execute:
+  echo: true
+  freeze: auto
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+#| echo: false
+
+library(tidyverse)
+library(knitr)
+
+# Evidence base coded from Progress Report 1 (Evidence Matrices A and B)
+evidence <- read_csv("data/ao4_evidence.csv", show_col_types = FALSE)
+
+# College enrollment figures from the Chapter 1 group presentation
+enrollment <- tibble(
+  year     = c("2015–16", "2025–26"),
+  students = c(1204, 434)
+)
+
+n_sources   <- nrow(evidence)
+n_support   <- sum(evidence$matrix == "Supporting")
+n_challenge <- sum(evidence$matrix == "Challenging")
+n_inquiry   <- sum(evidence$measures_inquiry)
+n_us        <- sum(str_detect(evidence$setting, "^US"))
+n_since2020 <- sum(evidence$year >= 2020)
+
+enroll_start <- enrollment$students[1]
+enroll_now   <- enrollment$students[2]
+pct_change   <- round((enroll_now - enroll_start) / enroll_start * 100)
+dean_goal    <- 600
+gap_to_goal  <- dean_goal - enroll_now
+```
+
+# Introduction {background-color="#1e4d2b"}
+
+## Background & Business Problem
+
+:::::::: columns
+::::: {.column width="45%"}
+::: card
+[`r format(enroll_start, big.mark = ",")` → `r enroll_now`]{.stat}
+
+[CCHM enrollment, 2015–16 to 2025–26 (`r pct_change`%)]{.stat-label}
+:::
+
+::: card
+[\~28,000]{.stat}
+
+[Cal Poly Pomona enrollment overall: relatively steady]{.stat-label}
+:::
+:::::
+
+:::: {.column width="55%"}
+The decline is **college-specific**, not campus-wide.
+
+. . .
+
+Strong, under-communicated assets:
+
+::: incremental
+- PolyX teaching restaurant built into the curriculum
+- Wine, spirits & beer courses; wine auditorium & library
+- Off-campus industry visits and a SoCal alumni network
+- Dean's Board of Advisors of industry executives
+:::
+::::
+::::::::
+
+::: notes
+The decline is college-specific. CPP overall is flat, so this isn't a campus-wide trend. The assets exist; they just aren't reaching prospects or engaging current students. The numbers on the left are pulled from the data with inline code, not typed in.
+:::
+
+## Problem Statement
+
+Two connected problems:
+
+::: incremental
+- **Attract:** fewer new students, and the college's channels don't consistently showcase what makes CCHM unique
+- **Retain:** many current students have limited involvement outside class
+:::
+
+. . .
+
+> Enrollment and retention are one connected problem: the experiences that keep current students engaged are the same ones we promote to prospects.
+
+## Project Objectives
+
+::::::::: columns
+:::: {.column width="33%"}
+::: card
+**PO1 · Enrollment**
+
+Grow CCHM toward the Dean's goal of **\~`r dean_goal` students**, about +`r gap_to_goal` from today.
+:::
+::::
+
+:::: {.column width="33%"}
+::: card
+**PO2 · Retention**
+
+Raise engagement and sense of belonging, especially among first-time freshmen.
+:::
+::::
+
+:::: {.column width="33%"}
+::: card
+**PO3 · Awareness**
+
+Increase prospective-student awareness through content tied to campus and industry events.
+:::
+::::
+:::::::::
+
+## Four AOs Across the Student Journey {transition="zoom-in fade-out" transition-speed="slow"}
+
+| Stage | Framework | Analytics Objective | Owner |
+|:--------------|:--------------|:----------------------------|:--------------|
+| Predisposition & search (pre-application) | Hossler & Gallagher, phases 1–2 | **AO4** · Which digital channels and content themes generate awareness and inquiry | Jake Evans |
+| Choice (application → enrollment) | Hossler & Gallagher, phase 3 | **AO3** · Courses most associated with attrition and retention | Aldo Naranjo |
+| Persistence (enrolled students) | Tinto's Student Integration Model | **AO1** · Belonging content and retention | Ruben Garcia |
+| Persistence (enrolled students) | Tinto's Student Integration Model | **AO2** · Transfer vs. first-time freshman retention | Nik Sahami |
+
+::: aside
+This slide zooms in and fades out. Transitions can be set per slide in the heading's curly brackets.
+:::
+
+## AO4: The Analytics Objective
+
+::: r-fit-text
+Which **digital channels** and **content themes**
+
+most effectively generate prospective-student
+
+**awareness and inquiry** for the Collins College?
+:::
+
+## Why It Matters
+
+::: incremental
+- Inquiry is the **first observable sign of interest**: the top of the enrollment funnel PO1 depends on
+- Every later stage (application, admission, enrollment) is drawn from the inquiry pool
+- The college has limited marketing resources, so knowing **what to post and where** is worth more than posting more[^1]
+- The first UTM-tagged campaign post is planned for **October 8, 2026**
+:::
+
+[^1]: Lund (2019) found posting volume had a negligible correlation with engagement across 50 universities.
+
+# Literature Review {background-color="#1e4d2b"}
+
+## Well-Established Models
+
+::::::: columns
+:::: {.column width="50%"}
+::: card
+**Three-phase model of college choice**
+
+@hossler1987: predisposition → search → choice.
+
+AO4 sits in phases 1–2, before a student applies. The model explains *where* inquiry happens in the decision process.
+:::
+::::
+
+:::: {.column width="50%"}
+::: card
+**Content coding + proportional engagement**
+
+@peruta2018: 17 content categories, 7 formats, and engagement ÷ followers.
+
+Fills the gap the college-choice model leaves: *which* messages move a student from awareness to inquiry.
+:::
+::::
+:::::::
+
+::: notes
+Hossler and Gallagher place AO4 in the decision process; Peruta and Shields give a practical way to measure and compare content for a small account like ours.
+:::
+
+## Evidence Supporting the Approach
+
+::: incremental
+- **Content matters.** Content category, format, and timing all predicted engagement across 5,932 posts [@peruta2018]
+- **The website is the stable core channel.** 90.3% of students used the official .edu site [@shields2019]
+- **Authentic beats promotional.** Curriculum and day-in-the-life content rated most impactful [@ozelie2025]
+- **Effects show up early.** Social media is most influential at the initial-interest stage [@delosreyes2023]
+- **A comparable design exists.** One department, 58 posts, IRB-exempt public data [@mishnick2024]
+:::
+
+## Evidence Challenging the Approach
+
+- [Posting volume ≈ no effect; prestige and endowment dominate [@lund2019]]{.fragment .fade-up}
+- [Social media's value rose mainly when in-person channels closed [@ng2023]]{.fragment .fade-up}
+- [Students and third parties generate most messaging about a school [@belanger2014]]{.fragment .fade-up}
+- [Paid search can't buy past low brand recognition [@taylor2020]]{.fragment .fade-up}
+- [Website effects may work only through mediators like usability [@eveleth2015]]{.fragment .fade-up}
+
+. . .
+
+[Takeaway: *what* we post matters more than *how much*, and effects will be modest.]{.fragment .highlight-red}
+
+## Adequacy of the Gathered Evidence
+
+```{r}
+#| label: coverage-chart
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show the chart code"
+#| fig-width: 11
+#| fig-height: 4.6
+#| fig-align: center
+
+coverage <- evidence |>
+  pivot_longer(starts_with("iv_"), names_to = "iv", values_to = "covered") |>
+  filter(covered) |>
+  mutate(iv = recode(iv,
+                     iv_channel = "Channel & medium",
+                     iv_theme   = "Content theme",
+                     iv_format  = "Creative format",
+                     iv_timing  = "Publication timing")) |>
+  count(iv, matrix)
+
+ggplot(coverage, aes(x = n, y = fct_reorder(iv, n, .fun = sum), fill = matrix)) +
+  geom_col(width = 0.65) +
+  scale_fill_manual(values = c(Supporting = "#1e4d2b", Challenging = "#c99700")) +
+  scale_x_continuous(breaks = 0:10, expand = expansion(mult = c(0, 0.05))) +
+  labs(x = "Number of sources", y = NULL, fill = NULL,
+       title = "Which AO4 independent variables does the evidence base address?") +
+  theme_minimal(base_size = 18) +
+  theme(legend.position = "top", panel.grid.major.y = element_blank())
+```
+
+::: gap
+Of `r n_sources` sources reviewed (`r n_support` supporting, `r n_challenge` challenging), **`r n_inquiry` measure inquiry** as the outcome. Only `r n_us` are U.S.-based, and `r n_since2020` were published since 2020.
+:::
+
+::: notes
+Every number in the green box is inline R code reading the evidence file. If I add a source to the CSV, the chart and the sentence both update on render. Channel is well covered; publication timing rests on a single study.
+:::
+
+## What the Studies Actually Measured {.scrollable}
+
+```{r}
+#| label: outcomes-table
+#| echo: false
+
+evidence |>
+  count(outcome_type, name = "Sources") |>
+  arrange(desc(Sources)) |>
+  rename(`Outcome measured` = outcome_type) |>
+  kable()
+```
+
+. . .
+
+None of these is **inquiry**. @cingillioglu2024 found the same across 43 articles: inquiry is a genuine gap in the literature, not a limit of the search.
+
+## Need for Additional Analysis
+
+- [**GA4 pre-campaign baseline**: published research can't tell us the college's current channel performance]{.fragment .highlight-gold}
+- [**Behavioral data first**: GA4 and platform analytics as primary evidence; the IRB survey explains *why*]{.fragment .highlight-gold}
+- [**Control for the application cycle**: seasonal demand is the main competing explanation]{.fragment .highlight-gold}
+- [**Sharpen the DV**: form submissions and portal referrals weigh above softer signals]{.fragment .highlight-gold}
+
+::: notes
+These four gold highlights use a custom fragment class defined in styles.css.
+:::
+
+# Methods {background-color="#1e4d2b"}
+
+## Data and Sampling
+
+::::: columns
+::: {.column width="50%"}
+**Primary data**
+
+- GA4 with consistent UTM tagging (access via Taylor Uster, Collins Marketing Communications)
+- Platform analytics: Facebook, Instagram, X/Twitter, YouTube
+- Email and paid advertising metrics
+- IRB-approved prospective-student survey
+:::
+
+::: {.column width="50%"}
+**Sampling frame**
+
+- Unit of analysis: each **campaign post** (or campaign day)
+- Window: Fall 2026 – Spring 2027 campaign; analysis Summer 2027
+- Every post tagged so inquiries link back to the post that produced them
+- **Secondary:** aggregate application, admission, and enrollment counts before vs. after the campaign
+:::
+:::::
+
+## Data Wrangling
+
+The evidence base is coded as one row per source. Reshaping it long lets us count coverage by independent variable:
+
+```{r}
+#| label: wrangle-demo
+#| echo: true
+#| code-line-numbers: "|1-2|3|4-8|9"
+#| output-location: fragment
+
+evidence |>
+  pivot_longer(starts_with("iv_"), names_to = "iv", values_to = "covered") |>
+  filter(covered) |>
+  mutate(iv = recode(iv,
+                     iv_channel = "Channel & medium",
+                     iv_theme   = "Content theme",
+                     iv_format  = "Creative format",
+                     iv_timing  = "Publication timing")) |>
+  count(iv, matrix)
+```
+
+::: notes
+Click through: line highlighting walks the audience through the pipeline, and the output appears only after the last step, like running it live.
+:::
+
+## Sample Characteristics (Evidence Base)
+
+```{r}
+#| label: sample-table
+#| echo: false
+
+evidence |>
+  arrange(matrix, year) |>
+  transmute(Source = paste0(source, " (", year, ")"),
+            Matrix = matrix,
+            N = format(sample_n, big.mark = ","),
+            Unit = sample_unit,
+            Setting = setting) |>
+  mutate(N = if_else(str_trim(N) == "NA", "n/r", N)) |>
+  kable()
+```
+
+::: aside
+Campaign data are not yet collected; this table describes the published evidence. n/r = not reported.
+:::
+
+## Measures
+
+| Role | Construct | Operationalization |
+|:---------------|:-------------------|:-----------------------------------|
+| **DV (primary)** | Inquiry | Intake form submissions, Bronco Applicant Portal referrals |
+| **DV (secondary)** | Inquiry | Engaged program-page sessions, event registrations, email sign-ups |
+| **IV** | Channel & medium | Platform; organic, paid, email, or referral traffic |
+| **IV** | Content theme | Main subject of the post or page |
+| **IV** | Creative format | Static image, carousel, short-form video, text |
+| **IV** | Publication timing | Day of week and time of day |
+| **Offset** | Reach | Impressions per post |
+
+## Analytics Methods
+
+::: incremental
+1.  **Primary: negative binomial regression** on post-level inquiry counts, with channel and content theme as main predictors, controlling for timing and reach
+2.  **Fallback:** if posts are too few, nonparametric group comparisons with effect sizes [following @peruta2018], plus descriptive GA4 channel contribution
+3.  **Secondary funnel:** application→admission and admission→enrollment rates compared before vs. after with **χ² tests and φ** [following @delosreyes2023], periods matched to the same point in the cycle [@ng2023]
+:::
+
+. . .
+
+::: card
+Realistic expectations: a comparable department drew **fewer than five engagements per post** [@mishnick2024].
+:::
+
+# References {background-color="#1e4d2b"}
+
+## References {.scrollable}
+
+::: {#refs}
+:::
+
+# Appendix {background-color="#1e4d2b" visibility="uncounted"}
+
+## Links {visibility="uncounted"}
+
+- [CEP Group 3 project site](https://jakevns.github.io/cep-group3-collins-enrollment-retention/)
+- [AO4 Progress Report 1 (PDF)](https://jakevns.github.io/cep-group3-collins-enrollment-retention/assignments/progress-reports/AO4-progress-report-1.pdf)
+- [Chapter 1 + Section 2.7 group presentation](https://jakevns.github.io/cep-group3-collins-enrollment-retention/assignments/progress-reports/ch1-sec27-presentation.html)
+- [Quarto Reveal.js documentation](https://quarto.org/docs/presentations/revealjs/)
+- [CCIDM effective-quarto-slides repo](https://github.com/CCIDM/effective-quarto-slides)
+- [Case 31 sample presentation](https://jmjung.quarto.pub/case31-presentatoin/)
+
+::: aside
+Press **S** for speaker notes, **F** for full screen, **Esc** for overview, **Alt/Option + click** to zoom.
+:::

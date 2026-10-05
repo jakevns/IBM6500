@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <circle cx="60" cy="60" r="56" fill="#1e4d2b"/>
+  <circle cx="60" cy="60" r="48" fill="none" stroke="#c99700" stroke-width="4"/>
+  <text x="60" y="72" text-anchor="middle" font-family="Georgia, serif" font-size="34" font-weight="700" fill="#fbf8f1">AO4</text>
+</svg>
