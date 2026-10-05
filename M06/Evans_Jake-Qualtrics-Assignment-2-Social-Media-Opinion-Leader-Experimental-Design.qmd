@@ -29,7 +29,7 @@ The screenshot below shows the full Survey Flow after my changes, starting with 
 The flow works in this order:
 
 | Order | Element | Purpose |
-|--------------------|--------------------------|--------------------------|
+|----|----|----|
 | 1 | Set Embedded Data: `id` | Gives each participant an ID when they enter the survey |
 | 2 | **Randomizer** (present 1, evenly) | Randomly assigns each participant to `Ad Type = reviewer` or `Ad Type = ads` |
 | 3–6 | Cover Page → Overall Social Media Experience → External Information Source → Opinion Leaders | Shown to everyone |

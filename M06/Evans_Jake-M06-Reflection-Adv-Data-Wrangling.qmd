@@ -1,0 +1,364 @@
+---
+title: "M06-Reflection Essay-Advanced Data Wrangling"
+subtitle: "Reveal.js Presentations and Advanced dplyr"
+author: "Jake Evans"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 4
+    toc-expand: 2
+    toc-location: left
+    toc-title: "Contents"
+    number-sections: true
+    code-link: true
+    code-fold: show
+    code-summary: "Show code"
+    code-tools: true
+    code-overflow: wrap
+    code-copy: true
+    embed-resources: true
+    theme:
+      light: flatly
+      dark: darkly
+editor: visual
+execute:
+  freeze: auto
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+#| code-fold: true
+#| code-summary: "Packages used in this report"
+
+library(tidyverse)
+library(knitr)
+```
+
+::: {.callout-note appearance="simple"}
+## About this report
+
+This reflection covers three parts of Module 6: designing presentations with Reveal.js (@sec-impressions), building my own Reveal.js deck for my CEP project (@sec-presentation), and three advanced `dplyr` functions from the wrangling lecture (@sec-wrangling).
+:::
+
+# Reveal.js Impressions {#sec-impressions}
+
+::: {.callout-tip icon="false"}
+## Prompt
+
+In Step 1, you learned how to design stunning presentation slides with Quarto. What's your impression of the Revealjs presentation? Describe its capabilities as you learned from the presentations. What are its strengths and weaknesses compared with PPT?
+:::
+
+## First Impression
+
+My first impression is that Reveal.js treats a presentation almost like a **report that is split into slides**. Everything I was already doing in Quarto, including the YAML header, headings, code chunks, and inline code, still works. The main difference is using `format: revealjs` instead of `format: html`, and each `##` heading becomes a new slide.
+
+What stood out to me most in Dr. Jung's Case 31 walkthrough was that the sample size numbers on his slides were not typed in manually. They were pulled directly from the data using inline code, so if the data changed, the slides would update automatically. That is something PowerPoint cannot really do.
+
+> A slide deck that re-renders from the data feels more like part of the analysis than a collection of screenshots from the analysis.
+
+## Capabilities
+
+The workshop with Dr. Carsten Lange and Jarrod Griffin, moderated by Dr. Jung, along with the Case 31 template, covered three main groups of features:
+
+::: panel-tabset
+### Building slides
+
+- **YAML header** controls the whole deck, including the title, subtitle, author, theme, footer, logo, slide numbers, and `embed-resources` for creating one self contained HTML file
+- **Incremental lists** can be turned on for the whole presentation with `incremental: true`, or just for one list with a `::: {.incremental}` fence
+- **Manual pauses** with `. . .` (three dots separated by spaces) can reveal any content, not just bullet points
+- **Per slide transitions** can be added inside the heading's curly brackets, such as `transition="zoom-in fade-out"` with `transition-speed="slow"`
+- **Asides** (`::: aside`) and **footnotes** can add smaller notes at the bottom of a slide
+- **Code control:** `#| code-fold: true` hides code until it is clicked, `code-line-numbers: "|1|2-3"` highlights lines one step at a time, and `output-location: fragment` or `slide` can delay the output so it feels more like the code is running live
+- **Overflow:** `.smaller` reduces the font size, while `scrollable: true` adds a scroll bar only when it is needed
+- **Optional slides:** `visibility="hidden"` or vertical navigation (`navigation-mode: vertical`) can keep backup slides available in case someone asks a question
+- **Publishing** only takes one command: `quarto publish quarto-pub file.qmd`
+
+### Presenting
+
+| Key | Feature | What it does |
+|:---------------:|:---------------------|:---------------------------------|
+| `Esc` | Overview mode | Shows every slide as a grid, with sub slides stacked under their section |
+| `S` | Speaker view | Opens notes, a timer, and the next slide in a separate window |
+| `F` | Full screen | Presents in full screen |
+| `E` | PDF export mode | Lays out slides for printing to PDF from the browser |
+| `Alt`/`Option` + click | Zoom | Zooms into any part of a slide |
+| ☰ menu | Navigation menu | Jumps to any section from the bottom left menu |
+
+Two features go beyond what PowerPoint offers:
+
+- **Chalkboard** lets the presenter draw directly on the slides or on a blank board
+- **Multiplex** lets the presenter control the audience's copy of the slides from a separate `-speaker` HTML file over the internet
+
+### Styling
+
+- **Built in themes** (`serif`, `moon`, `sky`, and others) can change the entire look of the deck with one line
+- **Stacked themes** such as `theme: [serif, custom.scss]` let me start with a built in theme and only change the parts I want
+- **Sass variables** such as `$brand-green: #1e4d2b` let me define a brand color once and reuse it throughout the presentation. Changing the variable updates every heading, link, and progress bar that uses it
+- **CSS classes** can create custom effects, such as Dr. Jung's red highlight fragment or a section background color set with `background-color="#..."`
+:::
+
+## Reveal.js vs. PowerPoint
+
+@tbl-compare summarizes how I see the differences after building my own deck.
+
+|   | Reveal.js (Quarto) | PowerPoint |
+|:-----------------------|:-----------------------|:-----------------------|
+| **Reproducibility** | Charts, tables, and numbers regenerate from data every time the deck is rendered | Charts are pasted in and can become outdated when the data changes |
+| **Version control** | Plain text works well with Git and GitHub | Binary file that is harder to track changes in |
+| **Sharing** | One HTML link or file that opens in any browser | Usually needs PowerPoint or a converter |
+| **Code** | Live, highlighted, foldable, and copyable code | Usually screenshots of code |
+| **Learning curve** | Steep because it requires YAML, Markdown, and CSS/SCSS | Lower because it is mostly point and click |
+| **Visual editing** | Colors and layout are controlled through code | Almost anything can be moved or changed by clicking and dragging |
+| **Collaboration with non-coders** | Harder for teammates who do not use R or Quarto | Most people already know how to use it |
+| **Reliability** | Some features conflict, such as chalkboard with `embed-resources`, and speaker view can sometimes fail | Mature and usually predictable |
+
+: Reveal.js compared with PowerPoint
+
+**Strengths.** The biggest strength for me is reproducibility. My slides and my analysis can live in the same file, so the numbers are much less likely to get out of sync. Publishing to a URL is also easier than sending around a large `.pptx` file, and tools like overview mode, zoom, and speaker view are already built in.
+
+**Weaknesses.** Small visual changes can take more work. In the workshop, changing something as simple as a heading color meant finding the right selector in the SCSS file and rendering again, while in PowerPoint that would only take a click. Some features also do not work well together. Jarrod mentioned that the chalkboard does not work with `embed-resources`, and his speaker view failed during the live demo. PDF export also seems to work best through the browser's print dialog with a paper size that matches the slide ratio instead of relying on the YAML setting.
+
+::: callout-important
+## Bottom line
+
+For a data focused presentation like my CEP proposal, Reveal.js makes more sense to me. For a quick presentation that teammates who do not code need to edit, PowerPoint is still easier.
+:::
+
+# My Reveal.js Presentation {#sec-presentation}
+
+::: {.callout-tip icon="false"}
+## Prompt
+
+In Step 2, you were asked to create a Revealjs presentation. Provide a link to the presentation you published on the web. Add at least one reproducible chart or table in the presentation. Briefly describe what the presentation is about. What did you learn from the experience of the Revealjs presentation?
+:::
+
+## Link
+
+::: {.callout-note}
+## Published slides
+
+<https://jakevns.github.io/IBM6500/M06/revealjs-slides/collins-ao4-proposal.html>
+:::
+
+## What the Presentation Covers
+
+The deck, *Reaching Future Hospitality Leaders*, is the proposal presentation for my CEP Group 3 project with the Collins College of Hospitality Management. Enrollment at the college dropped from 1,204 to 434 students between 2015–16 and 2025–26 while Cal Poly Pomona overall stayed relatively steady, which shows that the decline is specific to the college.
+
+The deck introduces the full project, including two connected problems, three project objectives, and four analytics objectives across the student journey. It then focuses on **AO4**, which is my part of the project: *which digital channels and content themes most effectively generate prospective student awareness and inquiry.* It follows the storytelling structure from the assignment:
+
+1.  Introduction, problem statement, and why AO4 matters
+2.  Literature review: Hossler and Gallagher's (1987) college choice model plus Peruta and Shields' (2018) content coding, supporting and challenging evidence, and an assessment of adequacy
+3.  Methods: data and sampling, wrangling, sample characteristics, measures, and analytic methods (negative binomial regression, with a nonparametric fallback and a χ² funnel comparison)
+4.  References and an appendix of clickable links
+
+## Reproducible Elements
+
+The evidence base from my Progress Report 1, which includes 11 sources across two evidence matrices, is coded as a CSV with one row for each source. The deck reads that file and creates:
+
+- A **bar chart** showing which AO4 independent variables are covered in the literature, split between supporting and challenging sources
+- A **table** showing what each study actually measured as its outcome
+- A **sample characteristics table** showing each study's sample size, unit, and setting
+- **Inline statistics**, including the total number of sources and how many measure inquiry, which is currently zero, so the sentence about the gap will update automatically if another source is added
+
+The enrollment decline (−64%) and the gap to the Dean's goal (+166 students) are also calculated with inline code instead of being typed in manually.
+
+## What I Learned
+
+- **Inline code changes how I write slides.** Writing `` `r knitr::inline_expr("n_inquiry")` `` instead of typing "0" made me think about the data first and write the sentence around it afterward.
+- **Theme stacking saves time.** Starting with `serif` and changing only a few Sass variables in `custom.scss` gave me a consistent green and gold design without having to create an entire theme from scratch.
+- **Reveal.js adds helpful classes automatically.** Slides with a dark `background-color` get a `.has-dark-background` class, which I used to switch the heading text to cream on section slides.
+- **Line highlighting with `output-location: fragment`** makes it much easier to walk through a wrangling pipeline one step at a time.
+- **Not every option is compatible.** I left the chalkboard turned off because I wanted to use `embed-resources: true` and keep the whole presentation in one HTML file.
+
+# Advanced Data Wrangling {#sec-wrangling}
+
+::: {.callout-tip icon="false"}
+## Prompt
+
+The advanced wrangling lecture in Step 3 introduced new concepts, including how to join relational databases. Pick three different functions, each from a different category. Describe when to use them and give one coding example along with an output for each function.
+:::
+
+I chose one function from each of three categories in the lecture:
+
+| Category | Function | Question it answers |
+|:-----------------|:-----------------|:-----------------------------------|
+| Relational data & joins | `left_join()` | How do I add columns from a lookup table without losing rows? |
+| Column-wise operations | `across()` | How do I apply one function to many columns at once? |
+| Row-wise operations | `rowwise()` + `c_across()` | How do I calculate a summary across columns within each row? |
+
+: The three functions covered in this section
+
+## Example Data
+
+To keep the examples connected to my CEP work, I used two small tables that are shaped like the data AO4 will eventually collect: a **posts** table with one row for each campaign post and inquiry counts by type, and a **channels** lookup table.
+
+::: callout-warning
+## Illustrative data only
+
+These numbers are made up for practice. The real campaign starts October 8, 2026, and no AO4 results exist yet.
+:::
+
+```{r}
+#| label: example-data
+
+channels <- tribble(
+  ~channel_code, ~platform,          ~medium,
+  "IG",          "Instagram",        "Organic social",
+  "FB",          "Facebook",         "Organic social",
+  "YT",          "YouTube",          "Organic social",
+  "EM",          "Email newsletter", "Email"
+)
+
+posts <- tribble(
+  ~post_id, ~channel_code, ~theme,             ~impressions, ~form, ~portal, ~event_reg, ~email_sub,
+  "P01",    "IG",          "PolyX restaurant",  1850,        2,     1,       3,          1,
+  "P02",    "IG",          "Day in the life",   2400,        3,     2,       1,          2,
+  "P03",    "FB",          "Industry visit",     960,        1,     0,       2,          0,
+  "P04",    "FB",          "Scholarships",      1200,        2,     1,       0,          1,
+  "P05",    "YT",          "Day in the life",    720,        1,     1,       0,          0,
+  "P06",    "EM",          "Open house",        1500,        4,     3,       5,          0,
+  "P07",    "TT",          "Wine program",      3100,        2,     0,       1,          1
+)
+```
+
+The two tables share the column `channel_code`. In `channels`, it is a **primary key** because each code appears only once. In `posts`, it is a **foreign key** because each post points to one channel, while one channel can have multiple posts. This is the same one to many relationship the lecture showed with `planes` and `flights`.
+
+## `left_join()`: Relational Joins {#sec-left-join}
+
+### When to use it
+
+`left_join()` is a **mutating join**, which means it adds columns from a second table to the first table when the key matches. The left table is treated as the main table, and **all of its rows are kept**, even when there is no match. That is why the lecture described it as the default join. An inner join would drop unmatched rows completely, which could make it easy to lose observations without noticing.
+
+### Example
+
+Each post only has a two letter channel code. I want the platform name and medium to appear next to each post:
+
+```{r}
+#| label: tbl-joined
+#| tbl-cap: "Posts after left_join() with the channels lookup table"
+
+posts_full <- posts |>
+  left_join(channels, by = "channel_code")
+
+posts_full |>
+  select(post_id, channel_code, platform, medium, theme) |>
+  kable()
+```
+
+### What the output shows
+
+@tbl-joined keeps all `r nrow(posts)` posts. Six posts were matched with a platform and medium. Post **P07** has the code `TT`, which is not in the lookup table, so the new columns for that row are `NA`. The important part is that the row is still there, which is exactly what a left join is supposed to do.
+
+::: {.callout-tip collapse="true"}
+## Finding unmatched keys with `anti_join()`
+
+The lecture recommended using `anti_join()` to find problems with joins. It returns rows from the first table that have **no** match in the second table:
+
+```{r}
+#| label: anti-join-check
+
+posts |>
+  anti_join(channels, by = "channel_code") |>
+  select(post_id, channel_code)
+```
+
+This makes it easy to see right away that `TT` for TikTok needs to be added to the lookup table before the analysis.
+:::
+
+## `across()`: Column-Wise Operations {#sec-across}
+
+### When to use it
+
+I would use `across()` inside `summarize()` or `mutate()` when I want the **same function to run on several columns**. Without it, I would have to write something like `form = sum(form), portal = sum(portal), ...` separately for every column, which takes longer and creates more chances for mistakes. `across()` mainly uses two arguments: `.cols`, which tells it which columns to use with tidy select helpers like `form:email_sub` or `where(is.numeric)`, and `.fns`, which tells it which function to run. The `.names` argument controls how the new columns are named using glue syntax.
+
+### Example
+
+Total each inquiry type by platform:
+
+```{r}
+#| label: across-example
+
+posts_full |>
+  group_by(platform) |>
+  summarize(
+    posts = n(),
+    across(form:email_sub, sum, .names = "{.col}_total")
+  ) |>
+  arrange(desc(form_total)) |>
+  kable()
+```
+
+### What the output shows
+
+One line, `across(form:email_sub, sum, ...)`, creates four summary columns. The `.names = "{.col}_total"` argument adds `_total` to each original column name, which makes the output easier to understand. The `posts = n()` summary is outside of `across()`, and like the lecture warned, the order matters. Since `posts` is created first, using `where(is.numeric)` instead of `form:email_sub` would also include the new `posts` column in the sums. Naming the columns directly avoids that problem. The unmatched post also appears as an `NA` platform group, which is another reason the lookup table should be fixed before doing the real analysis.
+
+## `rowwise()` + `c_across()`: Row-Wise Operations {#sec-rowwise}
+
+### When to use it
+
+Most `dplyr` functions work **down columns**. When I need to calculate something **across columns within one row**, such as the total number of inquiries for one post across four inquiry types, I can use `rowwise()` to treat each row as its own group and `c_across()` to select the columns using tidy select syntax. The lecture also showed why `c_across()` or `c()` is needed. Using something like `mean(height1, height2, height3)` by itself gives the wrong result because the function only uses the first argument the way we would expect.
+
+### Example
+
+Calculate each post's total inquiries and inquiries per 1,000 impressions:
+
+```{r}
+#| label: rowwise-example
+
+post_rates <- posts_full |>
+  rowwise() |>
+  mutate(
+    inquiries = sum(c_across(form:email_sub)),
+    per_1k    = round(inquiries / impressions * 1000, 2)
+  ) |>
+  ungroup()
+
+post_rates |>
+  select(post_id, platform, theme, impressions, inquiries, per_1k) |>
+  arrange(desc(per_1k)) |>
+  kable()
+```
+
+### What the output shows
+
+Each post now has its own `inquiries` total. Dividing that number by impressions puts larger and smaller posts on the same scale, which follows the same general logic as Peruta and Shields' proportional engagement measure. @fig-rate makes the comparison easier to see visually.
+
+```{r}
+#| label: fig-rate
+#| fig-cap: "Inquiries per 1,000 impressions by post (illustrative data)"
+#| code-fold: true
+#| fig-width: 8
+#| fig-height: 4
+
+post_rates |>
+  mutate(label = paste(post_id, theme, sep = " · ")) |>
+  ggplot(aes(x = per_1k, y = fct_reorder(label, per_1k))) +
+  geom_col(fill = "#1e4d2b", width = 0.6) +
+  labs(x = "Inquiries per 1,000 impressions", y = NULL) +
+  theme_minimal(base_size = 13)
+```
+
+In this example data, the email open house post (P06) generates the most inquiries per impression, while the high reach wine post (P07) generates the fewest. Looking only at raw totals would make that much harder to see.[^1]
+
+[^1]: `rowwise()` is slower than vectorized code because it processes one row at a time. Dr. Jung pointed this out in the lecture. For a simple sum, `rowSums(across(form:email_sub))` inside `mutate()` gives the same result faster, but `rowwise()` can work with any function.
+
+## Summary
+
+- `left_join()` brings information **in** from another table while keeping every row from the main table
+- `across()` repeats a function **across columns**
+- `rowwise()` + `c_across()` summarizes values **across a row**
+
+All three should be useful once the real AO4 data starts coming in: joining UTM tagged GA4 sessions to a post list, summarizing several metrics by channel, and calculating inquiry rates for each post.
+
+# Appendix: Links {.appendix .unnumbered}
+
+## My Work
+
+- [Published Reveal.js slides: Reaching Future Hospitality Leaders](https://jakevns.github.io/IBM6500/M06/revealjs-slides/collins-ao4-proposal.html)
+- [Slide source files on GitHub](https://github.com/jakevns/IBM6500/tree/main/M06/revealjs-slides)
+- [CEP Group 3 project site](https://jakevns.github.io/cep-group3-collins-enrollment-retention/)
+- [AO4 Progress Report 1 (PDF)](https://jakevns.github.io/cep-group3-collins-enrollment-retention/assignments/progress-reports/AO4-progress-report-1.pdf)
+
