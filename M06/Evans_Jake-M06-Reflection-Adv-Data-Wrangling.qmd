@@ -357,6 +357,7 @@ All three should be useful once the real AO4 data starts coming in: joining UTM 
 
 ## My Work
 
+- [Published report on github pages](https://jakevns.github.io/IBM6500/M06/Evans_Jake-M06-Reflection-Adv-Data-Wrangling.html)
 - [Published Reveal.js slides: Reaching Future Hospitality Leaders](https://jakevns.github.io/IBM6500/M06/revealjs-slides/collins-ao4-proposal.html)
 - [Slide source files on GitHub](https://github.com/jakevns/IBM6500/tree/main/M06/revealjs-slides)
 - [CEP Group 3 project site](https://jakevns.github.io/cep-group3-collins-enrollment-retention/)
