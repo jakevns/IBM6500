@@ -35,7 +35,7 @@ I also learned more about the order in which SQL processes a query. Even though 
 ### Important SQL syntax
 
 | Syntax                   | What it does                                     |
-|--------------------------|--------------------------------------------------|
+|-------------------------|-----------------------------------------------|
 | `COUNT(*)`               | Counts every record in the table                 |
 | `COUNT(column)`          | Counts only the nonmissing values in that column |
 | `DISTINCT`               | Removes repeated values from the results         |
@@ -214,6 +214,8 @@ My experience working in sales with Salesforce also makes these ideas easier to 
 
 # Appendix: Publication Links {.unnumbered}
 
-- [GitHub Repository](INSERT-REPOSITORY-URL)
-- [Published Intermediate SQL Report](INSERT-PAGES-URL/intermediate-sql.html)
-- [Published Portfolio Landing Page](INSERT-PAGES-URL/index.html)
+# Appendix: Publication Links {.unnumbered}
+
+- [GitHub Repository](https://github.com/jakevns/IBM6500/tree/main/ibm-6500-sql-learning-portfolio)
+- [Published Intermediate SQL Report](https://jakevns.github.io/IBM6500/ibm-6500-sql-learning-portfolio/docs/intermediate-sql.html)
+- [Published Portfolio Landing Page](https://jakevns.github.io/IBM6500/ibm-6500-sql-learning-portfolio/docs/index.html)
