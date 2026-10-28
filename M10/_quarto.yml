@@ -1,6 +1,11 @@
 project:
   type: website
   output-dir: docs   # GitHub Pages: Deploy from a branch > main > /docs
+  render:            # website pages only; the submission and proposal render on their own
+    - "*.qmd"
+    - "projects/*.qmd"
+    - "dashboard/*.qmd"
+    - "!Evans_Jake-*.qmd"
 
 website:
   title: "Jake Evans"

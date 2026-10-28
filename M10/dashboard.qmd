@@ -1,0 +1,37 @@
+---
+title: "Dashboard"
+subtitle: "EFCU member survey (Case 31)"
+page-layout: full
+toc: false
+---
+
+## What does the dashboard show?
+
+The dashboard summarizes a mail survey of Employees Federal Credit Union (EFCU) members from Case 31: how members rate employees, how aware they are of the credit union's services, and how they rate its operations.
+
+| Page | Contents |
+|---|---|
+| Members & Employees | Value boxes, employee ratings, and employee proficiency by residence |
+| Services & Operations | Awareness and use of 14 services, operations ratings, overall rating, and loans by residence |
+
+: Dashboard pages {.striped}
+
+[Open the dashboard full screen](dashboard/efcu-dashboard.html){.btn .btn-primary}
+
+## Dashboard
+
+```{=html}
+<iframe src="dashboard/efcu-dashboard.html"
+        style="width: 100%; height: 820px; border: 1px solid #ddd; border-radius: 6px;"
+        title="EFCU member survey dashboard"></iframe>
+```
+
+## How was it built?
+
+The dashboard is a Quarto document with `format: dashboard`, written in R:
+
+- **Layout:** two pages (`#` headings), rows and columns (`##` and `###` headings) with set heights and widths, a sidebar, and a tabset.
+- **Cards:** each chart is a code cell with a `#| title:` option.
+- **Value boxes:** `::: {.valuebox}` divs with Bootstrap icons, filled with inline R values.
+- **Theme:** the `cosmo` Bootswatch theme plus a custom `dashboard.scss`, with chart colors matched to the theme.
+- **Embedding:** this page shows the dashboard in an `<iframe>`.

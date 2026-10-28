@@ -1,0 +1,62 @@
+---
+title: "Jake Evans"
+subtitle: "Marketing · Brand & Content · Social Media"
+image: images/profile.jpg
+image-alt: "Headshot of Jake Evans"
+toc: false
+about:
+  template: jolla
+  image-shape: round
+  image-width: 14em
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/jakevns
+    - icon: github
+      text: GitHub
+      href: https://github.com/jakevns
+    - icon: envelope
+      text: Email
+      href: mailto:jakevns@gmail.com
+---
+
+Graphic designer and illustrator with a track record of producing ads, photos, and films, now pairing that creative work with CRM, analytics, and e-commerce strategy.
+
+## Career Aspirations
+
+Open to **marketing coordinator**, **brand and content**, and **social media** roles in Orange County, Los Angeles, and remote.
+
+## Skills
+
+| Area | Skills and tools |
+|---|---|
+| Marketing | E-commerce, positioning, email campaigns, social content, SEO audits |
+| Platforms | Shopify, Salesforce, Looker, SEMrush, Screaming Frog, PageSpeed Insights |
+| Creative | Adobe Creative Suite, illustration, photography, retouching, CAD rendering (Rhino) |
+| Data | R, Quarto, KPI dashboards |
+
+: {.striped}
+
+**Certifications:** Digital Advertising · Introducing Rhino 6 · Rhino 6 Essential Training · Design Foundation 3D: Shape and Form · Product Design: From Sketch to CAD
+
+## Education
+
+**California State Polytechnic University, Pomona**\
+Master of Science, Digital Marketing · Started August 2025
+
+**San Francisco Art Institute**\
+Bachelor of Fine Arts, Painting · 2015–2019
+
+## Experience
+
+**Casper** · Supervisor · 2020–present\
+Salesforce lead capture, pipeline management, and KPI reporting for a national direct-to-consumer brand.
+
+**Jake Bailey Artist** · Founder & Operator · 2013–present\
+Shopify e-commerce art brand with prints, custom commissions, and originals.
+
+**Marco David Studio** · Graphic Designer and Retoucher · 2016–present\
+Contract design and retouching for campaigns for clients including AMC, ALLBLK, and Mirror Image.
+
+**Wellness Ranch Equine Assisted Therapy** · Digital Marketing Micro-Intern · 2025–2026\
+Digital marketing plan and on-page SEO strategy for a nonprofit, through the Cal Poly Pomona MS in Digital Marketing program.

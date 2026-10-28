@@ -1,30 +1,212 @@
 [
   {
-    "objectID": "Evans_Jake-M10-Hands_on_Practice.html",
-    "href": "Evans_Jake-M10-Hands_on_Practice.html",
-    "title": "M10 Hands-on Practice: Sharing Outputs with the Audience",
+    "objectID": "styling.html",
+    "href": "styling.html",
+    "title": "Styling a Quarto Website with CSS/SCSS",
     "section": "",
-    "text": "Open the portfolio website on GitHub Pages"
+    "text": "Every website is HTML: elements written as tags in angle brackets that can be nested inside each other. A page has four main tags: &lt;html&gt; wraps everything, &lt;head&gt; loads stylesheets and metadata, &lt;title&gt; names the page, and &lt;body&gt; holds everything visitors see.\n\nCommon HTML tags\n\n\nTag\nWhat it is\nQuarto equivalent\n\n\n\n\n&lt;h1&gt; to &lt;h6&gt;\nHeadings, levels 1–6\n# to ######\n\n\n&lt;p&gt;\nParagraph\nA block of text\n\n\n&lt;a&gt;\nLink\n[text](url)\n\n\n&lt;img&gt;\nImage, with a src attribute\n![alt text](file.png)\n\n\n&lt;div&gt;\nGeneral container\n::: {.class}\n\n\n\nTags can carry attributes written as name=\"value\". Two attributes matter most for styling: class and id.\n&lt;div class=\"demo-card\" id=\"first-card\"&gt;\n  &lt;p&gt;Hello&lt;/p&gt;\n&lt;/div&gt;"
   },
   {
-    "objectID": "Evans_Jake-M10-Hands_on_Practice.html#where-can-you-view-the-website",
-    "href": "Evans_Jake-M10-Hands_on_Practice.html#where-can-you-view-the-website",
-    "title": "M10 Hands-on Practice: Sharing Outputs with the Audience",
+    "objectID": "styling.html#what-is-a-web-page-made-of",
+    "href": "styling.html#what-is-a-web-page-made-of",
+    "title": "Styling a Quarto Website with CSS/SCSS",
     "section": "",
-    "text": "Open the portfolio website on GitHub Pages"
+    "text": "Every website is HTML: elements written as tags in angle brackets that can be nested inside each other. A page has four main tags: &lt;html&gt; wraps everything, &lt;head&gt; loads stylesheets and metadata, &lt;title&gt; names the page, and &lt;body&gt; holds everything visitors see.\n\nCommon HTML tags\n\n\nTag\nWhat it is\nQuarto equivalent\n\n\n\n\n&lt;h1&gt; to &lt;h6&gt;\nHeadings, levels 1–6\n# to ######\n\n\n&lt;p&gt;\nParagraph\nA block of text\n\n\n&lt;a&gt;\nLink\n[text](url)\n\n\n&lt;img&gt;\nImage, with a src attribute\n![alt text](file.png)\n\n\n&lt;div&gt;\nGeneral container\n::: {.class}\n\n\n\nTags can carry attributes written as name=\"value\". Two attributes matter most for styling: class and id.\n&lt;div class=\"demo-card\" id=\"first-card\"&gt;\n  &lt;p&gt;Hello&lt;/p&gt;\n&lt;/div&gt;"
   },
   {
-    "objectID": "Evans_Jake-M10-Hands_on_Practice.html#where-can-you-find-the-source-files",
-    "href": "Evans_Jake-M10-Hands_on_Practice.html#where-can-you-find-the-source-files",
-    "title": "M10 Hands-on Practice: Sharing Outputs with the Audience",
-    "section": "Where can you find the source files?",
-    "text": "Where can you find the source files?\nOpen the GitHub repository (M10 folder)"
+    "objectID": "styling.html#why-use-a-stylesheet-instead-of-styling-each-element",
+    "href": "styling.html#why-use-a-stylesheet-instead-of-styling-each-element",
+    "title": "Styling a Quarto Website with CSS/SCSS",
+    "section": "Why use a stylesheet instead of styling each element?",
+    "text": "Why use a stylesheet instead of styling each element?\nYou can style an element inline with the style attribute:\n&lt;p style=\"color: red;\"&gt;Red text&lt;/p&gt;\nThat works for one element, but on a full website it gets long, repetitive, and error-prone. A stylesheet holds every rule in one place, and Quarto links it in the &lt;head&gt; for you when you list it in _quarto.yml:\n\n\n_quarto.yml\n\nformat:\n  html:\n    theme: [cosmo, styles.scss]"
   },
   {
-    "objectID": "Evans_Jake-M10-Hands_on_Practice.html#appendix-direct-links",
-    "href": "Evans_Jake-M10-Hands_on_Practice.html#appendix-direct-links",
-    "title": "M10 Hands-on Practice: Sharing Outputs with the Audience",
-    "section": "Appendix: Direct links",
-    "text": "Appendix: Direct links\n\nWebsite pages\n\nPages on the published website\n\n\nPage\nWhat it covers\nLink\n\n\n\n\nHome\nPhoto, career aspirations, skills, and education\nindex.html\n\n\nDashboard\nPortal to a Quarto dashboard\ndashboard.html\n\n\nCSS/SCSS\nStyling a Quarto website with CSS and SCSS\nstyling.html\n\n\nListings\nWhat listings are and how they work on a portfolio\nlistings.html\n\n\n\n\n\nSource files\n\nFiles in the GitHub repository\n\n\nFile\nPurpose\nLink\n\n\n\n\n_quarto.yml\nSite structure, navigation, and theme\nView\n\n\nstyles.scss\nCustom styles\nView\n\n\nindex.qmd\nHome page\nView\n\n\ndashboard.qmd\nDashboard page\nView\n\n\nstyling.qmd\nCSS/SCSS page\nView\n\n\nlistings.qmd\nListings page\nView\n\n\nlinks.yml\nItems for the table listing\nView\n\n\nprojects/\nPages for the grid listing\nView\n\n\ndocs/\nRendered website served by GitHub Pages\nView"
+    "objectID": "styling.html#how-does-css-decide-what-to-style",
+    "href": "styling.html#how-does-css-decide-what-to-style",
+    "title": "Styling a Quarto Website with CSS/SCSS",
+    "section": "How does CSS decide what to style?",
+    "text": "How does CSS decide what to style?\nA CSS rule has two parts: a selector (what to style) and properties (how to style it).\nh1 {            /* selector */\n  color: teal;  /* property: value */\n}\n\nCSS selectors\n\n\nSelector\nSelects\nExample\n\n\n\n\nTag\nEvery element of that type\nh1\n\n\nClass\nElements with that class\n.demo-card\n\n\nID\nThe one element with that ID\n#first-card\n\n\na, b\nBoth a and b\nh1, h2\n\n\na b (space)\nb anywhere inside a\np span\n\n\na &gt; b\nb exactly one level inside a\n.demo-card &gt; p\n\n\nab (no space)\nElements matching both\nh2.title\n\n\n*\nEverything\n.navbar *\n\n\n:hover\nElement under the mouse\na:hover\n\n\n:active\nElement being activated\n.nav-link:active\n\n\n\n\nWhich rule wins when two rules target the same element?\nThat is the cascade in Cascading Style Sheets. The general rule: the more specific selector wins. A rule for h1.title (tag + class) beats a rule for h1 (tag only)."
+  },
+  {
+    "objectID": "styling.html#what-can-css-change",
+    "href": "styling.html#what-can-css-change",
+    "title": "Styling a Quarto Website with CSS/SCSS",
+    "section": "What can CSS change?",
+    "text": "What can CSS change?\nCSS changes how elements look (colors, fonts, sizes) and how they are laid out. Every element follows the box model:\n\nContent sits in the middle (light teal). Padding is the space between the content and the border. The border is the dashed coral line, set by color, style, and width. Margin is the space outside the border.\n\n.box-demo {\n  background: $theme-light-teal;   // content area\n  padding: 1rem;                   // inside spacing\n  border: 3px dashed $theme-coral; // color, style, width\n  margin: 1.5rem 0;                // outside spacing\n}\nPadding and margin can be set all at once (padding: 1rem) or one side at a time (padding-top, padding-right, padding-bottom, padding-left). Sizes can be pixels, rem, or percentages of the parent element."
+  },
+  {
+    "objectID": "styling.html#what-does-scss-add-on-top-of-css",
+    "href": "styling.html#what-does-scss-add-on-top-of-css",
+    "title": "Styling a Quarto Website with CSS/SCSS",
+    "section": "What does SCSS add on top of CSS?",
+    "text": "What does SCSS add on top of CSS?\nSCSS (Sass) is CSS plus variables, nested rules, mixins, and functions. Any valid CSS is also valid SCSS. Quarto compiles the .scss file into plain CSS that browsers understand, so only the generated CSS is published.\n\nVariablesNested rulesMixinsFunctions\n\n\nStore a value once with $name: value; and reuse it everywhere. This site’s palette uses the theme- prefix and human-readable names:\n$theme-teal:       #1f5f5b;\n$theme-light-teal: #e8f1f0;\n$theme-coral:      #c8553d;\n$theme-ink:        #1e2a32;\n\n\nRules written inside other rules keep related styles together. & refers to the parent selector:\nh2 {\n  border-bottom: 2px solid $theme-coral;\n\n  a { color: $theme-coral; }   // compiles to: h2 a { ... }\n}\n\n\nA mixin is a reusable block of properties, pasted in wherever it is included:\n@mixin padding-small {\n  padding: 0.75rem 1rem;\n}\n\n.demo-card {\n  @include padding-small;\n}\n\n\nColor functions create variations from one base color. Change the base, and every variation updates:\n&:hover {\n  color: lighten($theme-teal, 20%);\n}\n\n\n\n\nWhere do variables and rules go in a Quarto SCSS file?\nQuarto SCSS files use two section markers:\n\n/*-- scss:defaults --*/ holds variables, including Bootstrap variables like $primary, $body-bg, and $navbar-bg that restyle the whole theme at once.\n/*-- scss:rules --*/ holds CSS rules for specific selectors."
+  },
+  {
+    "objectID": "styling.html#how-was-this-site-styled",
+    "href": "styling.html#how-was-this-site-styled",
+    "title": "Styling a Quarto Website with CSS/SCSS",
+    "section": "How was this site styled?",
+    "text": "How was this site styled?\nThese are the same steps from the Quarto Websites tutorial, applied to this site.\n\n1. Headings2. Navbar3. Hover effect4. Google Fonts\n\n\nAll six heading levels share one rule, in theme teal and uppercase:\nh1, h2, h3, h4, h5, h6 {\n  color: $theme-teal;\n  text-transform: uppercase;\n}\n\n\nRight-click the navbar, choose Inspect, and the developer tools show its elements have the class .navbar. Styling .navbar alone only changes the container, so * targets every child inside it:\n.navbar * {\n  color: $theme-teal;\n}\n\n\nInspecting the site name shows a span with the class navbar-title. Hovering turns it a lighter teal. transition-duration is set on both the normal and hover states so the change eases in both directions:\nspan.navbar-title {\n  transition-duration: 0.5s;\n\n  &:hover {\n    color: lighten($theme-teal, 20%);\n    transition-duration: 0.5s;\n  }\n}\n\n\nOn fonts.google.com, select fonts, choose Get embed code, and copy the @import line to the top of the rules section. Then name the fonts in the variables:\n@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Source+Sans+3&family=Fira+Code&display=swap');\n\n$headings-font-family:   \"Poppins\", sans-serif;\n$font-family-sans-serif: \"Source Sans 3\", \"Segoe UI\", sans-serif;\nEach font is listed with fallbacks separated by commas. If the first font can’t load, the browser uses the next one.\n\n\n\n\nLive example: class and child selectors\nThese cards use the .demo-card class (with the padding-small mixin) and .demo-card &gt; p. Hover over one to see the darken() function at work.\n\nVariables keep the palette consistent.\n\n\nNesting keeps the hover state next to the base style.\n\n\nMixins reuse the same padding without repeating it."
+  },
+  {
+    "objectID": "styling.html#what-makes-a-design-work",
+    "href": "styling.html#what-makes-a-design-work",
+    "title": "Styling a Quarto Website with CSS/SCSS",
+    "section": "What makes a design work?",
+    "text": "What makes a design work?\n\nConsistency: visitors notice what looks different and assume it matters. Styling everything from one stylesheet keeps attention on the right places.\nA small palette: pick colors from brand guidelines or palette inspiration, save them as theme- variables, and make variations with lighten() and darken().\nFew fonts: one for headings, one for body text, one for code. Familiar fonts are easier to read.\nAccessibility: keep color contrast high, add alt text to images, make every link reachable by keyboard (Tab), and avoid blinking or flashing content. A contrast checker such as WebAIM’s confirms whether text passes.\n\n\n\n\n\n\n\nStyling is trial and error\n\n\n\nOpen the browser’s developer tools (Inspect), find the element and its classes, test a rule like color: red to confirm the selector works, then switch to the real value."
+  },
+  {
+    "objectID": "styling.html#the-complete-stylesheet",
+    "href": "styling.html#the-complete-stylesheet",
+    "title": "Styling a Quarto Website with CSS/SCSS",
+    "section": "The complete stylesheet",
+    "text": "The complete stylesheet\n\n\nstyles.scss\n\n/*-- scss:defaults --*/\n\n// Color palette: prefixed with theme- and given human-readable names\n$theme-teal:       #1f5f5b;\n$theme-light-teal: #e8f1f0;\n$theme-coral:      #c8553d;\n$theme-ink:        #1e2a32;\n$theme-white:      #ffffff;\n\n// Bootstrap variables that Quarto themes are built on\n$body-bg:      $theme-white;\n$body-color:   $theme-ink;\n$link-color:   $theme-teal;\n$primary:      $theme-teal;\n$navbar-bg:    $theme-light-teal;\n$footer-bg:    $theme-light-teal;\n\n// Fonts: one for headings, one for body text, one for code\n$headings-font-family:     \"Poppins\", sans-serif;\n$font-family-sans-serif:   \"Source Sans 3\", \"Segoe UI\", sans-serif;\n$font-family-monospace:    \"Fira Code\", monospace;\n$font-size-root:           18px;\n\n/*-- scss:rules --*/\n\n// Google Fonts embed code (fonts.google.com &gt; Get embed code &gt; @import)\n@import url('https://fonts.googleapis.com/css2?family=Fira+Code&family=Poppins:wght@600&family=Source+Sans+3:wght@400;600&display=swap');\n\n// Mixin: reusable block of properties, pasted in with @include\n@mixin padding-small {\n  padding: 0.75rem 1rem;\n}\n\n// Every heading level at once (h1, h2 = \"and\" combination)\nh1, h2, h3, h4, h5, h6 {\n  color: $theme-teal;\n  text-transform: uppercase;\n  letter-spacing: 0.03em;\n}\n\n// Nested rule: links inside headings get their own color\nh2 {\n  border-bottom: 2px solid $theme-coral;\n  padding-bottom: 0.25rem;\n\n  a { color: $theme-coral; }\n}\n\n// Navbar: * selects every child element inside .navbar\n.navbar * {\n  color: $theme-teal;\n}\n\n// Navbar title: hover turns it a lighter teal, eased in both directions\nspan.navbar-title {\n  transition-duration: 0.5s;\n\n  &:hover {\n    color: lighten($theme-teal, 20%);\n    transition-duration: 0.5s;\n  }\n}\n\n// Current page in the navbar (Quarto adds the .active class to it)\n.navbar .nav-link.active {\n  border-bottom: 3px solid $theme-coral;\n}\n\n// Box model demo: content, padding, border, margin\n.box-demo {\n  background: $theme-light-teal;   // content area\n  padding: 1rem;                   // inside spacing\n  border: 3px dashed $theme-coral; // color, style, width\n  margin: 1.5rem 0;                // outside spacing\n}\n\n// Class selector used on this site's demo cards\n.demo-card {\n  @include padding-small;\n  background: $theme-light-teal;\n  border-left: 5px solid $theme-teal;\n  border-radius: 0.4rem;\n  margin-bottom: 1rem;\n  transition-duration: 0.3s;\n\n  &:hover {\n    background: darken($theme-light-teal, 5%);\n  }\n}\n\n// Child selector: only paragraphs one level inside .demo-card\n.demo-card &gt; p {\n  margin-bottom: 0;\n}\n\n// Listing cards pick up the same palette\n.quarto-grid-item {\n  border-top: 4px solid $theme-teal;\n}"
+  },
+  {
+    "objectID": "projects/marketing-portfolio.html",
+    "href": "projects/marketing-portfolio.html",
+    "title": "Digital Marketing Portfolio",
+    "section": "",
+    "text": "My main digital marketing portfolio, built with Quarto, hosted on GitHub Pages, and connected to its own GA4 property.\nVisit the portfolio"
+  },
+  {
+    "objectID": "listings.html",
+    "href": "listings.html",
+    "title": "Listings in Quarto",
+    "section": "",
+    "text": "A listing is an automatically generated list of content. You don’t build the list by hand. You tell Quarto where to look, and it reads the YAML front matter of each item (title, description, categories, image, date) to build the links.\nA listing can go on any page: add a listing option to the page’s YAML header. The most familiar example is a blog’s landing page, but listings work just as well for projects, talks, or publications."
+  },
+  {
+    "objectID": "listings.html#what-is-a-listing",
+    "href": "listings.html#what-is-a-listing",
+    "title": "Listings in Quarto",
+    "section": "",
+    "text": "A listing is an automatically generated list of content. You don’t build the list by hand. You tell Quarto where to look, and it reads the YAML front matter of each item (title, description, categories, image, date) to build the links.\nA listing can go on any page: add a listing option to the page’s YAML header. The most familiar example is a blog’s landing page, but listings work just as well for projects, talks, or publications."
+  },
+  {
+    "objectID": "listings.html#why-use-a-listing-on-a-portfolio",
+    "href": "listings.html#why-use-a-listing-on-a-portfolio",
+    "title": "Listings in Quarto",
+    "section": "Why use a listing on a portfolio?",
+    "text": "Why use a listing on a portfolio?\n\nLarge collections: no hand-written link for every item.\nGrowing collections: set it up once, then add a file whenever you have a new project.\nConsistent presentation: every item uses the same template."
+  },
+  {
+    "objectID": "listings.html#how-do-you-start-one",
+    "href": "listings.html#how-do-you-start-one",
+    "title": "Listings in Quarto",
+    "section": "How do you start one?",
+    "text": "How do you start one?\nThe smallest possible listing uses all the defaults:\n---\ntitle: \"Blog\"\nlisting: default\n---\nWith no options, Quarto lists every Quarto document in the same folder as the page, using each one’s title and description."
+  },
+  {
+    "objectID": "listings.html#what-options-control-a-listing",
+    "href": "listings.html#what-options-control-a-listing",
+    "title": "Listings in Quarto",
+    "section": "What options control a listing?",
+    "text": "What options control a listing?\n\nListing options\n\n\n\n\n\n\n\nOption\nWhat it does\nUsed on this page\n\n\n\n\ncontents\nWhere to look: a folder, file, or YAML list\nprojects, links.yml\n\n\ntype\nThe template: default, grid, or table\ngrid, table\n\n\nsort\nItem order\n\"title\"\n\n\nfields\nWhich metadata to show\n[title, description, categories]\n\n\nfield-display-names\nRenames the column headers\nTitle → Project, Categories → Skills\n\n\nsort-ui / filter-ui\nSort menu and search box\nTurned off\n\n\n\n\nThe three built-in types\n\ndefaultgridtable\n\n\nA blog-style list: one item per row with title, description, and an optional thumbnail.\n\n\nRectangular tiles laid out in a grid. Good for portfolios.\n\n\nLiterally a table of the items, with optional sorting and searching."
+  },
+  {
+    "objectID": "listings.html#example-1-a-folder-of-project-pages-grid",
+    "href": "listings.html#example-1-a-folder-of-project-pages-grid",
+    "title": "Listings in Quarto",
+    "section": "Example 1: a folder of project pages (grid)",
+    "text": "Example 1: a folder of project pages (grid)\nEach file in the projects/ folder is a full page on this site. Its YAML supplies the card content:\n\n\nprojects/cep-collins.qmd\n\n---\ntitle: \"Collins College Enrollment & Retention\"\ndescription: \"MSDM Culminating Experience Project, Group 3\"\ncategories: [CEP, GA4, Digital Channels]\n---\n\nThe listing points at the folder:\n\n\nlistings.qmd\n\nlisting:\n  - id: project-pages\n    contents: projects\n    type: grid\n    sort: \"title\"\n    fields: [title, description, categories]\n\n\n\n\n\n\n\n\nCollins College Enrollment & Retention\n\n\n\nCEP\n\n\nGA4\n\n\nDigital Channels\n\n\n\nMSDM Culminating Experience Project, Group 3. Which digital channels and content themes best drive awareness and inquiry among prospective students (AO4).\n\n\n\n\n\n\n\n\n\n\nDigital Marketing Portfolio\n\n\n\nQuarto\n\n\nGA4\n\n\nWeb Design\n\n\n\nMy main Quarto portfolio site, hosted on GitHub Pages and tracked with GA4.\n\n\n\n\n\n\n\n\n\n\nSQL Learning Portfolio\n\n\n\nSQL\n\n\nBigQuery\n\n\nData Analysis\n\n\n\nIBM 6500 portfolio covering Introduction to SQL, Introduction to BigQuery, and Intermediate SQL.\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "listings.html#example-2-a-yaml-file-of-outside-links-table",
+    "href": "listings.html#example-2-a-yaml-file-of-outside-links-table",
+    "title": "Listings in Quarto",
+    "section": "Example 2: a YAML file of outside links (table)",
+    "text": "Example 2: a YAML file of outside links (table)\nSome work lives somewhere else: a GitHub repo, a published deck, another website. Listing items don’t need their own pages. A YAML file can list them, using path for the URL, so clicking an item takes visitors off this site:\n\n\nlinks.yml\n\n- title: \"GitHub profile\"\n  path: https://github.com/jakevns\n  description: \"Source code for my coursework and websites\"\n  categories: [Git, Quarto, R]\n\nThis table uses field-display-names to make it read like a portfolio: what the project is, what it involved, and which skills it shows. With only a few items, the sort menu and search box aren’t needed, so they’re turned off:\n\n\nlistings.qmd\n\n  - id: project-links\n    contents: links.yml\n    type: table\n    sort-ui: false\n    filter-ui: false\n    fields: [title, description, categories]\n    field-display-names:\n      title: \"Project\"\n      categories: \"Skills\"\n\n\n\n\n\n\nProject\n\n\nDescription\n\n\nSkills\n\n\n\n\n\n\nCEP Group 3 project site\n\n\nCollins College enrollment and retention project\n\n\nDigital Channels, Research\n\n\n\n\nDigital marketing portfolio\n\n\nMy main Quarto portfolio site, hosted on GitHub Pages\n\n\nQuarto, GA4, Web Design\n\n\n\n\nGitHub profile\n\n\nSource code for my coursework and websites\n\n\nGit, Quarto, R\n\n\n\n\nJake Bailey Artist\n\n\nMy art brand: original paintings, pet portrait commissions, prints, and merchandise\n\n\nE-commerce, Branding\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "listings.html#how-do-you-place-more-than-one-listing-on-a-page",
+    "href": "listings.html#how-do-you-place-more-than-one-listing-on-a-page",
+    "title": "Listings in Quarto",
+    "section": "How do you place more than one listing on a page?",
+    "text": "How do you place more than one listing on a page?\nGive each listing an id in the YAML, then put an empty div with that id wherever it should appear. Text and other content can go before, between, or after listings:\n::: {#project-pages}\n:::\n\nSome text between the two listings.\n\n::: {#project-links}\n:::\nBeyond the built-in types, a listing can use a custom template that controls exactly how each item is laid out."
+  },
+  {
+    "objectID": "listings.html#how-do-you-remove-a-listing-page",
+    "href": "listings.html#how-do-you-remove-a-listing-page",
+    "title": "Listings in Quarto",
+    "section": "How do you remove a listing page?",
+    "text": "How do you remove a listing page?\nRemoving a page works the same way as adding one: delete the files that generate it, then remove its entry from the navbar in _quarto.yml."
+  },
+  {
+    "objectID": "dashboard.html",
+    "href": "dashboard.html",
+    "title": "Dashboard",
+    "section": "",
+    "text": "The dashboard summarizes a mail survey of Employees Federal Credit Union (EFCU) members from Case 31: how members rate employees, how aware they are of the credit union’s services, and how they rate its operations.\n\nDashboard pages\n\n\n\n\n\n\nPage\nContents\n\n\n\n\nMembers & Employees\nValue boxes, employee ratings, and employee proficiency by residence\n\n\nServices & Operations\nAwareness and use of 14 services, operations ratings, overall rating, and loans by residence\n\n\n\nOpen the dashboard full screen"
+  },
+  {
+    "objectID": "dashboard.html#what-does-the-dashboard-show",
+    "href": "dashboard.html#what-does-the-dashboard-show",
+    "title": "Dashboard",
+    "section": "",
+    "text": "The dashboard summarizes a mail survey of Employees Federal Credit Union (EFCU) members from Case 31: how members rate employees, how aware they are of the credit union’s services, and how they rate its operations.\n\nDashboard pages\n\n\n\n\n\n\nPage\nContents\n\n\n\n\nMembers & Employees\nValue boxes, employee ratings, and employee proficiency by residence\n\n\nServices & Operations\nAwareness and use of 14 services, operations ratings, overall rating, and loans by residence\n\n\n\nOpen the dashboard full screen"
+  },
+  {
+    "objectID": "dashboard.html#dashboard",
+    "href": "dashboard.html#dashboard",
+    "title": "Dashboard",
+    "section": "Dashboard",
+    "text": "Dashboard"
+  },
+  {
+    "objectID": "dashboard.html#how-was-it-built",
+    "href": "dashboard.html#how-was-it-built",
+    "title": "Dashboard",
+    "section": "How was it built?",
+    "text": "How was it built?\nThe dashboard is a Quarto document with format: dashboard, written in R:\n\nLayout: two pages (# headings), rows and columns (## and ### headings) with set heights and widths, a sidebar, and a tabset.\nCards: each chart is a code cell with a #| title: option.\nValue boxes: ::: {.valuebox} divs with Bootstrap icons, filled with inline R values.\nTheme: the cosmo Bootswatch theme plus a custom dashboard.scss, with chart colors matched to the theme.\nEmbedding: this page shows the dashboard in an &lt;iframe&gt;."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Jake Evans",
+    "section": "",
+    "text": "Graphic designer and illustrator with a track record of producing ads, photos, and films, now pairing that creative work with CRM, analytics, and e-commerce strategy."
+  },
+  {
+    "objectID": "index.html#career-aspirations",
+    "href": "index.html#career-aspirations",
+    "title": "Jake Evans",
+    "section": "Career Aspirations",
+    "text": "Career Aspirations\nOpen to marketing coordinator, brand and content, and social media roles in Orange County, Los Angeles, and remote."
+  },
+  {
+    "objectID": "index.html#skills",
+    "href": "index.html#skills",
+    "title": "Jake Evans",
+    "section": "Skills",
+    "text": "Skills\n\n\n\n\n\n\n\nArea\nSkills and tools\n\n\n\n\nMarketing\nE-commerce, positioning, email campaigns, social content, SEO audits\n\n\nPlatforms\nShopify, Salesforce, Looker, SEMrush, Screaming Frog, PageSpeed Insights\n\n\nCreative\nAdobe Creative Suite, illustration, photography, retouching, CAD rendering (Rhino)\n\n\nData\nR, Quarto, KPI dashboards\n\n\n\nCertifications: Digital Advertising · Introducing Rhino 6 · Rhino 6 Essential Training · Design Foundation 3D: Shape and Form · Product Design: From Sketch to CAD"
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Jake Evans",
+    "section": "Education",
+    "text": "Education\nCalifornia State Polytechnic University, Pomona\nMaster of Science, Digital Marketing · Started August 2025\nSan Francisco Art Institute\nBachelor of Fine Arts, Painting · 2015–2019"
+  },
+  {
+    "objectID": "index.html#experience",
+    "href": "index.html#experience",
+    "title": "Jake Evans",
+    "section": "Experience",
+    "text": "Experience\nCasper · Supervisor · 2020–present\nSalesforce lead capture, pipeline management, and KPI reporting for a national direct-to-consumer brand.\nJake Bailey Artist · Founder & Operator · 2013–present\nShopify e-commerce art brand with prints, custom commissions, and originals.\nMarco David Studio · Graphic Designer and Retoucher · 2016–present\nContract design and retouching for campaigns for clients including AMC, ALLBLK, and Mirror Image.\nWellness Ranch Equine Assisted Therapy · Digital Marketing Micro-Intern · 2025–2026\nDigital marketing plan and on-page SEO strategy for a nonprofit, through the Cal Poly Pomona MS in Digital Marketing program."
+  },
+  {
+    "objectID": "projects/cep-collins.html",
+    "href": "projects/cep-collins.html",
+    "title": "Collins College Enrollment & Retention",
+    "section": "",
+    "text": "My MSDM Culminating Experience Project with the Collins College of Hospitality Management. I lead AO4, which looks at which digital channels and content themes best drive awareness and inquiry among prospective students.\nVisit the project site"
+  },
+  {
+    "objectID": "projects/sql-portfolio.html",
+    "href": "projects/sql-portfolio.html",
+    "title": "SQL Learning Portfolio",
+    "section": "",
+    "text": "My IBM 6500 SQL learning portfolio, covering the DataCamp series Introduction to SQL, Introduction to BigQuery, and Intermediate SQL.\nView the IBM6500 repository"
   }
 ]

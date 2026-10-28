@@ -61,7 +61,7 @@ span.navbar-title {
   }
 }
 
-// Active page in the navbar (:active-style state set by Quarto)
+// Current page in the navbar (Quarto adds the .active class to it)
 .navbar .nav-link.active {
   border-bottom: 3px solid $theme-coral;
 }
