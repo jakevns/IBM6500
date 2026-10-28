@@ -1,86 +1,30 @@
 [
   {
-    "objectID": "listings.html",
-    "href": "listings.html",
-    "title": "Listings in Quarto",
+    "objectID": "Evans_Jake-M10-Hands_on_Practice.html",
+    "href": "Evans_Jake-M10-Hands_on_Practice.html",
+    "title": "M10 Hands-on Practice: Sharing Outputs with the Audience",
     "section": "",
-    "text": "A listing is an automatically generated list of content. You don’t build the list by hand. You tell Quarto where to look, and it reads the YAML front matter of each item (title, description, categories, image, date) to build the links.\nA listing can go on any page: add a listing option to the page’s YAML header. The most familiar example is a blog’s landing page, but listings work just as well for projects, talks, or publications."
+    "text": "Open the portfolio website on GitHub Pages"
   },
   {
-    "objectID": "listings.html#what-is-a-listing",
-    "href": "listings.html#what-is-a-listing",
-    "title": "Listings in Quarto",
+    "objectID": "Evans_Jake-M10-Hands_on_Practice.html#where-can-you-view-the-website",
+    "href": "Evans_Jake-M10-Hands_on_Practice.html#where-can-you-view-the-website",
+    "title": "M10 Hands-on Practice: Sharing Outputs with the Audience",
     "section": "",
-    "text": "A listing is an automatically generated list of content. You don’t build the list by hand. You tell Quarto where to look, and it reads the YAML front matter of each item (title, description, categories, image, date) to build the links.\nA listing can go on any page: add a listing option to the page’s YAML header. The most familiar example is a blog’s landing page, but listings work just as well for projects, talks, or publications."
+    "text": "Open the portfolio website on GitHub Pages"
   },
   {
-    "objectID": "listings.html#why-use-a-listing-on-a-portfolio",
-    "href": "listings.html#why-use-a-listing-on-a-portfolio",
-    "title": "Listings in Quarto",
-    "section": "Why use a listing on a portfolio?",
-    "text": "Why use a listing on a portfolio?\n\nLarge collections: no hand-written link for every item.\nGrowing collections: set it up once, then add a file whenever you have a new project.\nConsistent presentation: every item uses the same template."
+    "objectID": "Evans_Jake-M10-Hands_on_Practice.html#where-can-you-find-the-source-files",
+    "href": "Evans_Jake-M10-Hands_on_Practice.html#where-can-you-find-the-source-files",
+    "title": "M10 Hands-on Practice: Sharing Outputs with the Audience",
+    "section": "Where can you find the source files?",
+    "text": "Where can you find the source files?\nOpen the GitHub repository (M10 folder)"
   },
   {
-    "objectID": "listings.html#how-do-you-start-one",
-    "href": "listings.html#how-do-you-start-one",
-    "title": "Listings in Quarto",
-    "section": "How do you start one?",
-    "text": "How do you start one?\nThe smallest possible listing uses all the defaults:\n---\ntitle: \"Blog\"\nlisting: default\n---\nWith no options, Quarto lists every Quarto document in the same folder as the page, using each one’s title and description."
-  },
-  {
-    "objectID": "listings.html#what-options-control-a-listing",
-    "href": "listings.html#what-options-control-a-listing",
-    "title": "Listings in Quarto",
-    "section": "What options control a listing?",
-    "text": "What options control a listing?\n\nListing options\n\n\n\n\n\n\n\nOption\nWhat it does\nUsed on this page\n\n\n\n\ncontents\nWhere to look: a folder, file, or YAML list\nprojects, links.yml\n\n\ntype\nThe template: default, grid, or table\ngrid, table\n\n\nsort\nItem order\n\"title\"\n\n\nfields\nWhich metadata to show\n[title, description, categories]\n\n\nfield-display-names\nRenames the column headers\nTitle → Project, Categories → Skills\n\n\nsort-ui / filter-ui\nSort menu and search box\nTurned off\n\n\n\n\nThe three built-in types\n\ndefaultgridtable\n\n\nA blog-style list: one item per row with title, description, and an optional thumbnail.\n\n\nRectangular tiles laid out in a grid. Good for portfolios.\n\n\nLiterally a table of the items, with optional sorting and searching."
-  },
-  {
-    "objectID": "listings.html#example-1-a-folder-of-project-pages-grid",
-    "href": "listings.html#example-1-a-folder-of-project-pages-grid",
-    "title": "Listings in Quarto",
-    "section": "Example 1: a folder of project pages (grid)",
-    "text": "Example 1: a folder of project pages (grid)\nEach file in the projects/ folder is a full page on this site. Its YAML supplies the card content:\n\n\nprojects/cep-collins.qmd\n\n---\ntitle: \"Collins College Enrollment & Retention\"\ndescription: \"MSDM Culminating Experience Project, Group 3\"\ncategories: [CEP, GA4, Digital Channels]\n---\n\nThe listing points at the folder:\n\n\nlistings.qmd\n\nlisting:\n  - id: project-pages\n    contents: projects\n    type: grid\n    sort: \"title\"\n    fields: [title, description, categories]\n\n\n\n\n\n\n\n\nCollins College Enrollment & Retention\n\n\n\nCEP\n\nGA4\n\nDigital Channels\n\n\n\nMSDM Culminating Experience Project, Group 3. Which digital channels and content themes best drive awareness and inquiry among prospective students (AO4).\n\n\n\n\n\n\n\n\n\nDigital Marketing Portfolio\n\n\n\nQuarto\n\nGA4\n\nWeb Design\n\n\n\nMy main Quarto portfolio site, hosted on GitHub Pages and tracked with GA4.\n\n\n\n\n\n\n\n\n\nPortfolio Website Project Proposal\n\n\n\n\n\n\n\n\n\n\n\n\nSQL Learning Portfolio\n\n\n\nSQL\n\nBigQuery\n\nData Analysis\n\n\n\nIBM 6500 portfolio covering Introduction to SQL, Introduction to BigQuery, and Intermediate SQL.\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "listings.html#example-2-a-yaml-file-of-outside-links-table",
-    "href": "listings.html#example-2-a-yaml-file-of-outside-links-table",
-    "title": "Listings in Quarto",
-    "section": "Example 2: a YAML file of outside links (table)",
-    "text": "Example 2: a YAML file of outside links (table)\nSome work lives somewhere else: a GitHub repo, a published deck, another website. Listing items don’t need their own pages. A YAML file can list them, using path for the URL, so clicking an item takes visitors off this site:\n\n\nlinks.yml\n\n- title: \"GitHub profile\"\n  path: https://github.com/jakevns\n  description: \"Source code for my coursework and websites\"\n  categories: [Git, Quarto, R]\n\nThis table uses field-display-names to make it read like a portfolio: what the project is, what it involved, and which skills it shows. With only a few items, the sort menu and search box aren’t needed, so they’re turned off:\n\n\nlistings.qmd\n\n  - id: project-links\n    contents: links.yml\n    type: table\n    sort-ui: false\n    filter-ui: false\n    fields: [title, description, categories]\n    field-display-names:\n      title: \"Project\"\n      categories: \"Skills\"\n\n\n\n\n\n\n\nProject\n\n\n\nDescription\n\n\n\nSkills\n\n\n\n\n\n\n\n\nCEP Group 3 project site\n\n\nCollins College enrollment and retention project\n\n\nDigital Channels, Research\n\n\n\n\n\n\nDigital marketing portfolio\n\n\nMy main Quarto portfolio site, hosted on GitHub Pages\n\n\nQuarto, GA4, Web Design\n\n\n\n\n\n\nGitHub profile\n\n\nSource code for my coursework and websites\n\n\nGit, Quarto, R\n\n\n\n\n\n\nJake Bailey Artist\n\n\nMy art brand: original paintings, pet portrait commissions, prints, and merchandise\n\n\nE-commerce, Branding\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "listings.html#how-do-you-place-more-than-one-listing-on-a-page",
-    "href": "listings.html#how-do-you-place-more-than-one-listing-on-a-page",
-    "title": "Listings in Quarto",
-    "section": "How do you place more than one listing on a page?",
-    "text": "How do you place more than one listing on a page?\nGive each listing an id in the YAML, then put an empty div with that id wherever it should appear. Text and other content can go before, between, or after listings:\n::: {#project-pages}\n:::\n\nSome text between the two listings.\n\n::: {#project-links}\n:::\nBeyond the built-in types, a listing can use a custom template that controls exactly how each item is laid out."
-  },
-  {
-    "objectID": "listings.html#how-do-you-remove-a-listing-page",
-    "href": "listings.html#how-do-you-remove-a-listing-page",
-    "title": "Listings in Quarto",
-    "section": "How do you remove a listing page?",
-    "text": "How do you remove a listing page?\nRemoving a page works the same way as adding one: delete the files that generate it, then remove its entry from the navbar in _quarto.yml."
-  },
-  {
-    "objectID": "projects/cep-collins.html",
-    "href": "projects/cep-collins.html",
-    "title": "Collins College Enrollment & Retention",
-    "section": "",
-    "text": "My MSDM Culminating Experience Project with the Collins College of Hospitality Management. I lead AO4, which looks at which digital channels and content themes best drive awareness and inquiry among prospective students.\nVisit the project site"
-  },
-  {
-    "objectID": "projects/marketing-portfolio.html",
-    "href": "projects/marketing-portfolio.html",
-    "title": "Digital Marketing Portfolio",
-    "section": "",
-    "text": "My main digital marketing portfolio, built with Quarto, hosted on GitHub Pages, and connected to its own GA4 property.\nVisit the portfolio"
-  },
-  {
-    "objectID": "projects/sql-portfolio.html",
-    "href": "projects/sql-portfolio.html",
-    "title": "SQL Learning Portfolio",
-    "section": "",
-    "text": "My IBM 6500 SQL learning portfolio, covering the DataCamp series Introduction to SQL, Introduction to BigQuery, and Intermediate SQL.\nView the IBM6500 repository"
+    "objectID": "Evans_Jake-M10-Hands_on_Practice.html#appendix-direct-links",
+    "href": "Evans_Jake-M10-Hands_on_Practice.html#appendix-direct-links",
+    "title": "M10 Hands-on Practice: Sharing Outputs with the Audience",
+    "section": "Appendix: Direct links",
+    "text": "Appendix: Direct links\n\nWebsite pages\n\nPages on the published website\n\n\nPage\nWhat it covers\nLink\n\n\n\n\nHome\nPhoto, career aspirations, skills, and education\nindex.html\n\n\nDashboard\nPortal to a Quarto dashboard\ndashboard.html\n\n\nCSS/SCSS\nStyling a Quarto website with CSS and SCSS\nstyling.html\n\n\nListings\nWhat listings are and how they work on a portfolio\nlistings.html\n\n\n\n\n\nSource files\n\nFiles in the GitHub repository\n\n\nFile\nPurpose\nLink\n\n\n\n\n_quarto.yml\nSite structure, navigation, and theme\nView\n\n\nstyles.scss\nCustom styles\nView\n\n\nindex.qmd\nHome page\nView\n\n\ndashboard.qmd\nDashboard page\nView\n\n\nstyling.qmd\nCSS/SCSS page\nView\n\n\nlistings.qmd\nListings page\nView\n\n\nlinks.yml\nItems for the table listing\nView\n\n\nprojects/\nPages for the grid listing\nView\n\n\ndocs/\nRendered website served by GitHub Pages\nView"
   }
 ]
