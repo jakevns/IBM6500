@@ -1,0 +1,150 @@
+---
+title: "Listings in Quarto"
+subtitle: "Letting Quarto build the list of your work for you"
+listing:
+  - id: project-pages
+    contents: projects
+    type: grid
+    sort: "title"
+    fields: [title, description, categories]
+  - id: project-links
+    contents: links.yml
+    type: table
+    sort: "title"
+    sort-ui: false
+    filter-ui: false
+    fields: [title, description, categories]
+    field-display-names:
+      title: "Project"
+      categories: "Skills"
+---
+
+## What is a listing?
+
+A listing is an **automatically generated list of content**. You don't build the list by hand. You tell Quarto where to look, and it reads the YAML front matter of each item (title, description, categories, image, date) to build the links.
+
+A listing can go on **any page**: add a `listing` option to the page's YAML header. The most familiar example is a blog's landing page, but listings work just as well for projects, talks, or publications.
+
+## Why use a listing on a portfolio?
+
+- **Large collections:** no hand-written link for every item.
+- **Growing collections:** set it up once, then add a file whenever you have a new project.
+- **Consistent presentation:** every item uses the same template.
+
+## How do you start one?
+
+The smallest possible listing uses all the defaults:
+
+```{.yaml}
+---
+title: "Blog"
+listing: default
+---
+```
+
+With no options, Quarto lists every Quarto document in the **same folder** as the page, using each one's title and description.
+
+## What options control a listing?
+
+| Option | What it does | Used on this page |
+|---|---|---|
+| `contents` | Where to look: a folder, file, or YAML list | `projects`, `links.yml` |
+| `type` | The template: `default`, `grid`, or `table` | `grid`, `table` |
+| `sort` | Item order | `"title"` |
+| `fields` | Which metadata to show | `[title, description, categories]` |
+| `field-display-names` | Renames the column headers | Title → Project, Categories → Skills |
+| `sort-ui` / `filter-ui` | Sort menu and search box | Turned off |
+
+: Listing options {.striped .hover}
+
+### The three built-in types
+
+::: {.panel-tabset}
+
+### default
+
+A blog-style list: one item per row with title, description, and an optional thumbnail.
+
+### grid
+
+Rectangular tiles laid out in a grid. Good for portfolios.
+
+### table
+
+Literally a table of the items, with optional sorting and searching.
+
+:::
+
+## Example 1: a folder of project pages (grid)
+
+Each file in the `projects/` folder is a full page on this site. Its YAML supplies the card content:
+
+```{.yaml filename="projects/cep-collins.qmd"}
+---
+title: "Collins College Enrollment & Retention"
+description: "MSDM Culminating Experience Project, Group 3"
+categories: [CEP, GA4, Digital Channels]
+---
+```
+
+The listing points at the folder:
+
+```{.yaml filename="listings.qmd"}
+listing:
+  - id: project-pages
+    contents: projects
+    type: grid
+    sort: "title"
+    fields: [title, description, categories]
+```
+
+::: {#project-pages}
+:::
+
+## Example 2: a YAML file of outside links (table)
+
+Some work lives somewhere else: a GitHub repo, a published deck, another website. Listing items don't need their own pages. A YAML file can list them, using `path` for the URL, so clicking an item takes visitors off this site:
+
+```{.yaml filename="links.yml"}
+- title: "GitHub profile"
+  path: https://github.com/jakevns
+  description: "Source code for my coursework and websites"
+  categories: [Git, Quarto, R]
+```
+
+This table uses `field-display-names` to make it read like a portfolio: what the project is, what it involved, and which skills it shows. With only a few items, the sort menu and search box aren't needed, so they're turned off:
+
+```{.yaml filename="listings.qmd"}
+  - id: project-links
+    contents: links.yml
+    type: table
+    sort-ui: false
+    filter-ui: false
+    fields: [title, description, categories]
+    field-display-names:
+      title: "Project"
+      categories: "Skills"
+```
+
+::: {#project-links}
+:::
+
+## How do you place more than one listing on a page?
+
+Give each listing an `id` in the YAML, then put an empty div with that `id` wherever it should appear. Text and other content can go before, between, or after listings:
+
+```{.markdown}
+::: {#project-pages}
+:::
+
+Some text between the two listings.
+
+::: {#project-links}
+:::
+```
+
+Beyond the built-in types, a listing can use a **custom template** that controls exactly how each item is laid out.
+
+## How do you remove a listing page?
+
+Removing a page works the same way as adding one: delete the files that generate it, then remove its entry from the navbar in `_quarto.yml`.

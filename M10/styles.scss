@@ -1,0 +1,99 @@
+/*-- scss:defaults --*/
+
+// Color palette: prefixed with theme- and given human-readable names
+$theme-teal:       #1f5f5b;
+$theme-light-teal: #e8f1f0;
+$theme-coral:      #c8553d;
+$theme-ink:        #1e2a32;
+$theme-white:      #ffffff;
+
+// Bootstrap variables that Quarto themes are built on
+$body-bg:      $theme-white;
+$body-color:   $theme-ink;
+$link-color:   $theme-teal;
+$primary:      $theme-teal;
+$navbar-bg:    $theme-light-teal;
+$footer-bg:    $theme-light-teal;
+
+// Fonts: one for headings, one for body text, one for code
+$headings-font-family:     "Poppins", sans-serif;
+$font-family-sans-serif:   "Source Sans 3", "Segoe UI", sans-serif;
+$font-family-monospace:    "Fira Code", monospace;
+$font-size-root:           18px;
+
+/*-- scss:rules --*/
+
+// Google Fonts embed code (fonts.google.com > Get embed code > @import)
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&family=Poppins:wght@600&family=Source+Sans+3:wght@400;600&display=swap');
+
+// Mixin: reusable block of properties, pasted in with @include
+@mixin padding-small {
+  padding: 0.75rem 1rem;
+}
+
+// Every heading level at once (h1, h2 = "and" combination)
+h1, h2, h3, h4, h5, h6 {
+  color: $theme-teal;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+// Nested rule: links inside headings get their own color
+h2 {
+  border-bottom: 2px solid $theme-coral;
+  padding-bottom: 0.25rem;
+
+  a { color: $theme-coral; }
+}
+
+// Navbar: * selects every child element inside .navbar
+.navbar * {
+  color: $theme-teal;
+}
+
+// Navbar title: hover turns it a lighter teal, eased in both directions
+span.navbar-title {
+  transition-duration: 0.5s;
+
+  &:hover {
+    color: lighten($theme-teal, 20%);
+    transition-duration: 0.5s;
+  }
+}
+
+// Active page in the navbar (:active-style state set by Quarto)
+.navbar .nav-link.active {
+  border-bottom: 3px solid $theme-coral;
+}
+
+// Box model demo: content, padding, border, margin
+.box-demo {
+  background: $theme-light-teal;   // content area
+  padding: 1rem;                   // inside spacing
+  border: 3px dashed $theme-coral; // color, style, width
+  margin: 1.5rem 0;                // outside spacing
+}
+
+// Class selector used on this site's demo cards
+.demo-card {
+  @include padding-small;
+  background: $theme-light-teal;
+  border-left: 5px solid $theme-teal;
+  border-radius: 0.4rem;
+  margin-bottom: 1rem;
+  transition-duration: 0.3s;
+
+  &:hover {
+    background: darken($theme-light-teal, 5%);
+  }
+}
+
+// Child selector: only paragraphs one level inside .demo-card
+.demo-card > p {
+  margin-bottom: 0;
+}
+
+// Listing cards pick up the same palette
+.quarto-grid-item {
+  border-top: 4px solid $theme-teal;
+}

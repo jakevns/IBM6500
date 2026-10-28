@@ -1,0 +1,9 @@
+---
+title: "Collins College Enrollment & Retention"
+description: "MSDM Culminating Experience Project, Group 3. Which digital channels and content themes best drive awareness and inquiry among prospective students (AO4)."
+categories: [CEP, GA4, Digital Channels]
+---
+
+My MSDM Culminating Experience Project with the Collins College of Hospitality Management. I lead AO4, which looks at which digital channels and content themes best drive awareness and inquiry among prospective students.
+
+[Visit the project site](https://jakevns.github.io/cep-group3-collins-enrollment-retention/)

@@ -1,0 +1,9 @@
+---
+title: "SQL Learning Portfolio"
+description: "IBM 6500 portfolio covering Introduction to SQL, Introduction to BigQuery, and Intermediate SQL."
+categories: [SQL, BigQuery, Data Analysis]
+---
+
+My IBM 6500 SQL learning portfolio, covering the DataCamp series Introduction to SQL, Introduction to BigQuery, and Intermediate SQL.
+
+[View the IBM6500 repository](https://github.com/jakevns/IBM6500)
