@@ -1,0 +1,46 @@
+/*-- scss:defaults --*/
+
+$theme-teal:       #1f5f5b;
+$theme-light-teal: #e8f1f0;
+$theme-coral:      #c8553d;
+$theme-ink:        #1e2a32;
+
+$primary:    $theme-teal;
+$body-color: $theme-ink;
+$navbar-bg:  $theme-teal;
+$navbar-fg:  #ffffff;
+
+/*-- scss:rules --*/
+
+// Card titles
+.card-header {
+  background-color: $theme-light-teal;
+  color: $theme-teal;
+  font-weight: 600;
+}
+
+// Active page and hover in the navbar
+.navbar .nav-link.active,
+.navbar .nav-link:hover {
+  color: #ffffff;
+  border-bottom: 3px solid $theme-coral;
+}
+
+// Tabs
+.nav-tabs .nav-link.active {
+  color: $theme-teal;
+  border-top: 3px solid $theme-coral;
+}
+
+// Inside the site's iframe: hide the site navbar and footer
+.in-iframe #quarto-header .navbar-nav,
+.in-iframe #quarto-header .navbar-brand-container,
+.in-iframe #quarto-header .quarto-navbar-tools,
+.in-iframe .nav-footer {
+  display: none;
+}
+
+// Value box text
+.quarto-dashboard .bslib-value-box {
+  color: $theme-ink;
+}

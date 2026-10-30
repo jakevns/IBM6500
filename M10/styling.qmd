@@ -1,0 +1,243 @@
+---
+title: "Styling a Quarto Website with CSS/SCSS"
+subtitle: "How this site gets its look, and how you can restyle yours"
+---
+
+## What is a web page made of?
+
+Every website is HTML: elements written as tags in angle brackets that can be nested inside each other. A page has four main tags: `<html>` wraps everything, `<head>` loads stylesheets and metadata, `<title>` names the page, and `<body>` holds everything visitors see.
+
+| Tag | What it is | Quarto equivalent |
+|---|---|---|
+| `<h1>` to `<h6>` | Headings, levels 1–6 | `#` to `######` |
+| `<p>` | Paragraph | A block of text |
+| `<a>` | Link | `[text](url)` |
+| `<img>` | Image, with a `src` attribute | `![alt text](file.png)` |
+| `<div>` | General container | `::: {.class}` |
+
+: Common HTML tags {.striped}
+
+Tags can carry **attributes** written as `name="value"`. Two attributes matter most for styling: `class` and `id`.
+
+```{.html}
+<div class="demo-card" id="first-card">
+  <p>Hello</p>
+</div>
+```
+
+## Why use a stylesheet instead of styling each element?
+
+You can style an element inline with the `style` attribute:
+
+```{.html}
+<p style="color: red;">Red text</p>
+```
+
+That works for one element, but on a full website it gets long, repetitive, and error-prone. A **stylesheet** holds every rule in one place, and Quarto links it in the `<head>` for you when you list it in `_quarto.yml`:
+
+```{.yaml filename="_quarto.yml"}
+format:
+  html:
+    theme: [cosmo, styles.scss]
+```
+
+## How does CSS decide what to style?
+
+A CSS rule has two parts: a **selector** (what to style) and **properties** (how to style it).
+
+```{.css}
+h1 {            /* selector */
+  color: teal;  /* property: value */
+}
+```
+
+| Selector | Selects | Example |
+|---|---|---|
+| Tag | Every element of that type | `h1` |
+| Class | Elements with that class | `.demo-card` |
+| ID | The one element with that ID | `#first-card` |
+| `a, b` | Both `a` and `b` | `h1, h2` |
+| `a b` (space) | `b` anywhere inside `a` | `p span` |
+| `a > b` | `b` exactly one level inside `a` | `.demo-card > p` |
+| `ab` (no space) | Elements matching both | `h2.title` |
+| `*` | Everything | `.navbar *` |
+| `:hover` | Element under the mouse | `a:hover` |
+| `:active` | Element being activated | `.nav-link:active` |
+
+: CSS selectors {.striped .hover}
+
+### Which rule wins when two rules target the same element?
+
+That is the **cascade** in Cascading Style Sheets. The general rule: **the more specific selector wins**. A rule for `h1.title` (tag + class) beats a rule for `h1` (tag only).
+
+## What can CSS change?
+
+CSS changes how elements **look** (colors, fonts, sizes) and how they are **laid out**. Every element follows the **box model**:
+
+::: {.box-demo}
+**Content** sits in the middle (light teal). **Padding** is the space between the content and the border. The **border** is the dashed coral line, set by color, style, and width. **Margin** is the space outside the border.
+:::
+
+```{.scss}
+.box-demo {
+  background: $theme-light-teal;   // content area
+  padding: 1rem;                   // inside spacing
+  border: 3px dashed $theme-coral; // color, style, width
+  margin: 1.5rem 0;                // outside spacing
+}
+```
+
+Padding and margin can be set all at once (`padding: 1rem`) or one side at a time (`padding-top`, `padding-right`, `padding-bottom`, `padding-left`). Sizes can be pixels, `rem`, or percentages of the parent element.
+
+## What does SCSS add on top of CSS?
+
+SCSS (Sass) is CSS plus **variables, nested rules, mixins, and functions**. Any valid CSS is also valid SCSS. Quarto compiles the `.scss` file into plain CSS that browsers understand, so only the generated CSS is published.
+
+::: {.panel-tabset}
+
+### Variables
+
+Store a value once with `$name: value;` and reuse it everywhere. This site's palette uses the `theme-` prefix and human-readable names:
+
+```{.scss}
+$theme-teal:       #1f5f5b;
+$theme-light-teal: #e8f1f0;
+$theme-coral:      #c8553d;
+$theme-ink:        #1e2a32;
+```
+
+### Nested rules
+
+Rules written inside other rules keep related styles together. `&` refers to the parent selector:
+
+```{.scss}
+h2 {
+  border-bottom: 2px solid $theme-coral;
+
+  a { color: $theme-coral; }   // compiles to: h2 a { ... }
+}
+```
+
+### Mixins
+
+A mixin is a reusable block of properties, pasted in wherever it is included:
+
+```{.scss}
+@mixin padding-small {
+  padding: 0.75rem 1rem;
+}
+
+.demo-card {
+  @include padding-small;
+}
+```
+
+### Functions
+
+Color functions create variations from one base color. Change the base, and every variation updates:
+
+```{.scss}
+&:hover {
+  color: lighten($theme-teal, 20%);
+}
+```
+
+:::
+
+### Where do variables and rules go in a Quarto SCSS file?
+
+Quarto SCSS files use two section markers:
+
+- `/*-- scss:defaults --*/` holds variables, including Bootstrap variables like `$primary`, `$body-bg`, and `$navbar-bg` that restyle the whole theme at once.
+- `/*-- scss:rules --*/` holds CSS rules for specific selectors.
+
+## How was this site styled?
+
+These are the same steps from the Quarto Websites tutorial, applied to this site.
+
+::: {.panel-tabset}
+
+### 1. Headings
+
+All six heading levels share one rule, in theme teal and uppercase:
+
+```{.scss}
+h1, h2, h3, h4, h5, h6 {
+  color: $theme-teal;
+  text-transform: uppercase;
+}
+```
+
+### 2. Navbar
+
+Right-click the navbar, choose **Inspect**, and the developer tools show its elements have the class `.navbar`. Styling `.navbar` alone only changes the container, so `*` targets every child inside it:
+
+```{.scss}
+.navbar * {
+  color: $theme-teal;
+}
+```
+
+### 3. Hover effect
+
+Inspecting the site name shows a `span` with the class `navbar-title`. Hovering turns it a lighter teal. `transition-duration` is set on both the normal and hover states so the change eases in both directions:
+
+```{.scss}
+span.navbar-title {
+  transition-duration: 0.5s;
+
+  &:hover {
+    color: lighten($theme-teal, 20%);
+    transition-duration: 0.5s;
+  }
+}
+```
+
+### 4. Google Fonts
+
+On [fonts.google.com](https://fonts.google.com), select fonts, choose **Get embed code**, and copy the `@import` line to the top of the rules section. Then name the fonts in the variables:
+
+```{.scss}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Source+Sans+3&family=Fira+Code&display=swap');
+
+$headings-font-family:   "Poppins", sans-serif;
+$font-family-sans-serif: "Source Sans 3", "Segoe UI", sans-serif;
+```
+
+Each font is listed with **fallbacks** separated by commas. If the first font can't load, the browser uses the next one.
+
+:::
+
+### Live example: class and child selectors
+
+These cards use the `.demo-card` class (with the `padding-small` mixin) and `.demo-card > p`. Hover over one to see the `darken()` function at work.
+
+::: {.demo-card}
+**Variables** keep the palette consistent.
+:::
+
+::: {.demo-card}
+**Nesting** keeps the hover state next to the base style.
+:::
+
+::: {.demo-card}
+**Mixins** reuse the same padding without repeating it.
+:::
+
+## What makes a design work?
+
+- **Consistency:** visitors notice what looks different and assume it matters. Styling everything from one stylesheet keeps attention on the right places.
+- **A small palette:** pick colors from brand guidelines or palette inspiration, save them as `theme-` variables, and make variations with `lighten()` and `darken()`.
+- **Few fonts:** one for headings, one for body text, one for code. Familiar fonts are easier to read.
+- **Accessibility:** keep color contrast high, add alt text to images, make every link reachable by keyboard (Tab), and avoid blinking or flashing content. A contrast checker such as [WebAIM's](https://webaim.org/resources/contrastchecker/) confirms whether text passes.
+
+::: {.callout-tip}
+## Styling is trial and error
+Open the browser's developer tools (**Inspect**), find the element and its classes, test a rule like `color: red` to confirm the selector works, then switch to the real value.
+:::
+
+## The complete stylesheet
+
+```{.scss filename="styles.scss" code-line-numbers="true"}
+{{< include styles.scss >}}
+```

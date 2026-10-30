@@ -1,0 +1,19 @@
+- title: "GitHub profile"
+  path: https://github.com/jakevns
+  description: "Source code for my coursework and websites"
+  categories: [Git, Quarto, R]
+
+- title: "Digital marketing portfolio"
+  path: https://jakevns.github.io/marketing/
+  description: "My main Quarto portfolio site, hosted on GitHub Pages"
+  categories: [Quarto, GA4, Web Design]
+
+- title: "CEP Group 3 project site"
+  path: https://jakevns.github.io/cep-group3-collins-enrollment-retention/
+  description: "Collins College enrollment and retention project"
+  categories: [Digital Channels, Research]
+
+- title: "Jake Bailey Artist"
+  path: https://jakebaileyartist.com
+  description: "My art brand: original paintings, pet portrait commissions, prints, and merchandise"
+  categories: [E-commerce, Branding]

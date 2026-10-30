@@ -1,0 +1,36 @@
+project:
+  type: website
+  output-dir: docs   # GitHub Pages: Deploy from a branch > main > /docs
+  render:            # website pages only; the submission and proposal render on their own
+    - "*.qmd"
+    - "projects/*.qmd"
+    - "dashboard/*.qmd"
+    - "!Evans_Jake-*.qmd"
+
+website:
+  title: "Jake Evans"
+  page-footer:
+    left: "© 2026 Jake Evans"
+    right: "Built with [Quarto](https://quarto.org)"
+  navbar:
+    title: "Jake Evans"   # links back to the home page
+    right:
+      - href: dashboard.qmd
+        text: Dashboard
+        icon: speedometer2
+      - href: styling.qmd
+        text: CSS/SCSS
+        icon: palette
+      - href: listings.qmd
+        text: Listings
+        icon: list-ul
+    tools:
+      - icon: github
+        href: https://github.com/jakevns
+        aria-label: GitHub
+
+format:
+  html:
+    theme: [cosmo, styles.scss]
+    toc: true
+    code-copy: true

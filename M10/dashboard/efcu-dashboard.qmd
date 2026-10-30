@@ -1,0 +1,228 @@
+---
+title: "EFCU Member Survey"
+author: "Jake Evans"
+format:
+  dashboard:
+    orientation: rows
+    theme: [cosmo, dashboard.scss]
+    include-in-header:
+      text: |
+        <script>
+          // When shown inside the site's iframe, hide the site navbar and footer
+          if (window.self !== window.top) document.documentElement.classList.add("in-iframe");
+        </script>
+    nav-buttons:
+      - icon: github
+        href: https://github.com/jakevns/IBM6500/tree/main/M10
+        aria-label: GitHub repository
+---
+
+```{r}
+#| label: setup
+#| message: false
+library(haven)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(forcats)
+library(scales)
+
+efcu <- read_sav("../data/Case_31_Data_efcu_1.sav") |>
+  zap_labels() |>
+  mutate(
+    residence = if_else(q38 == 1, "Headquarters", "Non-headquarters"),
+    at_emp = rowMeans(across(q3:q6))   # employee proficiency (mean of q3-q6)
+  )
+
+# Theme colors, shared with dashboard.scss
+theme_teal  <- "#1f5f5b"
+theme_coral <- "#c8553d"
+theme_sand  <- "#d9c9a3"
+
+theme_set(theme_minimal(base_size = 18))
+```
+
+```{r}
+#| label: values
+n_members   <- nrow(efcu)
+emp_mean    <- mean(efcu$at_emp)
+pct_good    <- mean(efcu$q37 %in% c(1, 2))           # Excellent or Good
+pct_loan    <- mean(efcu$q27 == 1)                    # currently have a loan
+pct_hq      <- mean(efcu$q38 == 1)
+```
+
+# Members & Employees
+
+## Sidebar {.sidebar}
+
+**About the data**
+
+Mail survey of Employees Federal Credit Union (EFCU) members, from Case 31.
+
+- 300 members sampled
+- `r n_members` responses analyzed
+- `r percent(pct_hq, 0.1)` live in the headquarters area
+
+**Scales**
+
+Agreement items: 1 = Strongly Disagree to 5 = Strongly Agree.
+
+Employee proficiency is the mean of four items (q3–q6).
+
+## Row {height="22%"}
+
+::: {.valuebox icon="people-fill" color="#e8f1f0"}
+Members surveyed
+
+`r n_members`
+:::
+
+::: {.valuebox icon="person-badge" color="#f6e3dd"}
+Employee proficiency (out of 5)
+
+`r number(emp_mean, 0.01)`
+:::
+
+::: {.valuebox icon="star-fill" color="#efe7d3"}
+Rate the CU Excellent or Good
+
+`r percent(pct_good, 1)`
+:::
+
+::: {.valuebox icon="cash-coin" color="#e8f1f0"}
+Currently have a CU loan
+
+`r percent(pct_loan, 1)`
+:::
+
+## Row {height="78%"}
+
+### Column {width="55%"}
+
+```{r}
+#| title: How members rate employees
+#| fig-asp: 0.55
+emp_items <- efcu |>
+  select(Courteous = q3, Helpful = q4, Professional = q5, Available = q6) |>
+  pivot_longer(everything(), names_to = "item", values_to = "score")
+
+emp_items |>
+  group_by(item) |>
+  summarise(mean = mean(score)) |>
+  ggplot(aes(x = mean, y = fct_reorder(item, mean))) +
+  geom_col(fill = theme_teal, width = 0.6) +
+  geom_text(aes(label = number(mean, 0.01)), hjust = -0.2) +
+  scale_x_continuous(limits = c(0, 5), breaks = 1:5) +
+  labs(x = "Mean agreement (1-5)", y = NULL)
+```
+
+### Column {width="45%"}
+
+```{r}
+#| title: Employee proficiency by residence
+#| fig-asp: 0.75
+ggplot(efcu, aes(x = residence, y = at_emp, fill = residence)) +
+  geom_boxplot(width = 0.5, color = "grey30") +
+  stat_summary(fun = mean, geom = "point", shape = 18, size = 4) +
+  scale_fill_manual(values = c(Headquarters = theme_teal,
+                               `Non-headquarters` = theme_sand)) +
+  labs(x = NULL, y = "Employee proficiency (1-5)") +
+  theme(legend.position = "none")
+```
+
+# Services & Operations
+
+## Row {height="55%"}
+
+```{r}
+#| title: Awareness and use of CU services
+#| fig-width: 9
+#| fig-height: 5
+services <- c(
+  q13 = "Regular share account", q14 = "Special subaccounts",
+  q15 = "Christmas club account", q16 = "IRA",
+  q17 = "Master credit card", q18 = "Signature loans",
+  q19 = "New car loans", q20 = "Late model car loans",
+  q21 = "Older model car loans", q22 = "Household goods loans",
+  q23 = "Recreational loans", q24 = "Share collateralized loan",
+  q25 = "IRA loans", q26 = "Line of credit loans"
+)
+
+awareness <- efcu |>
+  select(all_of(names(services))) |>
+  pivot_longer(everything(), names_to = "q", values_to = "code") |>
+  mutate(
+    service = services[q],
+    status = factor(code, levels = c(3, 2, 1),
+                    labels = c("Unaware", "Aware but have not used",
+                               "Aware and have used"))
+  ) |>
+  count(service, status) |>
+  group_by(service) |>
+  mutate(share = n / sum(n)) |>
+  ungroup()
+
+used_order <- awareness |>
+  filter(status == "Aware and have used") |>
+  arrange(share) |>
+  pull(service)
+
+ggplot(awareness, aes(x = share, y = factor(service, levels = used_order),
+                      fill = status)) +
+  geom_col(color = "white") +
+  scale_x_continuous(labels = percent) +
+  scale_fill_manual(values = c("Unaware" = "grey80",
+                               "Aware but have not used" = theme_sand,
+                               "Aware and have used" = theme_teal)) +
+  labs(x = "Share of members", y = NULL, fill = NULL) +
+  theme(legend.position = "top")
+```
+
+## Row {height="45%"}
+
+### Column {.tabset}
+
+```{r}
+#| title: Operations ratings
+#| fig-asp: 0.45
+ops <- efcu |>
+  select(`Rates lower than competitors` = q30, `Keeps information confidential` = q31,
+         `Prompt` = q32, `Meets members' needs` = q33,
+         `Loan applications simple` = q34) |>
+  pivot_longer(everything(), names_to = "item", values_to = "score") |>
+  group_by(item) |>
+  summarise(mean = mean(score))
+
+ggplot(ops, aes(x = mean, y = fct_reorder(item, mean))) +
+  geom_col(fill = theme_coral, width = 0.6) +
+  geom_text(aes(label = number(mean, 0.01)), hjust = -0.2) +
+  scale_x_continuous(limits = c(0, 5), breaks = 1:5) +
+  labs(x = "Mean agreement (1-5)", y = NULL)
+```
+
+```{r}
+#| title: Overall rating
+#| fig-asp: 0.45
+efcu |>
+  filter(!is.na(q37)) |>
+  mutate(rating = factor(q37, levels = 1:5,
+                         labels = c("Excellent", "Good", "Average",
+                                    "Poor", "Very Poor"))) |>
+  count(rating, .drop = FALSE) |>
+  ggplot(aes(x = rating, y = n)) +
+  geom_col(fill = theme_teal, width = 0.6) +
+  geom_text(aes(label = n), vjust = -0.4) +
+  labs(x = NULL, y = "Members")
+```
+
+### Column
+
+```{r}
+#| title: Current loan by residence
+efcu |>
+  count(residence, loan = if_else(q27 == 1, "Has a CU loan", "No CU loan")) |>
+  group_by(residence) |>
+  mutate(share = percent(n / sum(n), 1)) |>
+  ungroup() |>
+  knitr::kable(col.names = c("Residence", "Loan status", "Members", "Share"))
+```

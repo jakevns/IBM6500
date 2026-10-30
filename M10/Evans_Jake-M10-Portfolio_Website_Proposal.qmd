@@ -1,0 +1,144 @@
+---
+title: "Portfolio Website Project Proposal"
+subtitle: "M10 · Customer Insights Methods & Survey Research"
+author: "Jake Evans"
+date: "2026-10-28"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    embed-resources: true
+    theme: cosmo
+---
+
+**Live site:** <https://jakevns.github.io/marketing/>
+**Source:** <https://github.com/jakevns>
+
+# Website Overview
+
+My portfolio is a Quarto website focused on creative digital marketing roles. This term, I’m keeping the current design and adding my analytics projects, a resume page, and website tracking.
+
+| # | Page | Status | Contents |
+|---|---|---|---|
+| 1 | Home | Live | Intro, personal statement, approach, credentials, contact |
+| 2 | Digital Marketing Projects | Live | Wellness Ranch digital marketing plan; Wellness Ranch on-page SEO audit; Jake Bailey Artist DTC brand |
+| 3 | Marketing Analytics Projects | To build | Casper pipeline & KPI dashboards; **Project A** (GA4 website traffic report); **Project B** (Reveal.js presentation) |
+| 4 | Resume | To build | Resume page built with Markdown and the `vitae` package |
+
+: Website structure {#tbl-structure}
+
+To follow the assignment requirements, I’m including the GA4 report and Reveal.js presentation as projects on the Marketing Analytics page instead of creating separate tabs.
+
+# Project A: Portfolio Website Traffic Analytics (GA4)
+
+## Project Title
+
+**Who Visits My Portfolio, and Do They Reach Out? A GA4 Traffic & Conversion Report**
+
+## Data and Source
+
+- **Google Analytics 4**: My new property, *Jake Evans Marketing Portfolio* (Measurement ID `G-YN67TFXLPY`), has been tracking visits since October 28, 2026.
+- **Google Search Console**: Linked to GA4 to track organic search queries, impressions, clicks, and average position.
+- **Google BigQuery**: Daily GA4 event exports for analysis using SQL.
+- **Looker Studio**: A dashboard connected to GA4 and BigQuery.
+- **Data window**: Late October 2026 through the end of the term.
+
+## Managerial Problem
+
+I use my portfolio to show my work and help with my job search. Without data, I don’t know how people find the site, which projects keep their attention, or whether they download my resume, visit my LinkedIn, or click to email me. Understanding those actions will help me decide where to spend time improving the site.
+
+## Target Audience
+
+- **Primary:** Me, as the site owner, using the results to decide what to improve.
+- **Secondary:** Hiring managers reviewing the report to see how I set up tracking, analyze GA4 data, and use the results to make decisions.
+
+## Research Questions / Objectives
+
+1. How do visitors find my site, and how much traffic comes from direct visits, organic search, LinkedIn/referrals, and social media?
+2. Which pages and projects get the most attention based on views, scroll depth, and engagement time?
+3. What percentage of sessions include a key event, such as a resume download, LinkedIn/GitHub click, or email click?
+4. Which Google search queries bring up my site, and where does it rank?
+5. How do engagement and conversion rates compare across devices and between new and returning visitors?
+
+## Expected Impact
+
+- Helps me decide which projects to feature first and which need to be updated or removed.
+- Shows where to focus my outreach efforts, such as posting on LinkedIn or improving SEO.
+- Establishes a baseline conversion rate so I can measure the results of future site changes.
+- Gives me a portfolio project that shows how I use GA4, GSC, BigQuery, and Looker Studio together, from setting up tracking to reporting and making decisions.
+
+## Methods
+
+- **Tracking setup:** Set up the GA4 tag, enhanced measurement, and key events to track resume downloads and outbound clicks.
+- **Data extraction:** Use SQL to query the BigQuery GA4 export, unnest event parameters, and build session tables.
+- **Descriptive analytics:** Compare traffic, engagement, and conversion KPIs by channel, page, and device.
+- **Funnel analysis:** Follow the path from landing on the site to viewing a project and completing a key event.
+- **Comparison tests:** Use chi-square tests to compare conversion rates by channel and device, if the sample size is large enough.
+- **Visualization:** Build a Looker Studio dashboard and include `ggplot2` charts in the Quarto report.
+
+# Project B: Jake Bailey Artist Marketing Performance (Reveal.js)
+
+## Project Title
+
+**From Followers to Collectors: What Drives Sales and Commissions for Jake Bailey Artist**
+
+## Data and Source
+
+- **Google Analytics 4**: My existing *Jake Bailey Artist* property for jakebaileyartist.com, including sessions, channels, landing pages, and conversions.
+- **Shopify**: Order exports with the date, product, product type, revenue, and referring source.
+- **Instagram Insights**: Post-level reach, engagement, saves, profile visits, and link clicks.
+- **Commission inquiries**: A log of custom pet portrait requests, including the date, source, and outcome.
+
+All of the data comes from my own business, so there are no confidentiality or NDA restrictions. I’ll remove customer names and contact information before publishing anything.
+
+## Managerial Problem
+
+Through Jake Bailey Artist, I sell original paintings, custom pet portraits, fine art prints, and merchandise. With limited time and money for marketing, I need to understand which channels and types of content lead to website visits, sales, and commission requests. Right now, I don’t have a clear picture of what works, which makes it harder to decide where to focus my effort.
+
+## Target Audience
+
+The main audience is me, as the owner and creative director of Jake Bailey Artist. I’ll present the findings the same way I would for a small-business client or marketing manager.
+
+## Research Questions / Objectives
+
+1. Which channels, including Instagram, organic search, direct visits, and referrals, bring in the most sessions and revenue?
+2. Which types of Instagram content, such as process videos, finished pieces, and pet portraits, lead to the most profile visits and link clicks? How do reels compare with static posts?
+3. How does the path to a purchase or inquiry differ between lower-priced products, such as prints and merchandise, and higher-priced work, such as originals and commissions?
+4. Do traffic, sales, and commission inquiries follow seasonal or day-of-week patterns?
+5. Where do visitors drop off between landing on the site, viewing a product, adding it to their cart, and making a purchase or submitting an inquiry?
+
+## Expected Impact
+
+- Helps me focus my posting time and marketing effort on the content and channels that bring in sales and commission requests.
+- Identifies where visitors leave the storefront so I can improve those steps.
+- Helps me plan promotions around seasonal demand, such as pet portraits during the holiday gift season.
+- Creates a monthly KPI review I can repeat to track performance and guide marketing decisions.
+
+## Methods
+
+- **Data preparation:** Clean and join the exports in R using `tidyverse`, with a reproducible workflow so I can update the analysis as new data comes in.
+- **Descriptive analytics & KPIs:** Compare sessions, conversion rate, average order value, and revenue by channel and product tier.
+- **Content analysis:** Group Instagram posts by content type and use ANOVA or *t*-tests to compare engagement.
+- **Funnel analysis:** Use GA4 ecommerce events to measure conversion and drop-off rates at each step.
+- **Regression:** Use linear regression to explore how weekly sessions and revenue relate to posting volume, content type, and seasonality.
+- **Time-series view:** Look at weekly trends and seasonal patterns.
+- **Visualization & delivery:** Create `ggplot2` charts and present the findings in a Quarto Reveal.js deck published on my portfolio site.
+
+# Timeline
+
+| Week | Milestone |
+|---|---|
+| Oct 28 | Portfolio GA4 tracking is live (done) |
+| Early Nov | Verify and link Search Console, turn on the BigQuery daily export, and set up key events |
+| Early–mid Nov | Export and clean Jake Bailey Artist data; add the resume page and Marketing Analytics section to the site |
+| Late Nov | Build the Looker Studio dashboard and complete the analysis for both projects |
+| Early Dec | Publish the GA4 report and Reveal.js deck on the site and complete a final review |
+
+: Project timeline {#tbl-timeline}
+
+# Appendix {.appendix}
+
+- **Live page (GitHub Pages):** <https://jakevns.github.io/IBM6500/M10/Evans_Jake-M10-Portfolio_Website_Proposal.html>
+- **GitHub folder:** <https://github.com/jakevns/IBM6500/tree/main/M10>
+- **Portfolio website:** <https://jakevns.github.io/marketing/>

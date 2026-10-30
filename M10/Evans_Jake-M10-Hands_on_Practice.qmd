@@ -1,0 +1,54 @@
+---
+title: "M10 Hands-on Practice: Sharing Outputs with the Audience"
+subtitle: "Portfolio website built with Quarto and published to GitHub Pages"
+author: "Jake Evans"
+date: today
+format:
+  html:
+    toc: true
+    embed-resources: true
+---
+
+## Where can you view the website?
+
+[**Open the portfolio website on GitHub Pages**](https://jakevns.github.io/IBM6500/M10/docs/)
+
+## Where can you find the source files?
+
+[**Open the GitHub repository (M10 folder)**](https://github.com/jakevns/IBM6500/tree/main/M10)
+
+## Appendix: Direct links
+
+### Website pages
+
+| Page | What it covers | Link |
+|---|---|---|
+| Home | Photo, career aspirations, skills, and education | [index.html](https://jakevns.github.io/IBM6500/M10/docs/index.html) |
+| Dashboard | Portal page with the embedded dashboard | [dashboard.html](https://jakevns.github.io/IBM6500/M10/docs/dashboard.html) |
+| EFCU dashboard | Quarto dashboard of the Case 31 member survey (full screen) | [efcu-dashboard.html](https://jakevns.github.io/IBM6500/M10/docs/dashboard/efcu-dashboard.html) |
+| CSS/SCSS | Styling a Quarto website with CSS and SCSS | [styling.html](https://jakevns.github.io/IBM6500/M10/docs/styling.html) |
+| Listings | What listings are and how they work on a portfolio | [listings.html](https://jakevns.github.io/IBM6500/M10/docs/listings.html) |
+| CEP project | Collins College enrollment and retention project | [cep-collins.html](https://jakevns.github.io/IBM6500/M10/docs/projects/cep-collins.html) |
+| SQL portfolio | IBM 6500 SQL learning portfolio | [sql-portfolio.html](https://jakevns.github.io/IBM6500/M10/docs/projects/sql-portfolio.html) |
+| Marketing portfolio | Main Quarto portfolio site | [marketing-portfolio.html](https://jakevns.github.io/IBM6500/M10/docs/projects/marketing-portfolio.html) |
+
+: Pages on the published website {.striped .hover}
+
+### Source files
+
+| File | Purpose | Link |
+|---|---|---|
+| `_quarto.yml` | Site structure, navigation, and theme | [View](https://github.com/jakevns/IBM6500/blob/main/M10/_quarto.yml) |
+| `styles.scss` | Custom styles | [View](https://github.com/jakevns/IBM6500/blob/main/M10/styles.scss) |
+| `index.qmd` | Home page | [View](https://github.com/jakevns/IBM6500/blob/main/M10/index.qmd) |
+| `dashboard.qmd` | Dashboard portal page | [View](https://github.com/jakevns/IBM6500/blob/main/M10/dashboard.qmd) |
+| `dashboard/efcu-dashboard.qmd` | Quarto dashboard | [View](https://github.com/jakevns/IBM6500/blob/main/M10/dashboard/efcu-dashboard.qmd) |
+| `dashboard/dashboard.scss` | Dashboard theme | [View](https://github.com/jakevns/IBM6500/blob/main/M10/dashboard/dashboard.scss) |
+| `data/` | Case 31 survey data | [View](https://github.com/jakevns/IBM6500/tree/main/M10/data) |
+| `styling.qmd` | CSS/SCSS page | [View](https://github.com/jakevns/IBM6500/blob/main/M10/styling.qmd) |
+| `listings.qmd` | Listings page | [View](https://github.com/jakevns/IBM6500/blob/main/M10/listings.qmd) |
+| `links.yml` | Items for the table listing | [View](https://github.com/jakevns/IBM6500/blob/main/M10/links.yml) |
+| `projects/` | Pages for the grid listing | [View](https://github.com/jakevns/IBM6500/tree/main/M10/projects) |
+| `docs/` | Rendered website served by GitHub Pages | [View](https://github.com/jakevns/IBM6500/tree/main/M10/docs) |
+
+: Files in the GitHub repository {.striped .hover}

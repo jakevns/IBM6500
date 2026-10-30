@@ -1,0 +1,9 @@
+---
+title: "Digital Marketing Portfolio"
+description: "My main Quarto portfolio site, hosted on GitHub Pages and tracked with GA4."
+categories: [Quarto, GA4, Web Design]
+---
+
+My main digital marketing portfolio, built with Quarto, hosted on GitHub Pages, and connected to its own GA4 property.
+
+[Visit the portfolio](https://jakevns.github.io/marketing/)
