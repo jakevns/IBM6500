@@ -1,0 +1,44 @@
+---
+title: "Class Notes for Week 06"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-expand: 1
+    toc-location: right-body
+    embed-resources: true
+    theme: cosmo
+execute:
+  freeze: auto
+---
+
+# Introduction
+
+The class started with professor reviewing how to properly take class notes.
+
+After the professor reviewed the presentation schedule .
+
+Professor explained whne is the best time to use each specific publication method for github.
+
+# survey Design and Data Collection
+
+Professor is starting the presentation by showing us various models.
+
+Marketing skills handbook that we have accesss to via cal poly pomona! definitely be sure to check it out.
+
+He is going through the book and showing us what we can do inside of it to make the most out of its modules. \
+\
+Professor is reviewing a groups survey plans.
+
+We should provide incentive to get people to want to do the survey whether that be discounts or something else. \
+\
+Professor emphasized when we should require answer vs skip logic
+
+# IRB Application
+
+Professor pulled up up the IRB application and has the link to the application on module.
+
+Professor is reviewing how the application works and what questions you want to answer a specific way (ie, if you are collaborating with other people, we are not)
+
+## 

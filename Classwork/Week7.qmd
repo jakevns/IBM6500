@@ -1,0 +1,65 @@
+---
+title: "Class Notes for Week 07"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-expand: 1
+    toc-location: right-body
+    embed-resources: true
+    theme: cosmo
+execute:
+  freeze: auto
+---
+
+# Class Overview
+
+- CEP assignments for survey data dont prior to Week 9.
+
+- CEP assignments for GA4 data prior to week 9.
+
+- Professor is reviewed podcasts that he likes to listen to while he drives to work.
+
+- Github Publicatin
+
+## CEP Project.
+
+Professor began class going over the CEP project and the required assignment in relations to the due dates and workload and emphasized if youre overwhelmed that you can email him and he will provide a one week extension.
+
+Professor reviewed how to properly set up the YAML.
+
+Professor is going over the data that we will need by week 13 and everything that we need to get approval so that we can move forward with the project. He provided a big picture of what to expect what to prioritize, and why he is giving us specific work. From week 7 to the rest of the semester.
+
+## AI usage
+
+Don't use AI to make your notes by the end of the class. he wants us to be using your own notes since this is our class and not AIs class. What I don't understand is why are people spending all of this money to go to school have AI take the classes.
+
+The professor is now going through the current usage of AI an when its okay to use ai and when it goes against the academic integrity.
+
+## Github Publishing
+
+There are maybe about 10-20% of students who still cant publish pages to GitHub.
+
+There are two ways to publish to github.
+
+1.  Pushing it from Rstudio/Positron. Its making an indexed HTML file that has a long folder name. Username.io/project/nameofhtmlfile.html
+
+2.  Its different because it will help us perserve the same file name so that when you are pubished you have to stype the entire file name. One benefit of this is in teh fiolder you can have multipel html pages.
+
+```         
+1.  Using Terminal
+2.  Using preview  + github repo settings.
+```
+
+sometimes index.html is simpler but sometimes its easier to do the other approach.
+
+right now we are \_quarto.html which is is sort of a third method that is even more advanced. Thats the best way tbh.
+
+## CEP Template
+
+Professor is reviewing the updates with the yellow box so we can look at the difference on the cep project template. Professor alread made the chapter 3 assignment and it will be due next week. The format is different than the original document because now we have survey data and secondary data and a ton of sections after.
+
+# CEP Meeting
+
+We had a cEP meeting prior to class where we gt admission tableau data.
