@@ -1,0 +1,65 @@
+---
+title: "Group Member Evaluation Form"
+subtitle: "IC09 – Group Member Evaluation (Confidential)"
+author: "Jake Evans"
+date: "2026-11-01"
+format:
+  html:
+    theme: cosmo
+    toc: false
+    embed-resources: true
+    page-layout: article
+---
+
+::: {.callout-important}
+## Confidential
+This evaluation was completed independently and in the absence of other group members.
+:::
+
+## Evaluator Information
+
+|                            |                                                                 |
+|:---------------------------|:----------------------------------------------------------------|
+| **Name**                   | Jake Evans                                                      |
+| **Date**                   | November 1, 2026                                                |
+| **Group Name / Project**   | Group 3 – Collins College Enrollment & Retention (Project P2)   |
+| **Evaluation Period**      | Week 01 through Proposal Presentation Day (October 22, 2026)    |
+
+## Instructions
+
+Please evaluate your group members (including you) from 1 to 100% scale. If you believe that a member equally contribute to the group project output submitted, give them 100%. If you believe that a member did not do his or her fair share, assign a percentage less than 100%. Evaluation will be confidential. If a person receives grades that are less than 100% from more than one person, the average of peer evaluation will be weighted to group grade to determine individual grade. Each student must evaluate his/her peers in the absence of the other members to guarantee confidentiality and accuracy. Group grade won't be assigned to you until you submit it. Further if you think there was a group leader who contributed to your group's success greatly above and beyond regular group members, please identify them below and make a comment. If there is a consensus, the MVP may receive up to 10% of the group's score on top of the group score.
+
+## Member Evaluation
+
+*MVP: check mark to only one person.*
+
+| #  | Member Name           | Grade (%) | MVP (yes / no) |
+|:--:|:----------------------|:---------:|:--------------:|
+| 1  | Jake Evans (self)     | 100%      | No             |
+| 2  | Nik Sahami            | 100%      | No             |
+| 3  | Aldo Naranjo          | 100%      | No             |
+| 4  | Ruben Garcia          | 100%      | No             |
+
+## Comments on Contributions
+
+*Briefly make comments on contributions of your teammates to the project. If you gave less than a perfect grade, please justify your evaluation below.*
+
+### 1. Jake Evans (self) — 100%
+
+I owned AO4, which looks at which digital channels and content themes generate prospective-student awareness and inquiry for the Collins College. I created the team's GitHub repository and Quarto website (Week 1), added the Cal Poly Pomona brand theme, set up the navbar and To-Do page, and maintained the site throughout the quarter. When a teammate's commit accidentally deleted four source files, I recovered them without rewriting history and moved them out of `docs/` so it would not happen again. I built the shared templates for Progress Reports 1 and 2 and the CEP Quarto reference document, wrote the shared 2.7 introduction, and owned Sections 2.4.3 (Key Competitors and Digital Strategies), 2.5.2 (Segment Analysis), and the Faculty-Lead Discussion Document for PR3. For AO4, I completed the PR1 evidence matrices (ten sources), the AO4 sections of PR2 through PR4, the AO4 Chapter 3 methods, measures, and data-collection sections, and the AO4 data requests and questions for Dr. Kwok. I also built the Chapter 1/2.7 presentation deck, the C&M table and questionnaire deck, and the CEP09 proposal presentation deck with speaker notes and a talk timer, along with a team study guide for the CEP09 presentation. I kept the To-Do board and the question list for Dr. Kwok up to date, contributed edits to the GA4 Analytics Blueprint and Tracking QA Log, and added my CITI certificate to the IRB package. I opened the CEP09 presentation and closing.
+
+### 2. Nik Sahami — 100%
+
+Nik owned AO2, which compares retention for 4-year (first-time freshman) and transfer students. He wrote the AO2 subsection of Chapter 1 and completed his AO2 Progress Report 1, and he wrote his AO2 parts of PR2, Chapter 2.7, PR3, and PR4. He co-authored Sections 2.1 (Client Background), 2.2 (Current Marketing Program), 2.4.1–2.4.2 (Industry Size and Outlook), and 2.5.1 (Segments) with Ruben. He set up the Qualtrics survey report page, added his changes to the survey document, and uploaded the Tableau dashboard data (retention, belonging, engagement, and learning-outcome exports) to the repo. He created the Milestone 2 Tracking QA Log, added a large share of its content, and finished his parts of the GA4 Analytics Blueprint. He wrote his Chapter 3 AO2 methods, made revisions to the shared beginning of Chapter 3, updated the IRB package with his CITI certificate, and finished his parts of the PR4 Faculty-Lead document. He also completed several prompts in the collaboration practice and Zotero assignments, made presentation edits and added speaker notes before CEP09, and presented his slides. He was consistently active in the repo and met every deadline.
+
+### 3. Aldo Naranjo — 100%
+
+Aldo owned AO3, which he revised from a course-performance focus into an application-to-enrollment funnel analysis, backing each change with citations. He wrote the AO3 subsection of Chapter 1, AO3 Progress Report 1, and the AO3 sections of PR2, Chapter 2.7, and PR3, and he corrected the O'Mahony findings across Chapter 1, PR2, and the slides. He also wrote Section 2.4.1 (Market Share of Each Major Player), built the GP05 construct and measurement table page, and added the section-ownership table that kept authorship clear. For the GA4 work, he added the stage definitions, survey rationale, and "Qualified Inquiry Rule," reframed the KPI tree around enrolled students as the north star, and added a "(not set)" troubleshooting table to Milestone 2. In Chapter 3 he wrote the AO3 methods plus the shared Data and Sampling, Data Wrangling, Sample Characteristics, and Measures sections. For PR4 he added the AO3 method-direction table and rationale and filled in the SWOT threats. He also restored IRB and progress-report files that a full site render had removed, updated the headcount (450) and sample target (208) across the deck and report so the numbers matched, added his CITI certificate, and presented the AO3 portion of CEP09. His work was careful and consistently well sourced.
+
+### 4. Ruben Garcia — 100%
+
+Ruben joined the group this quarter and owned AO1, which looks at belonging/happiness and retention among hospitality students. He wrote the AO1 subsection and PO detail in Chapter 1, Progress Report 1 for AO1, and the AO1 sections of PR2, Chapter 2.7, and Chapter 3. He co-authored Sections 2.1, 2.2, 2.4.1–2.4.2, and 2.5.1 with Nik, and he started the PR3 document. He created the template for the GA4 Analytics Blueprint and wrote its introduction and stakeholder questions. He took the lead on the IRB package: he added the Cayuse IRB links and screenshots, attached the supporting PDFs and forms, and added his CITI certificate. He created the PR4 template and filled it in, added his parts of the survey document, and, before CEP09, built the written-report file and revised the presentation deck. He also completed his prompts in the collaboration practice and Zotero bibliography assignments. One of his early commits accidentally deleted some site files, but that was a Quarto rendering issue rather than a lack of effort, and he adjusted his workflow afterward. He contributed fully and presented his AO1 slides.
+
+### MVP Nomination
+
+No MVP nominated. All four members did their fair share across every deliverable, each owned and defended one AO, and each presented their part of the CEP09 proposal.
