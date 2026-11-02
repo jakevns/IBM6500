@@ -1,0 +1,354 @@
+---
+title: "Class Notes for Week 10"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-expand: 1
+    toc-location: right-body
+    embed-resources: true
+    theme: cosmo
+execute:
+  freeze: auto
+---
+# Week 10: Overview
+
+## Today's Agenda
+
+- Guest speaker: Travis (PureSpectrum / Insights Association West)
+- Grade components and course adjustments
+- Proposed CEP course and curriculum changes
+- CEP task: faculty lead feedback and analytics method approval
+- Data analysis table (Case 31)
+- BigQuery and SQL
+- Data preparation and wrangling in R (Case 31)
+
+# Guest Speaker: Market Research and Insights Careers
+
+**Speaker:** Travis, SVP of Sales and Client Development at PureSpectrum; President of the Insights Association (IA) West chapter. About 20 years in market research (MR) and insights; started with a market research project at CSU Channel Islands.
+
+## Insights Association
+
+- National (North American) organization supporting the MR and insights industry.
+- Activities: papers, lobbying Congress (data collection and privacy), conferences, educational events.
+- **West chapter:** California, Oregon, Washington. Seven metro areas: San Diego, Orange County, Los Angeles, Ventura, San Francisco, Portland, Seattle.
+- Long collaboration with CPP (most recently the hackathon on AI problems in MR).
+- **Student membership is complimentary.**
+- Benefits: networking, internships, job leads, learning about the industry. Sometimes sponsors student travel to conferences.
+- Annual conference was in Las Vegas; moving to Dallas.
+- Upcoming:
+  - LA-area holiday event in December (may be 21+).
+  - Planned on-campus event at CPP next year.
+- Student signup on the IA website is currently unclear. Travis will follow up with details.
+- To do: connect with Travis on LinkedIn for membership info and introductions.
+
+## Career Paths in MR and Insights
+
+| Path | What it offers | Trade-offs |
+|---|---|---|
+| MR agency | Best starting point; training in survey writing, analysis, project management | Less direct exposure to C-suite stakeholders at first |
+| Brand / client side (e.g., Netflix, Hulu, YouTube) | Research directly for the business | Usually hires experienced researchers; harder stakeholder conversations |
+| Vendor / technology (e.g., PureSpectrum) | Lower barriers to entry; work with many agencies and brands; exposure to AI and synthetic data | Little core analytics research |
+| Entrepreneurial | Start your own agency or data collection company after ~7–10 years | Requires business knowledge and an established network |
+
+- Example agencies: JD Power, Escalant, Material (LA area).
+- Entertainment research is big in LA (MarketCast, NRG, Screen Engine), with end clients like Netflix and Hulu.
+- Other areas: political nonprofits, consumer goods.
+- MR skills transfer to client-facing roles such as account management and sales.
+
+## Useful Preparation
+
+- Courses: statistics, economics, business, math, reading/writing, problem solving, critical thinking, consumer behavior.
+- Follow current events, markets, and trends in anything you are interested in (there is MR happening on almost every topic).
+- MR follows a scientific process: problem → hypothesis → collect data → confirm or re-evaluate.
+- Expect heavy on-the-job training after school.
+
+## Advice for Students
+
+- Conduct real research: find a small business or community organization that could use a market research project.
+- Get an internship at an MR agency.
+- Join the Insights Association.
+- Practice with free survey tools (classmates, social media, personal-interest surveys) and practice the analysis.
+- Keep networking and asking for opportunities.
+- For the first job, look for an **in-person team** with experienced colleagues (first 2–3 years matter most). Be open to relocating.
+- PureSpectrum runs a paid summer intern cohort for graduating students and often hires them in the fall.
+
+## How Technology Is Changing MR
+
+**Data collection evolution:**
+
+- Mail surveys (with a $1 incentive) → online opt-in panels and communities.
+- Hand-dialed phones → automated dialing systems.
+- Restrictions on auto-dialing mobile phones → **mixed-mode sampling** (phone + online + mobile panels).
+- Political campaigns (starting with Obama) were early adopters of online polling and data.
+
+**Speed of a project (write → program → field → collect → analyze → report):**
+
+| Period | Time |
+|---|---|
+| ~5–6 years ago | 2–3 weeks |
+| Today | 2–3 days (sometimes 1–2) |
+| Industry goal | 2–3 hours |
+
+- Surveys written in Word can be auto-programmed; projects launch directly in a platform.
+- Templated surveys can be programmed in about 30 minutes.
+- AI agents (e.g., Claude via MCP) can launch projects and run analysis and reporting.
+- **A skilled researcher is still required:** define the sample, write the questionnaire, judge whether results make sense.
+
+**Synthetic data:**
+
+- Works for: quick in-the-moment sentiment, hard-to-reach niche audiences (e.g., weighting/extending ~50 completes from contractors or architects), and companies with large internal datasets (e.g., Comcast's engine inside Slack).
+- Does not work for: price points, recall, brand recognition, household information. It only knows what it has been trained on.
+- Can answer less than 1% of the surveys in PureSpectrum's marketplace.
+- Does not replace longitudinal studies or opinion/recall research.
+- Human data is still more cost-efficient at scale.
+- New opportunity: **training data products**. Buyers want bulk completes (e.g., 50,000/month at ~$0.75) instead of one-off studies (e.g., 1,000 completes at ~$2), with regular refreshes.
+- Panel companies will not be replaced in the short term (telephone interviewing still exists).
+- PureSpectrum is launching synthetic data in its marketplace; Travis has worked with Qualtrics on its synthetic offering.
+
+**AI-moderated interviews:**
+
+- AI agents recruit and conduct 15–20 minute conversational qualitative interviews.
+- Replaces the slow process of recruiting participants and scheduling a human moderator.
+
+## Q&A
+
+**Using a Spanish-language background in MR:**
+
+- Specialized Hispanic research agencies exist, many in Southern California.
+- Requires accounting for acculturation and different ways of asking questions.
+- Hard-to-reach groups (e.g., first-generation, recent arrivals) don't join online panels and must be recruited directly.
+- Demand for researchers who can support North American agencies working in Central America.
+- Get to know the vendors specializing in that recruitment.
+
+**Getting people to take surveys (small teams):**
+
+- Incentives can bias answers, raise costs, and attract fraud (much of it from overseas).
+- Know your audience and get as close to it as possible.
+- Go face to face, use referrals.
+- Open with a conversation instead of a yes/no request (e.g., "Are you enjoying your day shopping?"). Once people answer 2–3 questions, they tend to continue.
+- Response rates: cold request ~1–3%; engaged audience ~10–20%.
+
+# Course and Grade Adjustments
+
+## Feedback on Initial Presentations
+
+- Faculty lead feedback is being entered into the Canvas gradebook under the CEP 9 initial presentation assignment.
+
+## Class Notes Assignment
+
+- Week 10 notes assignment (10-1) is open; same instructions and same project folder.
+- Notes that miss significant topics get deductions.
+- Guest speaker content and today's course adjustments are part of the notes.
+
+## Excluded (Ungraded) Assignments
+
+Stepping-stone group assignments are moved to "Excluded" and set to zero weight. They remain available as guidelines and milestones.
+
+- CEP stepping stones: Chapter 1; revised Chapter 1 and literature review; C&M (constructs and measures) table; final revised questionnaire; proposed Chapter 3; IRB preparation and package submission (not needed if not using a survey).
+- Secondary data (GA4) assignments.
+- Reason: their quality is already evaluated through the written report. Excluding them raised grades for most groups.
+
+## What Is Still Graded
+
+- Final project presentation and written report.
+- If the final presentation improves significantly, it can stand in place of a weak initial presentation grade.
+- Chapter 3 must cover the data, variables, method, and how the data was verified.
+- Link to the data goes in the report appendix.
+- Remaining items: literature data setup (Zotero), initial proposal presentation (CEP 9), group peer evaluation, data preparation, final presentation (not set up yet).
+- Data preparation may be removed later since it is assessed in Chapter 3.
+
+## CEP Goal for This Semester
+
+- **Data collection is the goal:** get IRB approval and collect the data.
+- Groups not using surveys: group-data assignments will likely be waived. Focus on the individual Case 31 assignments and apply the techniques once group data is ready.
+- Remaining five weeks focus on the course's core topics: data preparation and analysis.
+
+## Canvas Modules
+
+- Color-coded into three types: IBM 6500 modules, CEP modules, secondary data (GA4/BigQuery) modules.
+
+Need to confirm: students cannot see the "Excluded" assignments group in Canvas. Ask for the full list of excluded assignments.
+
+# Proposed CEP Course and Curriculum Changes
+
+To be proposed at the MSDM committee meeting next week:
+
+- New **3-unit course in the fall** dedicated to CEP advising (writing, presentations, project management, working with faculty leads and clients, getting access to client systems such as websites, CRM, and GA4).
+- Current dedicated CEP courses: IBM 6800 (2 units, advising) and IBM 6915 (summer). None in the fall.
+- Fall matters most: without data secured in the fall, the rest of the project suffers.
+- Comparison: another CPP program dedicates 7 units to CEP (2 fall, 3 spring, 2 summer).
+- Adding 3 units would raise graduation credits from 34 to 37 (~$2,500 more tuition at $825/unit). To keep cost the same, a required course would become an elective (possibly IBM 6010, Digital Marketing).
+- Possible restructuring into three emphases: **Content and Creative**, **Technical and Performance**, **Data and Analytics**.
+- Would not take effect for the current class.
+
+# CEP Task: Faculty Lead Feedback and Analytics Method
+
+**Due:** Wednesday, November 4 (meet with the faculty lead before next class).
+
+## Steps
+
+1. Find the faculty lead's feedback in the CEP 9 initial presentation assignment.
+2. Discuss with the group and list each feedback point and the tasks needed to address it.
+3. Assign a team member's name to every task.
+4. Email the faculty lead: thank them, summarize the feedback, and explain the plan. If you disagree, ask for clarification or request a meeting.
+5. Revisit the Chapter 3 module on analytics methods.
+6. Get two statements from the faculty lead:
+   - Approval of the analytics objectives (AOs) and that they lead to the project objectives.
+   - Approval of the method for addressing each AO.
+7. Submit the task list and both statements.
+
+## "Analytics Method to Employ" Section (Chapter 3)
+
+Only about 10% of groups wrote this section correctly. It needs three parts:
+
+1. **Method:** which analysis method will be used.
+2. **Justification:** why this method instead of alternatives.
+3. **Variables:** independent, dependent, and control variables for the method.
+
+- The original in-class proposal-deficiency activity is canceled (one less assignment).
+
+# Data Analysis Table (Case 31)
+
+- Individual assignment: fill out a data analysis table for Case 31.
+- Submitting it unlocks the answer key in the next item (prerequisite requirement). Use the key to check understanding, then apply it to the group project.
+- Works for any data type: survey, GA4, or CRM.
+
+## Table Structure
+
+- **Rows:** each analytics objective (AO1, AO2, ...) and its research questions or hypotheses (from Chapter 2, section 2.7).
+- **Columns:** constructs, type of analysis, operationalization (which question measured it), scale type, statistical technique.
+
+**Example row (AO1):**
+
+| Construct | Analysis | Measure | Scale | Technique |
+|---|---|---|---|---|
+| Reasons to join the credit union | Descriptive (one variable) | Q7 | Interval | Descriptive statistics + one-sample t-test (e.g., mean > 3 on a 1–5 scale) |
+
+- Multiple RQs/hypotheses per AO break down a complex AO into manageable parts.
+- If an AO is simple (few variables), one row for the AO is enough.
+
+## Scale Type Determines the Test
+
+- Four scale types: **nominal, ordinal, interval, ratio.**
+- The available statistical tests depend on the scale type (e.g., interval allows means).
+
+## Data Analysis Table vs. C&M Table
+
+| | C&M table | Data analysis table |
+|---|---|---|
+| One row per | Construct | Hypothesis / RQ |
+| Focus | How each construct is operationalized and measured | How each hypothesis is tested |
+| Repeats | One construct can map to several hypotheses | Each hypothesis appears once |
+
+- A completed C&M table example is at the bottom of the measurement module (module 6 or 7).
+
+# BigQuery and SQL (10-3)
+
+## Concepts
+
+- **BigQuery:** Google's cloud data warehouse, part of Google Cloud Platform (GCP). A GCP account gives access to BigQuery.
+- GA4 data (or uploaded data) is moved into BigQuery and queried with SQL.
+- Practice uses Google's sample GA4 dataset.
+
+## Resources
+
+- Google Analytics Academy video on Skillshop (GA4 and BigQuery intro).
+- YouTube "GA4 + BigQuery tutorial for beginners" (~30 min).
+- Professor's lecture code (assumes the GA4 sample data).
+- Clone folders in the module with sample data.
+
+## SQL Basics
+
+- `SELECT` columns (e.g., `event_date`, `event_name`), `FROM` the table, `LIMIT` rows.
+- GA4 exports one events table per day; `events_*` (wildcard) queries across dates.
+- Use `LIMIT` (e.g., 20 rows) to keep results manageable and reduce query cost.
+- Other clauses: `ORDER BY`, `COUNT`, `SUM`, `AVG`, `MIN`/`MAX`, `GROUP BY`, `HAVING`, filters, wildcard tables.
+- Similar logic to dplyr/tidyverse in R.
+
+## Cost
+
+- 90-day free trial with $300 credit.
+- Class usage will not make a dent in the credit.
+- Google does not charge automatically after the trial unless you upgrade.
+
+## Assignment
+
+- Run the lecture code in BigQuery.
+- Take screenshots of the code entered and the output, and report the output.
+
+## Also in Module 10
+
+- Data Science Hangout video on interoperability: how data science team members using different programming languages work together, and the tools and approaches they use.
+- Spring 2027 on-campus event: fill out the one-page interest form shared in class.
+
+# Data Preparation and Wrangling (10-2, Case 31)
+
+## Key Points
+
+- Data preparation can start with **partial data**. With code-based preparation, write the code on early responses and rerun it when the full data arrives.
+- Wrangling is needed to finish Chapter 3, e.g., **sample characteristics**:
+  - Survey data: demographics (income, age, gender, ethnicity, occupation).
+  - GA4 data: date range of the data, number of events.
+- Survey data: read SPSS files with **haven**, check quality, fix missing values and labels.
+- Secondary data: no variable or value labels to handle; otherwise the same process.
+- Instructions updated from SPSS-based to R-based.
+- Group data preparation assignment: deadline Nov 1 is flexible; aim to finish by week 14 (before week 15 presentations).
+
+## Setup
+
+- Clone the professor's Case 31 GitHub repo: copy the repo URL → RStudio → New Project → Version Control → Git → paste URL → choose folder location.
+- Repo includes three QMD files: data preparation (today), a second data prep file, and presentation slides.
+- Case 31 files (credit union survey) are also in Canvas, week 6 or 7.
+- Packages: `tidyverse`, `haven`, `labelled`. `sjlabelled` overlaps with `labelled` and is optional.
+
+## Steps
+
+**1. Import and inspect SPSS data**
+
+- Read the `.sav` file with `haven::read_sav()`.
+- Case 31: 128 rows × 34 columns. Variables Q3–Q38, plus two with odd names (likely renamed by a past student).
+
+**2. Count missing values**
+
+```r
+df |>
+  summarise(across(everything(), ~ sum(is.na(.)))) |>
+  pivot_longer(everything(), names_to = "variable", values_to = "n_missing") |>
+  filter(n_missing > 0) |>
+  arrange(desc(n_missing))
+```
+
+- `is.na()` returns TRUE/FALSE; summing counts TRUE as 1.
+- Case 31: only two variables have missing values (10 and 21).
+- `summary()` works but doesn't show missing counts the same way.
+
+Need to confirm: the single function the professor couldn't recall that gives descriptive statistics plus missing counts for all variables (possibly `skimr::skim()`).
+
+**3. Create a data dictionary**
+
+- Easy way: `sjPlot::view_df(df)` (needs sjPlot loaded).
+- Or the more detailed approach in the QMD.
+- Check distinct values per variable and value labels (e.g., 1 = Strongly disagree).
+
+**4. Improve the metadata**
+
+- The SPSS file is missing some value labels.
+- Use the coding instructions on the last page of the Case 31 survey PDF to fill the gaps (e.g., what 5 = "Never" means).
+- Metadata types:
+  - **Variable label:** longer description of what the variable means (`var_label()`).
+  - **Value labels:** what each numeric code means (`val_labels()`).
+- Use short but meaningful variable names (e.g., `ATT` for attitude, `BI` for behavioral intention) instead of Q numbers.
+- Check labels on a variable (e.g., Q7) and fix missing ones.
+
+**5. Create an analysis copy**
+
+- Keep a labeled copy with all metadata.
+- Create a separate analysis copy: select only the needed variables and drop what isn't needed.
+- Not finished in class; continue next week.
+
+## Answer Formatting
+
+- Put answers in the "Answer" sections of the QMD.
+- Make answers stand out (e.g., bold) and support them with code.

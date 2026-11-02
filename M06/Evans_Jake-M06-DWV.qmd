@@ -1,0 +1,496 @@
+---
+title: "M06: Data Wrangling and Visualization for MSDM Culminating Experience Project"
+subtitle: "CEP Group 3 · Collins College of Hospitality Management · AO4"
+author: "Jake Evans"
+date: '`r format(Sys.time())`'
+format:
+  html:
+    toc: true
+    toc-depth: 4
+    number-sections: true
+    code-line-numbers: true
+    code-fold: false
+    code-link: true
+    embed-resources: true
+editor: visual
+execute:
+  freeze: auto
+  warning: false
+  error: true
+---
+
+# Overview {.unnumbered}
+
+**Analytics Objective 4 (AO4):** Identify which digital channels and content themes best drive awareness and inquiry among prospective students for the Collins College of Hospitality Management.
+
+Inquiry is AO4's primary data. It comes from GA4, platform analytics, and the IRB-approved survey, and none of that exists until the campaign runs in Fall 2026–Spring 2027. The college has provided its **admissions funnel data** (applications → admits → deposits → enrollment) as AO4's secondary data. This document wrangles that funnel data and explores it with descriptive analytics. The goal is to find *where* prospective students are lost and *which segments* convert, so the campaign knows where to aim before any inquiry data come in.
+
+::: callout-important
+## Data privacy
+
+The applicant file contains names, Bronco IDs, and application numbers. Per the Group 3 data README, raw data stay in the team's OneDrive folder and are never committed to GitHub. The `data/` folder is git-ignored. Identifying columns are dropped right after import, and only aggregated results appear in this report.
+:::
+
+# Setup
+
+```{r}
+#| label: setup
+library(tidyverse)   # import, tidy, transform, visualize
+library(kableExtra)  # tables
+library(scales)      # percent / comma formatting
+
+# CPP brand colors
+cpp_green <- "#1E4D2B"
+cpp_gold  <- "#FFB500"
+cpp_grey  <- "#8C8C8C"
+
+theme_set(theme_minimal(base_size = 12) +
+            theme(plot.title.position = "plot",
+                  plot.title = element_text(face = "bold"),
+                  panel.grid.minor = element_blank()))
+```
+
+# Execution of the Data Wrangling and Visualization Plan
+
+## Data Collection
+
+All files were exported by the college from CPP's Tableau dashboards (Office of Institutional Research) and the admissions system.
+
+```{r}
+#| label: tbl-sources
+#| tbl-cap: "Data sources used for AO4"
+sources <- tribble(
+  ~File,                                 ~Level,       ~`What it contains`,                                        ~`Role for AO4`,
+  "Applicant Detail.csv",                "Applicant",  "First-time applicants, Fall 2026/2027: funnel flags, tier, HS GPA, EOP, decision", "Primary EDA file: who converts",
+  "admissions summary by Acad Grp.csv",  "Aggregate",  "Apps, admits, deposits, enrolled by admit term (all student types)",               "Funnel by term; FTF vs. non-FTF",
+  "Yearly enrollment by Term.csv",       "Aggregate",  "Headcount / FTES / units by term, 2016-17 to 2026-27",                          "Context: enrollment trend",
+  "Yearly enrollment Graph.csv",         "Aggregate",  "Dashboard's yearly average headcount and FTES",                                  "Check of dashboard averages"
+)
+kbl(sources) |> kable_styling(bootstrap_options = c("striped", "condensed"), full_width = TRUE)
+```
+
+The other files in the group folder (retention cohorts, equity gaps, the alumni survey dashboards) belong to the retention-focused AOs and aren't used here.
+
+## Import
+
+The IR exports are labeled `.csv`, but they are actually **UTF-16, tab-separated** files with commas and `%` signs stored as text. `read_csv()` returns garbage on them, so I wrote one helper to read them all the same way.
+
+```{r}
+#| label: import
+read_ir <- function(file) {
+  read_tsv(file.path("data", file),
+           locale = locale(encoding = "UTF-16LE"),
+           col_types = cols(.default = col_character()),
+           na = c("", " ", "NA"),
+           show_col_types = FALSE)
+}
+
+applicants_raw <- read_ir("Applicant Detail.csv")
+adm_summary_raw <- read_ir("admissions summary by Acad Grp.csv")
+enroll_term_raw <- read_ir("Yearly enrollment by Term.csv")
+enroll_graph_raw <- read_ir("Yearly enrollment Graph.csv")
+
+dim(applicants_raw)
+```
+
+The applicant file has `r nrow(applicants_raw)` rows (one per application) and `r ncol(applicants_raw)` columns.
+
+## Tidy {#sec-tidy}
+
+### Applicant file: drop identifiers, clean names, fix types
+
+```{r}
+#| label: tidy-applicants
+pii_cols <- c("Bronco ID", "Last Name", "First Name", "Middle Name",
+              "Application No", "Cal State Apply ID")
+
+clean_names <- function(x) {
+  x |> str_to_lower() |> str_replace_all("[^a-z0-9]+", "_") |> str_remove_all("^_|_$")
+}
+
+applicants <- applicants_raw |>
+  select(-any_of(pii_cols), -starts_with("...")) |>   # drop PII + blank trailing column
+  rename_with(clean_names) |>
+  mutate(
+    across(c(apps, admits, ec_deposit, enrolled, hs_math_course_count), as.integer),
+    across(c(hs_gpa, hs_math_gpa), as.numeric),
+    hs_gpa      = na_if(hs_gpa, 0),                     # GPA of 0 = not reported
+    action_date = mdy(action_date),
+    eop_interest = if_else(eop_interest_n == "Y", "EOP interest", "No EOP interest", missing = "No EOP interest")
+  )
+
+# Confirm no identifiers remain
+intersect(clean_names(pii_cols), names(applicants))
+```
+
+### Aggregate files: wide → long, text → numbers
+
+The dashboard tables put years in columns. I pivot them so each row is one term/year and one measure.
+
+```{r}
+#| label: tidy-aggregates
+adm_summary <- adm_summary_raw |>
+  rename_with(clean_names) |>
+  mutate(across(apps:enrolled, parse_number))
+
+enroll_term <- enroll_term_raw |>
+  rename(term = 1, measure = 2) |>
+  pivot_longer(-c(term, measure), names_to = "year", values_to = "value") |>
+  mutate(value = parse_number(value),
+         term  = str_to_title(term)) |>
+  filter(!is.na(value))
+
+enroll_graph <- enroll_graph_raw |>
+  rename(measure = 1) |>
+  pivot_longer(-measure, names_to = "year", values_to = "value") |>
+  mutate(value = parse_number(value))
+
+head(enroll_term)
+```
+
+### Data checks
+
+```{r}
+#| label: checks
+# 1. Funnel flags should only ever narrow
+applicants |> summarise(admit_without_app   = sum(admits > apps),
+                        deposit_without_admit = sum(ec_deposit > admits),
+                        enroll_without_deposit = sum(enrolled > ec_deposit))
+
+# 2. Fall 2027 is still open, so keep only the completed Fall 2026 cycle
+count(applicants, admit_term)
+
+# 3. Does the applicant file match the admissions summary?
+applicants |> filter(admit_term == "F 2026") |> count(student_type)
+adm_summary |> filter(admit_term == "F 2026")
+```
+
+Three things came out of the checks:
+
+1.  The funnel flags are consistent: nobody is admitted without applying, deposits without an admit, or enrolls without a deposit.
+2.  Fall 2027 has only `r sum(applicants$admit_term == "F 2027")` applications so far, all still pending. Only the **completed Fall 2026 cycle** is analyzed.
+3.  The applicant file is **first-time freshmen only** (`r sum(applicants$admit_term == "F 2026")` apps). The admissions summary covers all student types (`r adm_summary$apps[adm_summary$admit_term == "F 2026"]` apps). Subtracting one from the other gives the non-first-time group, which is mostly transfers.
+
+## Transform
+
+```{r}
+#| label: transform
+f26 <- applicants |>
+  filter(admit_term == "F 2026") |>
+  mutate(
+    tier = recode(tier,
+                  "T1-Local"        = "Local",
+                  "T2-California"   = "Other California",
+                  "T3-Out of state" = "Out of state",
+                  "T4-Non-US"       = "International") |>
+      factor(levels = c("Local", "Other California", "Out of state", "International")),
+    gpa_band = cut(hs_gpa, breaks = c(0, 3.0, 3.5, 3.9, 5),
+                   labels = c("Under 3.00", "3.00–3.49", "3.50–3.89", "3.90+"),
+                   right = FALSE),
+    lost_reason = case_when(
+      enrolled == 1                                        ~ "Enrolled",
+      admit_decision == "Deny"                             ~ "Denied",
+      admit_decision == "Administrative Withdrawal"        ~ "Admitted, never committed",
+      admit_decision == "Applicant Withdrawal"             ~ "Admitted, declined",
+      TRUE                                                 ~ "Other"
+    )
+  )
+
+# Reusable funnel summary: counts + stage-to-stage conversion
+funnel_by <- function(data, ...) {
+  data |>
+    group_by(...) |>
+    summarise(apps = sum(apps), admits = sum(admits),
+              deposits = sum(ec_deposit), enrolled = sum(enrolled), .groups = "drop") |>
+    mutate(admit_rate   = admits / apps,
+           deposit_rate = deposits / admits,    # yield on admits
+           melt_rate    = 1 - enrolled / deposits,
+           app_to_enroll = enrolled / apps)
+}
+
+# FTF vs. non-FTF (derived from the two files)
+ftf <- funnel_by(f26) |> mutate(group = "First-time freshmen")
+all_f26 <- adm_summary |> filter(admit_term == "F 2026")
+non_ftf <- tibble(group = "Non-first-time (mostly transfer)",
+                  apps = all_f26$apps - ftf$apps, admits = all_f26$admits - ftf$admits,
+                  deposits = all_f26$ec_deposit - ftf$deposits, enrolled = all_f26$enrolled - ftf$enrolled) |>
+  mutate(admit_rate = admits / apps, deposit_rate = deposits / admits,
+         melt_rate = 1 - enrolled / deposits, app_to_enroll = enrolled / apps)
+by_type <- bind_rows(ftf, non_ftf) |> relocate(group)
+```
+
+# Exploratory Data Analysis
+
+## Analytics Objective #4: Digital channels and content themes that drive inquiry
+
+### Descriptive Analytics and Results
+
+#### Context: the college is about 60% smaller than ten years ago
+
+```{r}
+#| label: fig-enroll
+#| fig-cap: "Fall headcount, Collins College of Hospitality Management"
+#| fig-width: 9
+#| fig-height: 4
+fall <- enroll_term |> filter(term == "Fall", measure == "Headcount")
+
+ggplot(fall, aes(year, value, group = 1)) +
+  geom_line(color = cpp_green, linewidth = 1.2) +
+  geom_point(color = cpp_green, size = 2.5) +
+  geom_text(aes(label = comma(value)), vjust = -1, size = 3.3) +
+  scale_y_continuous(limits = c(0, 1300), labels = comma) +
+  labs(x = NULL, y = "Fall headcount",
+       title = "Fall headcount fell from 1,178 to about 450, then leveled off")
+```
+
+```{r}
+#| label: tbl-avg-artifact
+#| tbl-cap: "Why the dashboard shows 2026-27 at 239.5"
+enroll_graph |>
+  filter(year %in% c("2025-26", "2026-27"), str_detect(measure, "Headcount")) |>
+  select(year, dashboard_avg = value) |>
+  left_join(enroll_term |> filter(measure == "Headcount") |>
+              group_by(year) |>
+              summarise(terms_reported = paste(term, collapse = " + "),
+                        fall_headcount = value[term == "Fall"]),
+            by = "year") |>
+  kbl(col.names = c("Year", "Dashboard avg. headcount", "Terms in average", "Fall headcount")) |>
+  kable_styling(bootstrap_options = c("striped", "condensed"), full_width = FALSE)
+```
+
+::: callout-note
+## Insight
+
+The yearly dashboard shows headcount collapsing to 239.5 in 2026-27. That drop isn't real. The dashboard averages across the terms reported so far, and 2026-27 only has Summer (29) and Fall (450). Fall-to-Fall, headcount is flat (459 → 450). Decline is still the main story, though. Fall headcount fell about 62% from 2016-17 to 2026-27, which is the reason the college wants a campaign at all. (2016-17 and 2017-18 also include Winter terms, from before CPP's 2018 move to semesters, so those yearly averages aren't directly comparable.)
+:::
+
+#### The funnel: where prospective students are lost
+
+```{r}
+#| label: fig-funnel
+#| fig-cap: "Fall 2026 admissions funnel, all student types"
+#| fig-width: 8
+#| fig-height: 3.5
+all_f26 |>
+  select(Applications = apps, Admits = admits, Deposits = ec_deposit, Enrolled = enrolled) |>
+  pivot_longer(everything(), names_to = "stage", values_to = "n") |>
+  mutate(stage = fct_rev(fct_inorder(stage)),
+         pct_of_apps = n / max(n)) |>
+  ggplot(aes(n, stage)) +
+  geom_col(fill = c(cpp_gold, cpp_green, cpp_green, cpp_green), width = 0.65) +
+  geom_text(aes(label = paste0(n, "  (", percent(pct_of_apps, 1), ")")), hjust = -0.1, size = 3.6) +
+  scale_x_continuous(limits = c(0, 470)) +
+  labs(x = "Students", y = NULL,
+       title = "Most applicants get admitted. The drop happens after the admit.")
+```
+
+```{r}
+#| label: tbl-type
+#| tbl-cap: "Fall 2026 funnel: first-time freshmen vs. non-first-time students"
+by_type |>
+  mutate(across(admit_rate:app_to_enroll, \(x) percent(x, 0.1))) |>
+  kbl(col.names = c("Group", "Apps", "Admits", "Deposits", "Enrolled",
+                    "Admit rate", "Deposit rate (of admits)", "Melt (deposit, no enroll)", "Apps to enrolled")) |>
+  kable_styling(bootstrap_options = c("striped", "condensed")) |>
+  column_spec(7, bold = TRUE, color = cpp_green)
+```
+
+```{r}
+#| label: chisq-type
+type_test <- chisq.test(matrix(c(ftf$deposits, ftf$admits - ftf$deposits,
+                                 non_ftf$deposits, non_ftf$admits - non_ftf$deposits),
+                               nrow = 2, byrow = TRUE))
+type_test
+```
+
+::: callout-note
+## Insight
+
+The college admits `r percent(all_f26$admits / all_f26$apps, 1)` of applicants, so getting in isn't what's holding enrollment back. The biggest loss happens between **admit and deposit**. Only `r percent(ftf$deposit_rate, 1)` of admitted first-time freshmen put down a deposit, compared with `r percent(non_ftf$deposit_rate, 1)` of admitted non-first-time students. That difference is statistically significant (χ² = `r round(type_test$statistic, 1)`, p `r ifelse(type_test$p.value < .001, "< .001", paste("=", round(type_test$p.value, 3)))`). Once students deposit, most of them show up: FTF melt is `r percent(ftf$melt_rate, 1)`.
+:::
+
+#### Which first-time freshmen convert? Funnel by residency tier
+
+```{r}
+#| label: tbl-tier
+#| tbl-cap: "Fall 2026 first-time freshman funnel by residency tier"
+tier_funnel <- funnel_by(f26, tier)
+
+tier_funnel |>
+  mutate(across(admit_rate:app_to_enroll, \(x) percent(x, 0.1))) |>
+  kbl(col.names = c("Tier", "Apps", "Admits", "Deposits", "Enrolled",
+                    "Admit rate", "Deposit rate (of admits)", "Melt", "Apps to enrolled")) |>
+  kable_styling(bootstrap_options = c("striped", "condensed")) |>
+  column_spec(7, bold = TRUE, color = cpp_green) |>
+  footnote(general = "Out-of-state and international groups are small (n < 15); read their rates with caution.")
+```
+
+```{r}
+#| label: fig-tier
+#| fig-cap: "Deposit rate among admitted first-time freshmen, by tier"
+#| fig-width: 8
+#| fig-height: 3.5
+ggplot(tier_funnel, aes(deposit_rate, fct_rev(tier))) +
+  geom_col(aes(fill = tier == "Local"), width = 0.6, show.legend = FALSE) +
+  geom_text(aes(label = paste0(percent(deposit_rate, 1), "  (", deposits, " of ", admits, ")")),
+            hjust = -0.1, size = 3.6) +
+  scale_fill_manual(values = c(`TRUE` = cpp_gold, `FALSE` = cpp_green)) +
+  scale_x_continuous(labels = percent, limits = c(0, 0.85)) +
+  labs(x = "Deposit rate (deposits ÷ admits)", y = NULL,
+       title = "Local admits deposit at more than twice the rate of other California admits")
+```
+
+```{r}
+#| label: chisq-tier
+local_vs_ca <- f26 |>
+  filter(admits == 1, tier %in% c("Local", "Other California")) |>
+  mutate(tier = droplevels(tier))
+tier_test <- chisq.test(table(local_vs_ca$tier, local_vs_ca$ec_deposit))
+tier_test
+```
+
+::: callout-note
+## Insight
+
+Other California applicants make up `r percent(tier_funnel$apps[tier_funnel$tier == "Other California"] / sum(tier_funnel$apps), 1)` of first-time applications, but only `r percent(tier_funnel$deposit_rate[tier_funnel$tier == "Other California"], 1)` of those admitted deposit. Local admits deposit at `r percent(tier_funnel$deposit_rate[tier_funnel$tier == "Local"], 1)` (χ² = `r round(tier_test$statistic, 1)`, p `r ifelse(tier_test$p.value < .001, "< .001", paste("=", round(tier_test$p.value, 3)))`). Like the lecture's transfer-student example, this is a gap that holds up statistically. Students farther from campus are getting admitted but aren't choosing Collins.
+:::
+
+#### Does academic preparation explain it? Funnel by HS GPA
+
+```{r}
+#| label: fig-gpa
+#| fig-cap: "Deposit rate among admitted first-time freshmen, by HS GPA band"
+#| fig-width: 8
+#| fig-height: 3.5
+gpa_funnel <- f26 |> filter(!is.na(gpa_band)) |> funnel_by(gpa_band)
+
+ggplot(gpa_funnel, aes(gpa_band, deposit_rate)) +
+  geom_col(fill = cpp_green, width = 0.6) +
+  geom_text(aes(label = paste0(percent(deposit_rate, 1), "\n(", deposits, " of ", admits, ")")),
+            vjust = -0.3, size = 3.4) +
+  scale_y_continuous(labels = percent, limits = c(0, 0.6)) +
+  labs(x = "High school GPA", y = "Deposit rate",
+       title = "Deposit rates are similar across GPA bands")
+```
+
+```{r}
+#| label: chisq-gpa
+gpa_test <- f26 |> filter(admits == 1, !is.na(gpa_band)) |>
+  with(chisq.test(table(gpa_band, ec_deposit), simulate.p.value = TRUE, B = 10000))
+gpa_test
+```
+
+::: callout-note
+## Insight
+
+Deposit rates range from about 27% to 42% across GPA bands, with no steady pattern, and the differences aren't statistically significant (p `r ifelse(gpa_test$p.value < .001, "< .001", paste("=", round(gpa_test$p.value, 3)))`). Academic preparation doesn't explain the low yield. Distance from campus (residency tier) does, so the campaign should segment by location, not by academic profile.
+:::
+
+#### Why admitted students are lost, and when
+
+```{r}
+#| label: fig-lost
+#| fig-cap: "Outcome of every Fall 2026 first-time application"
+#| fig-width: 8
+#| fig-height: 3.5
+f26 |>
+  count(lost_reason) |>
+  mutate(lost_reason = fct_reorder(lost_reason, n), pct = n / sum(n)) |>
+  ggplot(aes(n, lost_reason)) +
+  geom_col(aes(fill = lost_reason == "Admitted, never committed"), width = 0.6, show.legend = FALSE) +
+  geom_text(aes(label = paste0(n, " (", percent(pct, 1), ")")), hjust = -0.1, size = 3.6) +
+  scale_fill_manual(values = c(`TRUE` = cpp_gold, `FALSE` = cpp_green)) +
+  scale_x_continuous(limits = c(0, 175)) +
+  labs(x = "Applications", y = NULL,
+       title = "More than half of applicants were admitted and simply never committed")
+```
+
+```{r}
+#| label: tbl-timing
+#| tbl-cap: "Month of final admissions action, Fall 2026 first-time applicants"
+f26 |>
+  mutate(month = month(action_date, label = TRUE)) |>
+  count(month, lost_reason) |>
+  pivot_wider(names_from = lost_reason, values_from = n, values_fill = 0) |>
+  select(Month = month, any_of(c("Denied", "Admitted, declined", "Admitted, never committed", "Enrolled", "Other"))) |>
+  kbl() |>
+  kable_styling(bootstrap_options = c("striped", "condensed"), full_width = FALSE)
+```
+
+::: callout-note
+## Insight
+
+`r sum(f26$lost_reason == "Admitted, never committed")` of `r nrow(f26)` first-time applicants (`r percent(mean(f26$lost_reason == "Admitted, never committed"), 1)`) were admitted and then administratively withdrawn. Almost all of those withdrawals were processed in **May**, which lines up with the May 1 commitment deadline. These students didn't turn Collins down. They just never acted on the offer. Only `r sum(f26$lost_reason == "Admitted, declined")` actively declined.
+:::
+
+#### Is there a feeder school to target?
+
+```{r}
+#| label: tbl-feeder
+#| tbl-cap: "Concentration of first-time applicants by high school"
+f26 |>
+  count(source_institution, name = "apps_from_school") |>
+  summarise(`High schools represented` = n(),
+            `Schools sending 1 applicant` = sum(apps_from_school == 1),
+            `Largest single-school count` = max(apps_from_school),
+            `Share from schools with 3+ applicants` = percent(sum(apps_from_school[apps_from_school >= 3]) / sum(apps_from_school), 1)) |>
+  pivot_longer(everything(), names_to = "Measure", values_to = "Value", values_transform = as.character) |>
+  kbl() |>
+  kable_styling(bootstrap_options = c("striped", "condensed"), full_width = FALSE)
+```
+
+::: callout-note
+## Insight
+
+Applicants come from a very long tail of high schools. No school sends more than a handful, and most send one. School visits alone can't reach this audience, which supports AO4's premise that broad digital channels are the realistic way to build awareness. (School names are left out on purpose, because counts this small could identify individual applicants.)
+:::
+
+### Summary of Insights and Recommendations for AO4
+
+```{r}
+#| label: tbl-summary
+#| tbl-cap: "AO4 descriptive findings, insights, and recommendations"
+tribble(
+  ~`Descriptive statistic`, ~Insight, ~Recommendation,
+  "Funnel counts and conversion rates (Fall 2026)",
+  "Admission isn't the bottleneck; the admit-to-deposit step is.",
+  "Treat admitted students as a main audience for AO4 content (yield campaign), not just prospects at the top of the funnel.",
+  "Deposit rate by student type, χ² test",
+  "First-time freshmen deposit at about half the rate of non-first-time students.",
+  "Prioritize first-time freshmen and the parents who influence them; test content on student life, outcomes, and the hospitality industry.",
+  "Deposit rate by residency tier, χ² test",
+  "Local admits convert; other California admits mostly don't.",
+  "Use geo-targeted paid social for California admits outside the local area, with content that answers 'why travel to Pomona for Collins?'",
+  "Deposit rate by HS GPA band, χ² test",
+  "No significant GPA pattern; location matters more than academic profile.",
+  "Segment campaign audiences by geography rather than academic profile.",
+  "Outcome counts and month of action",
+  "Most losses are silent non-commitments processed in May.",
+  "Front-load AO4 content in March–April, before May 1, and tag each post with UTMs so inquiry and commitment can be linked back to the post."
+) |>
+  kbl() |>
+  kable_styling(bootstrap_options = c("striped"), full_width = TRUE) |>
+  column_spec(1, width = "22%") |>
+  column_spec(3, color = cpp_green)
+```
+
+These results set the baseline. Once the campaign's GA4 and platform data come in, the same funnel tables can be rebuilt for the post-campaign cycle and compared against Fall 2026. Inquiry by channel and content theme will be the primary outcome, analyzed in GP09.
+
+# Check-points
+
+| Check-point | How this document addresses it |
+|----|----|
+| Data wrangling done correctly and adequately? | UTF-16 import, PII removal, type fixes, GPA 0 → missing, wide → long pivots, funnel consistency checks, cross-file reconciliation (@sec-tidy). |
+| Enough visualization with descriptive analytics? | Enrollment trend, overall funnel, and conversion by student type, tier, GPA, outcome, and timing (charts and tables). |
+| Insights generated with respect to the AO? | Each analysis ends with an insight callout; the summary table maps statistic → insight → recommendation. |
+| Business knowledge applied? | Caught the dashboard averaging artifact and the quarter-to-semester change; read deposit behavior through distance from campus and the May 1 deadline; limited the analysis to completed cycles; withheld small-count school names. |
+
+# Appendix {.unnumbered}
+
+- GitHub folder: <https://github.com/jakevns/IBM6500/tree/main/M06>
+- CEP Group 3 site: <https://jakevns.github.io/cep-group3-collins-enrollment-retention/>
+
+```{r}
+#| label: session
+sessionInfo()
+```
