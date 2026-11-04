@@ -620,6 +620,6 @@ data |>
 
 ## Appendix: GitHub Pages link
 
--   [View my GitHub Pages report](https://jakevns.github.io/REPOSITORY/FOLDER/Evans_Jake-IC10-2-1-Data-Preparation-Case-31.html)
+-   [View my GitHub Pages report](https://jakevns.github.io/IBM6500/IC10-1-Data-Preparation-with-Case-31/Evans_Jake-IC10-2-1-Data-Preparation-Case-31.html)
 
--   [GitHub Repo for Case 31](https://github.com/jakevns/REPOSITORY)
+-   [GitHub Repo for Case 31](https://github.com/jakevns/IBM6500/tree/main/IC10-1-Data-Preparation-with-Case-31)

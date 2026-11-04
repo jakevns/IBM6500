@@ -1,0 +1,53 @@
+---
+title: "IC10-2-2: Data Analysis Table - Research Questions with Case 31"
+subtitle: "Case 31: Employees Federal Credit Union"
+author: "Jake Evans"
+date: today
+format:
+  html:
+    toc: true
+    embed-resources: true
+---
+
+## R2
+
+- **Constructs & their role:** Reasons to use other financial institutions to borrow funds (descriptive)
+- **Operationalization:** Q28 - Q29
+- **Scale:** Nominal
+- **Statistical test:** Descriptive statistics (frequency distribution), followed by chi-square goodness-of-fit test
+
+## R4c
+
+- **Scale:** Q9r - Q10r: Interval; Q11 - Q12rc: Nominal; Q31 - Q34: Interval; Q37r: Interval
+- **Statistical test:** Q9r - Q10r: Independent groups t-test; Q11 - Q12rc: Chi-square test of independence; Q31 - Q34: Independent groups t-test; Q37r: Independent groups t-test
+
+## R5
+
+- **Scale:** Ordinal
+- **Statistical test:** Descriptive statistics (frequency distribution, median, mode), followed by chi-square goodness-of-fit test
+
+## R6
+
+- **Constructs & their role:** Attitude toward operational effectiveness (descriptive)
+- **Scale:** Q9r - Q10r: Interval; Q11 - Q12rc: Nominal; Q31 - Q34: Interval; Q37r: Interval
+- **Statistical test:** Descriptive statistics, followed by: Q9r - Q10r: One group t-test; Q11 - Q12rc: Chi-square goodness-of-fit test; Q31 - Q34: Reliability analysis, then one group t-test; Q37r: One group t-test
+
+## H1
+
+- **Role of awareness of the regular share account:** I.V.
+- **Role of the degree to which current financial services meet members' needs:** D.V.
+- **Scale of Q33:** Interval
+- **Statistical test:** Descriptive statistics, followed by one-way ANOVA
+
+## H2
+
+- **Role of member opinion on CU's rate charge:** Test variable 1
+- **Role of member agreement that CU's loan rates are lower than competitors:** Test variable 2
+- **Operationalization:** Q8r; Q30
+- **Scale:** Interval; Interval
+- **Statistical test:** Paired samples (dependent) t-test
+
+## Appendix: Direct links
+
+- [**GitHub Pages: this report**](https://jakevns.github.io/IBM6500/M08/Evans_Jake-M08-Data_Analysis_Table-Case31.html)
+- [**GitHub repository: M08 folder**](https://github.com/jakevns/IBM6500/tree/main/M08)
