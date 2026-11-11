@@ -1,0 +1,601 @@
+---
+title: "Case 31: Summary of Data Analysis"
+subtitle: "IC11-2: R1, R2, R5, & R6 — Employees Federal Credit Union"
+author: "Jake Evans"
+institute: "Cal Poly Pomona"
+date: today
+format:
+  revealjs:
+    theme: serif
+    width: 1600
+    height: 900
+    footer: "IC11-2 Case 31: Summary of Data Analysis (R1, R2, R5, R6)"
+    slide-number: true
+    scrollable: true
+    smaller: true
+    toc: true
+    toc-depth: 1
+    code-overflow: wrap
+    code-copy: true
+    embed-resources: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+library(haven)
+library(psych)
+library(knitr)
+
+theme_set(theme_minimal(base_size = 16))
+
+# Cleaned data from IC10-2-1 (Data Preparation)
+case31 <- read_sav("Case31_Data_efcu_JE_cleaned.sav")
+
+# Frequency table: count and percent, value labels shown
+freq_table <- function(data, var) {
+  data |>
+    filter(!is.na({{ var }})) |>
+    mutate(response = as_factor({{ var }}, levels = "labels")) |>
+    count(response, .drop = FALSE) |>
+    mutate(percent = round(n / sum(n) * 100, 1))
+}
+
+# Bar chart of response frequencies
+freq_bar <- function(data, var, x_lab, title) {
+  data |>
+    filter(!is.na({{ var }})) |>
+    mutate(response = as_factor({{ var }}, levels = "labels")) |>
+    ggplot(aes(response, fill = response)) +
+    geom_bar(show.legend = FALSE) +
+    scale_x_discrete(drop = FALSE) +
+    labs(x = x_lab, y = "# of Responses", title = title)
+}
+
+# One-sample t-test (mu = 3, the scale midpoint) as a one-row table
+t_row <- function(data, var, label) {
+  x <- data[[var]]
+  res <- t.test(x, mu = 3)
+  tibble(
+    Variable = label,
+    n = sum(!is.na(x)),
+    Mean = round(mean(x, na.rm = TRUE), 2),
+    SD = round(sd(x, na.rm = TRUE), 2),
+    t = round(unname(res$statistic), 2),
+    df = unname(res$parameter),
+    p = format.pval(res$p.value, digits = 3, eps = .001)
+  )
+}
+
+# Chi-square goodness-of-fit test against equal proportions as a one-row table
+gof_row <- function(data, var, label) {
+  levs <- setdiff(levels(as_factor(data[[var]], levels = "labels")), "No answer")
+  x <- as.character(as_factor(data[[var]], levels = "labels"))
+  tab <- table(factor(x[!is.na(x)], levels = levs))
+  res <- chisq.test(tab, p = rep(1 / length(tab), length(tab)))
+  tibble(
+    Variable = label,
+    Observed = paste(names(tab), tab, sep = ": ", collapse = " | "),
+    `Chi-sq` = round(unname(res$statistic), 2),
+    df = unname(res$parameter),
+    `Min. expected` = round(min(res$expected), 1),
+    p = format.pval(res$p.value, digits = 3, eps = .001)
+  )
+}
+```
+
+# Data {background-color="#a13c65"}
+
+## Data Used
+
+-   **Data:** `Case31_Data_efcu_JE_cleaned.sav`, the cleaned file from IC10-2-1 (Data Preparation)
+-   **Participants:** `r nrow(case31)` members
+-   **Coding used in this analysis:**
+    -   "No opinion" (q7, q8, q37) and "No answer" (q12) were set to missing
+    -   q7r, q8r, q10r, and q37r are reverse coded so a larger number = a higher rating
+    -   q13r-q26r: 1 = Unaware, 2 = Aware but Have Not Used, 3 = Aware and Have Used
+    -   q9_group: statement frequency grouped into too often / about right / not often enough
+-   **Decision rule:** reject H~0~ when *p* \< .05
+
+# R1: One-Sample t-test {background-color="aquamarine"}
+
+**R1: Why do people join the Credit Union?**
+
+-   `Constructs and roles`: Reasons why people join the Credit Union (descriptive)
+-   `Operationalization`: q7r (opinion on the rates CU pays on share/savings accounts)
+-   `Scale`: 1-5 point, Likert-type scale (1 = Very Low ... 5 = Very High)
+-   `Statistics`: Descriptive statistics, followed by one-sample t-test
+
+## Descriptive Statistics
+
+:::: columns
+::: {.column width="45%"}
+```{r}
+#| label: tbl-q7r-freq
+#| tbl-cap: Response Frequency of Savings Rate (q7r)
+
+case31 |>
+  freq_table(q7r) |>
+  kable(col.names = c("Savings Rate", "n", "%"))
+```
+
+```{r}
+#| label: tbl-q7r-desc
+#| tbl-cap: Descriptive Statistics for Savings Rate (q7r)
+
+describe(case31$q7r) |>
+  as_tibble() |>
+  select(n, mean, sd, median, min, max, skew, kurtosis) |>
+  mutate(across(everything(), \(x) round(x, 2))) |>
+  kable()
+```
+:::
+
+::: {.column width="55%"}
+```{r}
+#| label: fig-q7r-bar
+#| fig-cap: Frequency of Member Opinions on Savings Rates
+
+case31 |>
+  freq_bar(q7r, "Savings Rate", "Member Opinions on Savings Rates (q7r)")
+```
+:::
+::::
+
+## One-Sample t-test
+
+-   H~0~: μ = 3 (members rate the savings rate as "Average")
+-   H~A~: μ ≠ 3
+
+```{r}
+#| echo: true
+
+t.test(case31$q7r, mu = 3)
+```
+
+------------------------------------------------------------------------
+
+```{r}
+r1 <- t_row(case31, "q7r", "q7r")
+pct_avg_q7r <- case31 |> freq_table(q7r) |> filter(response == "Average") |> pull(percent)
+```
+
+::: {.callout-note}
+## Insights about R1
+
+-   Most members (`r pct_avg_q7r`%) rate the savings rate the CU pays as "Average."
+-   The sample mean (*M* = `r r1$Mean`) is not statistically different from 3 ("Average") (*t*(`r r1$df`) = `r r1$t`, *p* = `r r1$p`).
+-   Members see the CU's savings rate as about average, so higher savings rates are not a strong reason to join or stay with the CU.
+:::
+
+# R2: One-Sample t-tests {background-color="aquamarine"}
+
+**R2: Why do members use other financial institutions when they need to borrow funds?**
+
+-   `Constructs and roles`: Reasons to use loans from other financial institutions (descriptive)
+-   `Operationalization`:
+    -   q8r (opinion on the rates CU charges to borrow funds; 1 = Very Low ... 5 = Very High)
+    -   q30 (CU's loan rates are lower than other institutions; 1 = Strongly Disagree ... 5 = Strongly Agree)
+-   `Scale`: 1-5 point, Likert-type scales
+-   `Statistics`: Descriptive statistics, followed by one-sample t-test
+
+## Descriptive Statistics: Loan Rates (q8r)
+
+:::: columns
+::: {.column width="45%"}
+```{r}
+#| label: tbl-q8r-freq
+#| tbl-cap: Response Frequency of Loan Rates Charged (q8r)
+
+case31 |>
+  freq_table(q8r) |>
+  kable(col.names = c("Loan Rate", "n", "%"))
+```
+:::
+
+::: {.column width="55%"}
+```{r}
+#| label: fig-q8r-bar
+#| fig-cap: Frequency of Member Opinions on Loan Rates Charged
+
+case31 |>
+  freq_bar(q8r, "Loan Rate Charged", "Member Opinions on CU Loan Rates (q8r)")
+```
+:::
+::::
+
+## Descriptive Statistics: CU Rates Lower (q30)
+
+:::: columns
+::: {.column width="45%"}
+```{r}
+#| label: tbl-q30-freq
+#| tbl-cap: Response Frequency of "CU Loan Rates Are Lower Than Others" (q30)
+
+case31 |>
+  freq_table(q30) |>
+  kable(col.names = c("Agreement", "n", "%"))
+```
+:::
+
+::: {.column width="55%"}
+```{r}
+#| label: fig-q30-bar
+#| fig-cap: Agreement That CU Loan Rates Are Lower Than Other Institutions
+
+case31 |>
+  freq_bar(q30, "Agreement", "CU Loan Rates Are Lower Than Others (q30)") +
+  theme(axis.text.x = element_text(angle = 15, hjust = 1))
+```
+:::
+::::
+
+## Descriptive Statistics: Summary
+
+```{r}
+#| label: tbl-r2-desc
+#| tbl-cap: Descriptive Statistics for q8r and q30
+
+describe(case31[c("q8r", "q30")]) |>
+  as_tibble(rownames = "Variable") |>
+  select(Variable, n, mean, sd, median, min, max, skew, kurtosis) |>
+  mutate(across(where(is.numeric), \(x) round(x, 2))) |>
+  kable()
+```
+
+## One-Sample t-tests
+
+-   H~0~: μ = 3 (q8r: "Average"; q30: "Uncertain")
+-   H~A~: μ ≠ 3
+
+:::: columns
+::: column
+```{r}
+#| echo: true
+
+t.test(case31$q8r, mu = 3)
+```
+:::
+
+::: column
+```{r}
+#| echo: true
+
+t.test(case31$q30, mu = 3)
+```
+:::
+::::
+
+------------------------------------------------------------------------
+
+```{r}
+r2 <- bind_rows(
+  t_row(case31, "q8r", "q8r: Loan rates charged"),
+  t_row(case31, "q30", "q30: CU loan rates lower")
+)
+r2 |> kable(caption = "One-Sample t-test Results for R2 (test value = 3)")
+
+pct_avg_q8r <- case31 |> freq_table(q8r) |> filter(response == "Average") |> pull(percent)
+pct_unc_q30 <- case31 |> freq_table(q30) |> filter(response == "Uncertain") |> pull(percent)
+```
+
+::: {.callout-note}
+## Insights about R2
+
+-   Most members rate the CU's loan rates as "Average" (`r pct_avg_q8r`%). The mean (*M* = `r r2$Mean[1]`) is not statistically different from 3 (*p* = `r r2$p[1]`).
+-   On whether CU loan rates are lower than other institutions, the most common answer is "Uncertain" (`r pct_unc_q30`%). The mean (*M* = `r r2$Mean[2]`) is not statistically different from 3 (*p* = `r r2$p[2]`).
+-   Members do not see the CU's loans as cheaper than other lenders. With no rate advantage, members have little reason to borrow from the CU instead of other institutions.
+:::
+
+# R5: Chi-square Goodness-of-Fit {background-color="aquamarine"}
+
+**R5: How well are the members aware of the services offered by the credit union?**
+
+-   `Constructs and roles`: Awareness of services (descriptive)
+-   `Operationalization`: q13r-q26r (14 services)
+-   `Scale`: Ordinal scale (1 = Unaware, 2 = Aware but Have Not Used, 3 = Aware and Have Used)
+-   `Statistics`: Descriptive statistics (frequency distribution), followed by chi-square goodness-of-fit test
+
+```{r}
+services <- c(
+  q13r = "Regular share accounts", q14r = "Special subaccounts",
+  q15r = "Christmas club accounts", q16r = "Individual retirement accounts",
+  q17r = "MasterCard credit cards", q18r = "Signature loans",
+  q19r = "New car loans", q20r = "Late model car loans",
+  q21r = "Older model car loans", q22r = "Household goods/appliance loans",
+  q23r = "Recreational loans", q24r = "Share collateralized loans",
+  q25r = "IRA loans", q26r = "Line of credit loans"
+)
+
+awareness_long <- case31 |>
+  select(all_of(names(services))) |>
+  mutate(across(everything(), \(x) as_factor(x, levels = "labels"))) |>
+  pivot_longer(everything(), names_to = "variable", values_to = "aware_level") |>
+  mutate(service = factor(services[variable], levels = services))
+```
+
+## Frequency Distribution
+
+```{r}
+#| label: tbl-r5-freq
+#| tbl-cap: Awareness of Services, % of Members (n = 128)
+
+awareness_long |>
+  count(service, aware_level, .drop = FALSE) |>
+  group_by(service) |>
+  mutate(percent = round(n / sum(n) * 100, 1)) |>
+  ungroup() |>
+  select(-n) |>
+  pivot_wider(names_from = aware_level, values_from = percent) |>
+  rename(Service = service) |>
+  kable()
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| label: fig-r5-bar
+#| fig-cap: Awareness Levels Across CU Services
+#| fig-width: 14
+#| fig-height: 7.5
+
+awareness_long |>
+  count(service, aware_level) |>
+  group_by(service) |>
+  mutate(percent = n / sum(n)) |>
+  ggplot(aes(percent, fct_rev(service), fill = aware_level)) +
+  geom_col() +
+  scale_x_continuous(labels = scales::percent) +
+  labs(x = "% of Members", y = NULL, fill = "Awareness",
+       title = "Members' Awareness of CU Services (q13r-q26r)") +
+  theme(legend.position = "top")
+```
+
+## Chi-square Goodness-of-Fit Tests
+
+-   H~0~: The awareness levels follow the expected (equal, 1/3 each) distribution
+-   H~A~: The awareness levels do not follow the expected distribution
+
+```{r}
+#| echo: true
+
+# Example: regular share accounts (q13r)
+table(as_factor(case31$q13r)) |>
+  chisq.test(p = c(1/3, 1/3, 1/3))
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| label: tbl-r5-gof
+#| tbl-cap: Chi-square Goodness-of-Fit Tests for All 14 Services (expected = 1/3 per level)
+
+r5 <- map2(names(services), services, \(v, lab) gof_row(case31, v, lab)) |>
+  list_rbind()
+r5 |> kable()
+```
+
+------------------------------------------------------------------------
+
+```{r}
+top_level <- awareness_long |>
+  count(service, aware_level) |>
+  group_by(service) |>
+  slice_max(n, n = 1) |>
+  ungroup()
+
+used_pct <- awareness_long |>
+  group_by(service) |>
+  summarise(used = round(mean(aware_level == "Aware and Have Used") * 100, 1))
+
+n_aware_not_used <- sum(top_level$aware_level == "Aware but Have Not Used")
+unaware_top <- top_level |> filter(aware_level == "Unaware") |> pull(service) |> as.character()
+```
+
+::: {.callout-note}
+## Insights about R5
+
+-   For all 14 services, the awareness levels are significantly different from an equal distribution (all *p* \< .001). The expected count is 42.7 in every cell, so the tests are valid.
+-   For `r n_aware_not_used` of the 14 services, the most common answer is "Aware but Have Not Used." Members know about most of the loan products but are not using them (e.g., signature loans: `r used_pct$used[used_pct$service == "Signature loans"]`% have used; new car loans: `r used_pct$used[used_pct$service == "New car loans"]`%).
+-   "Unaware" is the most common answer for `r paste(unaware_top, collapse = ", ")`.
+-   Use is low across the board. Only MasterCard credit cards (`r used_pct$used[used_pct$service == "MasterCard credit cards"]`%) and line of credit loans (`r used_pct$used[used_pct$service == "Line of credit loans"]`%) are used by more than a third of members.
+-   The CU should raise awareness of its lesser-known services and give members reasons to actually use the loan products they already know about.
+:::
+
+# R6: Chi-square & One-Sample t-tests {background-color="aquamarine"}
+
+**R6: What are the members' attitudes and beliefs about how effectively the credit union is operated?**
+
+:::: columns
+::: {.column width="50%"}
+-   `Constructs and roles`: Attitude toward operational effectiveness (descriptive)
+-   `Operationalization`:
+    -   q9_group (statement frequency), q10r (statement accuracy)
+    -   q11 (statements easy to understand), q12 (account information kept confidential)
+    -   q31-q34 (confidentiality, loan processing, services meet needs, loan applications)
+    -   q37r (overall rating of management and operation)
+:::
+
+::: {.column width="50%"}
+-   `Scale`:
+    -   Ordinal
+    -   Nominal
+    -   Interval
+    -   Interval
+-   `Statistics`:
+    -   Descriptive statistics / chi-square goodness-of-fit test
+    -   Descriptive statistics / chi-square goodness-of-fit test
+    -   Descriptive statistics / one-sample t-test
+    -   Descriptive statistics / one-sample t-test
+:::
+::::
+
+## Statements: Frequency Distributions
+
+:::: columns
+::: column
+```{r}
+#| label: tbl-q9-freq
+#| tbl-cap: Statement Frequency (q9_group)
+
+case31 |> freq_table(q9_group) |> kable(col.names = c("Statement Frequency", "n", "%"))
+```
+
+```{r}
+#| label: tbl-q10r-freq
+#| tbl-cap: Statement Accuracy (q10r)
+
+case31 |> freq_table(q10r) |> kable(col.names = c("Statement Accuracy", "n", "%"))
+```
+:::
+
+::: column
+```{r}
+#| label: tbl-q11-freq
+#| tbl-cap: Statements Easy to Understand (q11)
+
+case31 |>
+  freq_table(q11) |>
+  filter(response != "No answer") |>
+  kable(col.names = c("Easy to Understand", "n", "%"))
+```
+
+```{r}
+#| label: tbl-q12-freq
+#| tbl-cap: CU Keeps Account Information Confidential (q12)
+
+case31 |>
+  freq_table(q12) |>
+  filter(response != "No answer") |>
+  kable(col.names = c("Confidential", "n", "%"))
+```
+:::
+::::
+
+## Statements: Chi-square Goodness-of-Fit Tests
+
+-   H~0~: Responses follow the expected (equal) distribution
+-   H~A~: Responses do not follow the expected distribution
+
+```{r}
+#| echo: true
+
+# Example: statements easy to understand (q11), expected 50% / 50%
+table(droplevels(as_factor(case31$q11))) |>
+  chisq.test(p = c(.5, .5))
+```
+
+```{r}
+#| label: tbl-r6-gof
+#| tbl-cap: Chi-square Goodness-of-Fit Tests (expected = equal proportions)
+
+r6_gof <- bind_rows(
+  gof_row(case31, "q9_group", "q9_group: Statement frequency"),
+  gof_row(case31, "q10r", "q10r: Statement accuracy"),
+  gof_row(case31, "q11", "q11: Easy to understand"),
+  gof_row(case31, "q12", "q12: Info kept confidential")
+)
+r6_gof |> kable()
+```
+
+## Attitudes and Overall Rating: Descriptive Statistics
+
+```{r}
+r6_items <- c(
+  q31 = "q31: Personal financial info kept confidential",
+  q32 = "q32: Prompt in processing loan applications",
+  q33 = "q33: Services meet members' needs",
+  q34 = "q34: Loan applications simple and easy",
+  q37r = "q37r: Overall management and operation"
+)
+```
+
+:::: columns
+::: {.column width="45%"}
+```{r}
+#| label: tbl-r6-desc
+#| tbl-cap: Descriptive Statistics for q31-q34 and q37r
+
+describe(case31[names(r6_items)]) |>
+  as_tibble(rownames = "Variable") |>
+  select(Variable, n, mean, sd, median, min, max) |>
+  mutate(across(where(is.numeric), \(x) round(x, 2))) |>
+  kable()
+```
+
+q31-q34: 1 = Strongly Disagree ... 5 = Strongly Agree. q37r: 1 = Very Poor ... 5 = Excellent. q31-q34 are tested as separate items because their reliability in IC10-2-1 was too low to combine them into an index.
+:::
+
+::: {.column width="55%"}
+```{r}
+#| label: fig-r6-means
+#| fig-cap: Mean Ratings of Operational Effectiveness (midpoint = 3)
+
+case31 |>
+  select(all_of(names(r6_items))) |>
+  pivot_longer(everything(), names_to = "variable", values_to = "value") |>
+  group_by(variable) |>
+  summarise(mean = mean(value, na.rm = TRUE)) |>
+  mutate(item = factor(r6_items[variable], levels = rev(r6_items))) |>
+  ggplot(aes(mean, item)) +
+  geom_col(fill = "steelblue") +
+  geom_vline(xintercept = 3, linetype = "dashed", color = "red") +
+  geom_text(aes(label = round(mean, 2)), hjust = -0.2) +
+  scale_x_continuous(limits = c(0, 5)) +
+  labs(x = "Mean (1-5)", y = NULL, title = "Operational Effectiveness Ratings")
+```
+:::
+::::
+
+## One-Sample t-tests
+
+-   H~0~: μ = 3 (q31-q34: "Uncertain"; q37r: "Average")
+-   H~A~: μ ≠ 3
+
+```{r}
+#| echo: true
+
+# Example: overall rating of management and operation (q37r)
+t.test(case31$q37r, mu = 3)
+```
+
+```{r}
+#| label: tbl-r6-t
+#| tbl-cap: One-Sample t-test Results for R6 (test value = 3)
+
+r6_t <- map2(names(r6_items), r6_items, \(v, lab) t_row(case31, v, lab)) |>
+  list_rbind()
+r6_t |> kable()
+```
+
+------------------------------------------------------------------------
+
+```{r}
+pct <- function(var, level) {
+  case31 |> freq_table({{ var }}) |> filter(response != "No answer") |>
+    mutate(percent = round(n / sum(n) * 100, 1)) |>
+    filter(response == level) |> pull(percent)
+}
+```
+
+::: {.callout-note}
+## Insights about R6
+
+-   **Statements:** Most members say statement frequency is "About right" (`r pct(q9_group, "About right")`%), and no one says "Too often." Most rate accuracy as "Good" or "Excellent" (`r pct(q10r, "Good") + pct(q10r, "Excellent")`%), and almost all find statements easy to understand (`r pct(q11, "Yes")`%). All four distributions differ significantly from equal proportions (*p* \< .001).
+-   **Confidentiality:** `r pct(q12, "Yes")`% say the CU keeps account information confidential (q12, *p* \< .001), and q31 has the highest agreement of the four attitude items (*M* = `r r6_t$Mean[1]`).
+-   **Loan processing and services:** Members agree, but less strongly, that loan applications are processed promptly (*M* = `r r6_t$Mean[2]`), services meet their needs (*M* = `r r6_t$Mean[3]`), and loan applications are simple and easy (*M* = `r r6_t$Mean[4]`). All are significantly above 3 (*p* \< .001), but loan applications have the lowest score.
+-   **Overall:** Members rate the CU's management and operation as good (*M* = `r r6_t$Mean[5]`, *p* \< .001).
+-   Members believe the CU is run effectively. Loan applications score lowest, so making them simpler could help the CU's borrowing problem.
+:::
+
+# Appendix
+
+## Links
+
+-   [GitHub Pages: this presentation](https://jakevns.github.io/IBM6500/IC11-2-Case-31-Summary-Analysis/Evans_Jake-IC11-2-Case31-Summary-R1-R2-R5-R6.html)
+-   [GitHub Repo: IC11-2 folder](https://github.com/jakevns/IBM6500/tree/main/IC11-2-Case-31-Summary-Analysis)
