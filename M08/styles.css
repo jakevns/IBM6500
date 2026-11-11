@@ -1,0 +1,27 @@
+/* Custom CSS for M08 revealjs deck */
+
+.reveal .slide-logo {
+  max-height: 60px !important;
+}
+
+.reveal .footer {
+  font-size: 0.55em;
+  color: #6c757d;
+}
+
+/* Keep gtsummary/gt tables readable on slides */
+.reveal .gt_table {
+  font-size: 0.75em !important;
+}
+
+.reveal table {
+  font-size: 0.8em;
+}
+
+.reveal .callout {
+  font-size: 0.9em;
+}
+
+.reveal .panel-tabset {
+  font-size: 0.9em;
+}

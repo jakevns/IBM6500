@@ -1,0 +1,21 @@
+/*-- scss:defaults --*/
+
+// Sass variables layered on top of the serif theme
+$cpp-green: #1e4d2b;
+$cpp-gold: #ffb81c;
+
+$link-color: $cpp-green;
+$presentation-heading-color: $cpp-green;
+$presentation-h1-font-size: 2.2em;
+$code-block-font-size: 0.65em;
+
+/*-- scss:rules --*/
+
+.reveal h2 {
+  border-bottom: 3px solid $cpp-gold;
+  padding-bottom: 0.15em;
+}
+
+.reveal strong {
+  color: $cpp-green;
+}

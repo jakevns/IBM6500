@@ -1,0 +1,10 @@
+# Confidential CEP data: never commit
+data/
+*.csv
+*.xlsx
+
+# R / Quarto
+.Rproj.user/
+.Rhistory
+.RData
+*_cache/
