@@ -19,270 +19,463 @@ execute:
 
 Before beginning the Chapter 16 lecture, the instructor reviewed the in-class assignment **IC11-2—Case 31: Summary of Data Analysis for R1, R2, R5, and R6**. The assignment asks students to summarize the results of the data analysis for the assigned research questions.
 
+
 ### Assignment Preparation
 
-Students should already be familiar with the Case 31 narrative. The project folder should contain the following materials:
+Before starting, we should already be familiar with the Case 31 narrative. Our project folder should have the following materials:
 
-- the Case 31 questionnaire;
-- the cleaned SPSS data file, either the student's prepared data from Module 10 or the provided cleaned file; and
-- the Case 31 data analysis table, including the research questions and assignment keys.
+- The Case 31 questionnaire.
+- The cleaned SPSS data file, either the version we prepared in Module 10 or the cleaned file provided to us.
+- The Case 31 data analysis table, which includes the research questions and assignment keys.
 
-The questionnaire, cleaned data, and data analysis table should be open together so that the analyst can move between the wording of each question, the data variable, and the planned analysis method.
+It's helpful to have the questionnaire, cleaned data, and data analysis table open at the same time. This makes it easier to go back and forth between the original questions, their corresponding variables in the dataset, and the analysis methods we plan to use.
+
+
 
 ### Demonstration and Video Review
 
-The assignment requires starting a new QMD file using the `revealjs` format. The instructor will demonstrate the analysis procedure using Case 31. Because there is not enough time to analyze every variable, the demonstration is intended to show each type of analysis at least once. Students are responsible for applying the demonstrated procedure to other variables that require the same statistical method.
+For this assignment, we'll start a new QMD file using the `revealjs` format. The professor will walk us through the analysis process using Case 31. Since there isn't enough time to go through every variable in class, he'll demonstrate each type of analysis at least once. From there, we'll need to apply those same steps to the remaining variables that use the same statistical methods.
 
-The reviewed video is **“Transitioning from SPSS (SAS/STATA) to R for Survey Research”** from CCIDM at Cal Poly Pomona. The video is approximately 1 hour and 30 minutes long. In class, the instructor reviewed only the final four minutes of the video, rather than the entire video. The relevant portion was approximately **1:26:00 to 1:30:00**.
+The video we're reviewing is **"Transitioning from SPSS (SAS/STATA) to R for Survey Research"** from CCIDM at Cal Poly Pomona. The full video is about an hour and a half long, but during class, we only went over the last four minutes, around **1:26:00 to 1:30:00**.
 
-The purpose of reviewing this ending segment was to connect the SPSS-style survey analysis workflow to R and to show how analysis results can be visualized and used to test hypotheses. The earlier timestamps listed in the assignment identify sections of the full video, but they were not all reviewed during this class session.
+The main point of reviewing this section was to show how we can take the survey analysis process we're familiar with in SPSS and apply it in R. It also showed how to visualize our results and use them to test hypotheses.
+
+The assignment includes timestamps for other sections of the video, but we didn't go through all of those during this class session.
 
 ### Student Responsibilities After the Demonstration
 
-After class, students are expected to repeat the demonstrated procedure so that they can perform the analysis independently. If a variable is not demonstrated because it uses a procedure already shown, the student must complete that analysis by applying the same procedure to the appropriate variable.
+After class, we're expected to practice the procedures the professor demonstrated so we can complete the analyses on our own. If he didn't cover a particular variable because it uses a method we've already seen, we'll need to follow the same steps and apply them to that variable ourselves.
 
-The results must be summarized using the separate Case 31 data-preparation and analysis instructions. The remaining work is completed as the in-class assignment **IC11-2—Case 31: Summary of Data Analysis for R1, R2, R5, and R6**.
+We'll then summarize our findings using the separate Case 31 data preparation and analysis instructions.
+
+The remaining work will be completed as part of our in-class assignment, **IC11-2—Case 31: Summary of Data Analysis for R1, R2, R5, and R6**.
 
 ### Submission Requirements for the Case 31 Assignment
 
-The final assignment requires:
+For the final submission, we'll need to include:
 
-- an HTML file;
-- a QMD file;
-- publication of the work through GitHub Pages; and
-- links to the GitHub repository and GitHub Pages under the Appendix section of the report.
+- The rendered HTML file.
+- The original QMD file.
+- A published version of our work on GitHub Pages.
+- Links to both the GitHub repository and GitHub Pages in the Appendix section of our report.
 
-The QMD and HTML files should be prepared in the normal way for the assignment, with the QMD file containing the analysis workflow and the HTML file presenting the rendered results.
+The QMD file should contain our analysis process, including the code and explanations, while the HTML file will display the rendered results. Both files should be prepared and submitted following the normal assignment requirements.
+
 
 ### Reproducible Presentation Workflow
 
-The instructor also reviewed a sample Case 31 presentation and explained how the team can use the same general workflow. The presentation is generated from a source file containing the written slide content, R code, analysis output, and visualizations. It is not necessary to manually rebuild every slide when the analysis changes.
+The professor also went over a sample Case 31 presentation and explained how we can follow a similar process for our own work. The presentation is created from a source file that includes the slide content, R code, analysis results, and visualizations. This means we don't have to manually recreate every slide whenever something in our analysis changes.
 
-The basic workflow is:
+The basic workflow looks like this:
 
-1. Keep the data, analysis code, and presentation source file together in the project folder.
-2. Write the analysis and visualizations in the source QMD file.
-3. Use code chunks to calculate results and produce tables or figures.
+1. Keep our dataset, analysis code, and presentation source file together in the project folder.
+2. Write our analysis and create the visualizations directly in the QMD file.
+3. Use code chunks to run calculations and generate tables or graphs.
 4. Render the QMD file using the `revealjs` format.
-5. The rendered HTML presentation updates whenever the code or source content changes.
+5. Whenever we update the code or content, we can render the file again to generate an updated HTML presentation.
 
-This means that if the team corrects data preparation, changes a variable, updates a statistical test, or modifies a graph, the presentation can be regenerated so the displayed results change automatically. The team should therefore copy the workflow and source structure, not merely copy the finished HTML. Each group must replace the sample's data, variables, research questions, results, and interpretations with its own Case 31 work.
+One of the biggest benefits of this approach is that everything stays connected. If we need to fix something in our data preparation, change a variable, run a different statistical test, or adjust a graph, we can simply update the source file and render it again. The presentation will then reflect those changes without us having to manually update each slide.
 
-The sample presentation demonstrates an organization that moves from the case background and research questions to methods, data preparation, sample characteristics, measures, analysis, results, and insights. The analysis sections are grouped by research question and test type, including one-sample and two-sample t-tests, chi-square independence and goodness-of-fit tests, ANOVA, ANCOVA, MANOVA, and multiple regression.
+The professor emphasized that we should follow the **workflow and structure of the sample**, rather than just copying the finished HTML presentation. Each group still needs to use its own Case 31 data, variables, research questions, results, and interpretations.
+
+The sample presentation also gives us a good idea of how to organize our work. It starts with the case background and research questions, then moves into the methods, data preparation, sample characteristics, measures, analysis, results, and insights.
+
+The analysis is organized by research question and the type of statistical test being used. Some of the methods shown include:
+
+- One-sample and two-sample t-tests.
+- Chi-square tests for independence and goodness of fit.
+- ANOVA and ANCOVA.
+- MANOVA.
+- Multiple regression.
 
 ### Demonstration: R1 Frequency Distribution and Descriptive Statistics
 
-At this point in the class, the instructor was moving back and forth between the rendered Case 31 presentation and the R code used to create it. He was specifically demonstrating the section for **R1**, including the frequency-distribution chart and the descriptive-statistics results.
+During this part of class, the professor was switching between the finished Case 31 presentation and the R code used to generate it. He was focusing on **R1**, specifically the frequency distribution chart and descriptive statistics.
 
-The important connection is between the source code and the visible presentation:
+The main thing he was showing us was how the code connects to what we see in the final presentation:
 
-- the R code performs the calculation or creates the visualization;
-- the QMD source places the result and explanation into the presentation;
-- the rendered revealjs presentation displays the current output; and
-- changing the code or data and rendering the file again updates the presentation.
+- **R code:** Runs the calculations and generates the visualizations.
+- **QMD source file:** Organizes the results, explanations, and graphs into slides.
+- **Rendered revealjs presentation:** Displays the results in the finished HTML presentation.
+- **Updating the presentation:** When we make changes to the code or data, we can render the file again to update the results.
 
-The R1 section shows how descriptive statistics should be presented before moving to an inferential test. The frequency distribution helps show how responses are distributed, while the descriptive-statistics output summarizes the variable numerically. The presentation should then explain the insight from those results in words rather than showing statistics without interpretation.
+For R1, the professor demonstrated how we should look at descriptive statistics before moving into more advanced statistical tests.
+
+The frequency distribution helps us understand how responses are spread across the different categories or values. The descriptive statistics give us a numerical summary of the variable, making it easier to understand the overall patterns in the data.
+
+Another important point is that **we shouldn't just show graphs and statistics without explaining what they mean**. After presenting our results, we need to describe what we're seeing and explain how those findings relate to the research question.
+
+This is especially important for our final presentation because the goal isn't just to demonstrate that we can run the analysis in R. We also need to show that we understand the results and can explain why they matter.
+
 
 ## Today's Focus
 
-This class focused on the first steps of data analysis after data preparation and planning. The main topics were descriptive statistics, frequency distributions, measures of location and variability, cross-tabulation, hypothesis testing, and chi-square statistics. The class also connected these concepts to using R for analysis.
+Today's class focused on the first steps of analyzing data after we've finished preparing it and planning our analysis. We covered descriptive statistics, frequency distributions, measures of location and variability, cross-tabulation, hypothesis testing, and chi-square statistics. We also looked at how we can apply these concepts when working with data in R.
 
-The overall purpose of descriptive analysis is to become familiar with a data set before conducting more advanced analyses designed to test hypotheses. The analysis should be connected to the research questions and analytics objectives rather than performed without a plan.
+The main purpose of descriptive analysis is to help us get familiar with our dataset before moving into more advanced statistical tests. It's important that we're not just running analyses for the sake of it. Everything we do should connect back to our research questions and analytics objectives.
 
 ## Learning Objectives
 
 By the end of this module, I should be able to:
 
-1. Explain descriptive statistics.
-2. Explain frequency counts and the measures associated with them.
-3. Explain how cross-tabulation analysis is conducted.
-4. Set up rows and columns of a cross-tabulation using independent and dependent variables.
-5. Describe when an association between two variables can be tested with cross-tabulation and chi-square statistics.
-6. Explain the general process of a hypothesis test.
-7. Explain four patterns that can appear after introducing a third variable into a cross-tabulation.
-8. Distinguish between the chi-square goodness-of-fit test and the chi-square test of independence.
-9. Use R to create a cross-tabulation and chi-square statistics and interpret the results.
+1. Explain what descriptive statistics are and why we use them.
+2. Understand frequency counts and the different measures associated with them.
+3. Explain how cross-tabulation works and how to perform the analysis.
+4. Organize the rows and columns of a cross-tabulation using independent and dependent variables.
+5. Identify when we can use cross-tabulation and chi-square statistics to test the relationship between two variables.
+6. Explain the basic steps involved in hypothesis testing.
+7. Recognize the four patterns that can appear when we introduce a third variable into a cross-tabulation.
+8. Understand the difference between a chi-square goodness-of-fit test and a chi-square test of independence.
+9. Use R to create cross-tabulations, calculate chi-square statistics, and interpret the results.
 
 # Module Reference: Chapter 16 (Not Covered in Class)
 
-The following material comes from the module notes and is included only as a reference for the Chapter 16 material that was mentioned but not presented during this class session.
+The following information comes from our module notes. I'm including it as a reference for Chapter 16 since the material was mentioned but wasn't actually covered during this class session.
 
 # Descriptive Statistics
 
 ## Meaning and Purpose
 
-Descriptive statistics summarize the characteristics of data. They are usually the first analyses conducted because they help the analyst understand what has been collected, identify the distribution of responses, and notice possible problems before moving to hypothesis testing.
+Descriptive statistics help us summarize and understand the information in our dataset. They're usually one of the first things we look at because they give us a better idea of what we've collected, how the responses are distributed, and whether there are any issues we should address before moving into hypothesis testing.
 
-Descriptive statistics can describe one variable at a time or summarize the relationship between variables. A frequency distribution is an example of a one-variable descriptive analysis. A cross-tabulation is used to examine the distribution of one variable across the categories of another variable.
+We can use descriptive statistics to look at individual variables or explore how different variables relate to one another.
 
-Descriptive statistics do not by themselves prove that a hypothesis is true. They organize and summarize the data so that the analyst can select an appropriate inferential test and interpret the findings in context.
+For example:
+
+- **Frequency distributions** help us understand how responses are spread across the different values or categories of a single variable.
+- **Cross-tabulations** allow us to compare how one variable is distributed across the categories of another variable.
+
+One thing to remember is that descriptive statistics alone don't prove whether a hypothesis is true. Instead, they help us organize the information, recognize patterns, and decide which statistical tests make the most sense for our research questions.
 
 ## Frequency Distributions
 
-A frequency distribution reports how many observations fall into each category or value of a variable. The basic frequency count is the number of cases in a category. Percentages and valid percentages can also be used to make categories easier to compare, especially when groups have different total sizes.
+A frequency distribution shows us how many observations fall into each category or value of a variable. The frequency count is simply the number of times a particular response or value appears in the dataset.
 
-When interpreting a frequency distribution, I should check:
+We can also look at percentages and valid percentages to better understand how the responses compare. This is especially helpful when we're comparing groups that don't have the same number of observations.
 
-- the categories or values that appear;
-- the number of observations in each category;
-- the percentage represented by each category;
-- the total number of valid cases; and
-- whether there are missing or unusual values.
+When reviewing a frequency distribution, I should pay attention to:
 
-Frequency distributions are useful for categorical variables such as gender, education category, or a yes/no response. They can also be used for numerical variables when the individual values or value ranges are meaningful.
+- The different categories or values in the variable.
+- How many observations fall into each category.
+- What percentage of the total each category represents.
+- The total number of valid responses.
+- Whether there are any missing values or unusual responses.
+
+Frequency distributions are especially useful when working with categorical variables, such as gender, education level, or yes/no questions.
+
+We can also use them with numerical variables, particularly when the individual values or ranges tell us something meaningful about the data.
 
 ## Measures of Location
 
-Measures of location describe where the center or typical value of a distribution is located.
+Measures of location help us understand where the center of our data is. In other words, they give us an idea of what a typical value looks like within a distribution.
+
+The three main measures we'll be looking at are the mean, median, and mode.
 
 ### Mean
 
-The mean is the arithmetic average. It is calculated by adding the values and dividing by the number of observations. The mean is useful when the scale and distribution make averaging meaningful, but it can be affected by unusually high or low values.
+The **mean** is what we typically think of as the average. We calculate it by adding up all the values and dividing by the total number of observations.
+
+The mean is useful when averaging makes sense for the type of data we're working with. However, one thing to keep in mind is that unusually high or low values can pull the average in one direction.
+
+For example, if most respondents have relatively similar incomes but one person has an extremely high income, that single response could raise the mean quite a bit.
 
 ### Median
 
-The median is the middle value after the observations are placed in order. Half of the observations are below the median and half are above it. The median is less affected by extreme values than the mean.
+The **median** is the middle value when all our observations are arranged from lowest to highest.
+
+If we split the data at the median, approximately half of the observations fall below it and half fall above it.
+
+One advantage of the median is that it isn't affected as much by extreme values. This can make it more useful than the mean when our data is skewed or contains outliers.
+
+For example, when looking at income data, the median might give us a better idea of what a typical respondent earns if a few people have much higher incomes than everyone else.
 
 ### Mode
 
-The mode is the most frequently occurring value or category. It is especially useful for nominal variables because it does not require the categories to have a numerical order.
+The **mode** is the value or category that appears most frequently in our dataset.
 
-The appropriate measure depends on the scale of measurement and the shape of the data. The mean should not automatically be used for every variable simply because software reports it.
+This is especially useful when working with nominal variables because those categories don't necessarily have a numerical order.
+
+For example, if we're looking at respondents' preferred shopping methods, the mode would tell us which option was selected the most.
+
+The main thing to remember is that **we shouldn't automatically use the mean for every variable just because our statistical software provides it**.
+
+We need to consider the type of variable, its measurement scale, and how the values are distributed before deciding which measure gives us the most useful information.
+
 
 ## Measures of Variability
 
-Measures of variability describe how spread out the observations are.
+Measures of variability help us understand how spread out the values are in our dataset. While measures of location tell us where the center of the data is, measures of variability show us how much the individual observations differ from one another.
 
 ### Range
 
-The range is the difference between the largest and smallest values. It is easy to interpret, but it depends only on the two extreme values.
+The **range** is the difference between the highest and lowest values in our dataset.
+
+It's one of the easiest ways to understand how spread out our data is, but it does have a limitation. Since it only looks at the two extreme values, it doesn't tell us much about how the rest of the observations are distributed.
+
+For example, if most respondents have similar incomes but one person earns significantly more than everyone else, that one response could make the range much larger.
 
 ### Variance
 
-Variance summarizes the average squared distance of observations from the mean. Because the distances are squared, the units of variance are also squared, which can make it less intuitive to interpret directly.
+**Variance** measures how much our observations differ from the mean by looking at their average squared distance from it.
+
+Essentially, it gives us an idea of how much variation exists within the dataset.
+
+One thing to keep in mind is that variance uses squared units. This can make the results harder to interpret directly, especially when we're working with measurements like income, age, or other numerical variables.
 
 ### Standard Deviation
 
-The standard deviation is the square root of the variance. It is expressed in the original units of the variable, so it is usually easier to interpret. A smaller standard deviation means that observations are more closely grouped around the mean; a larger standard deviation means that they are more spread out.
+The **standard deviation** is the square root of the variance. It's usually easier to interpret because it's expressed in the same units as the original variable.
 
-Measures of location and variability should be interpreted together. A mean without information about spread does not show how similar or different the observations are from one another.
+It helps us understand how closely the observations are grouped around the mean.
+
+- **Smaller standard deviation:** The values are more closely grouped around the mean, meaning there's less variation in the data.
+- **Larger standard deviation:** The values are more spread out from the mean, meaning there's more variation between observations.
+
+For example, if we're comparing customer spending between two groups, they could have the same average spending but very different standard deviations. One group might spend relatively similar amounts, while the other has customers spending both very little and quite a lot.
+
+The important thing to remember is that **measures of location and variability should be looked at together**.
+
+Knowing the mean is helpful, but it doesn't tell us how consistent the observations are. We also need to understand how much the values vary to get a better picture of what's happening in our data.
 
 # Cross-Tabulation
 
 ## Purpose of a Cross-Tabulation
 
-A cross-tabulation, or cross-tab, displays the categories of two variables together in a table. It allows the analyst to compare the distribution of a dependent variable across categories of an independent variable.
+A **cross-tabulation**, also called a cross-tab, is a table that allows us to compare two categorical variables at the same time.
 
-For example, an analyst could compare a response such as intention to join a credit union across different demographic or behavioral groups. The cross-tab shows the observed counts and usually the percentages for each group.
+Instead of looking at each variable separately, we can use a cross-tab to see how the responses for one variable are distributed across the categories of another.
 
-Cross-tabulation is appropriate when the variables are categorical. The categories may be nominal or ordinal. The analysis is used to describe a possible association; a statistical test is then used to evaluate whether the observed pattern is likely to reflect more than random variation.
+Typically, we're comparing a **dependent variable** against an **independent variable** to see whether there's a pattern or possible relationship between them.
+
+For example, if we're studying whether people are interested in joining a credit union, we could compare their responses across different demographic or behavioral groups.
+
+The cross-tab would allow us to see how many people in each group said they were interested, along with the percentages for each category.
+
+Cross-tabulation works best with categorical variables, including:
+
+- **Nominal variables:** Categories that don't have a natural order, such as gender or preferred banking institution.
+- **Ordinal variables:** Categories that have a meaningful order, such as satisfaction levels or education categories.
+
+One thing to remember is that a cross-tab helps us **identify possible associations between variables**, but the table alone doesn't tell us whether those patterns are statistically significant.
+
+To determine whether the differences we're seeing are likely to be more than random variation, we need to use an appropriate statistical test, such as the chi-square test of independence.
+
+This is why cross-tabulation is useful during our analysis. It gives us a way to visually compare groups and recognize patterns before testing whether those relationships are statistically significant.
+
 
 ## Rows and Columns
 
-The independent variable is generally placed in the columns and the dependent variable is generally placed in the rows. This setup makes it possible to compare the dependent-variable percentages across the categories of the independent variable.
+When creating a cross-tabulation, we generally place the **independent variable in the columns** and the **dependent variable in the rows**.
 
-The most important issue is not simply the physical placement of the variables. The percentages must be calculated in the direction that answers the research question. If the question asks how the dependent variable differs across independent-variable groups, the percentages should be read within the independent-variable groups.
+This makes it easier to compare how the dependent variable changes across the different categories of the independent variable.
 
-When interpreting a cross-tab, I should identify:
+However, the most important thing isn't necessarily where we place the variables. What really matters is that we're calculating and interpreting the percentages in a way that actually answers our research question.
 
-- which variable is independent and which is dependent;
-- what the counts represent;
-- which percentage direction is being displayed;
-- whether the pattern is large enough to be meaningful; and
-- whether a statistical test supports an association.
+For example, if we're trying to understand how interest in joining a credit union differs between age groups, we would want to look at the percentage of interested respondents within each age group.
+
+When reviewing a cross-tab, I should make sure I understand:
+
+- Which variable is independent and which is dependent.
+- What the numbers in each cell actually represent.
+- Whether we're looking at row percentages or column percentages.
+- Whether the differences between groups are large enough to be meaningful.
+- Whether a statistical test supports the relationship we're seeing.
+
+The main takeaway is that **we need to pay attention to how we're reading the percentages**, not just the numbers in the table. Otherwise, we could end up interpreting the relationship incorrectly.
 
 ## Observed and Expected Counts
 
-The observed count is the number of cases actually found in a cell of the table. An expected count is the number that would be anticipated if the variables were unrelated, based on the row and column totals.
+When working with cross-tabulations and chi-square tests, we need to understand the difference between **observed counts** and **expected counts**.
 
-Comparing observed and expected counts helps identify the cells contributing to a possible association. Large differences between observed and expected counts can contribute to a larger chi-square statistic, but the overall test and the research context are still needed for interpretation.
+- **Observed counts:** The actual number of responses or observations that fall into each cell of our table.
+- **Expected counts:** The number of observations we would expect to see in each cell if there were no relationship between the two variables, based on the row and column totals.
+
+By comparing the observed and expected counts, we can start to see where differences or possible relationships might exist.
+
+If the observed counts are very different from what we expected, those differences can contribute to a larger chi-square statistic.
+
+However, we can't automatically assume that a large difference means there's a statistically significant relationship. We still need to look at the results of the overall test and consider what those differences mean in the context of our research.
 
 # Hypothesis Testing
 
 ## General Process
 
-Hypothesis testing provides a systematic way to evaluate a claim about a population using sample data. The general process is:
+Hypothesis testing gives us a structured way to evaluate a claim about a population using data collected from a sample.
 
-1. State the research question and the null and alternative hypotheses.
-2. Select a statistical test that matches the variables and research design.
-3. Choose a significance level before evaluating the result.
-4. Calculate the test statistic and obtain the p-value.
-5. Compare the p-value with the significance level.
-6. Decide whether to reject or fail to reject the null hypothesis.
-7. Interpret the result in plain language and in relation to the research question.
+Instead of making assumptions based on what we see in the data, we use statistical tests to determine whether there's enough evidence to support a particular conclusion.
 
-The null hypothesis generally states that there is no difference, no association, or no departure from an expected distribution. The alternative hypothesis states that a difference, association, or departure exists.
+The general process looks like this:
 
-A statistically significant result means that the observed data would be relatively unlikely if the null hypothesis were true at the selected significance level. It does not automatically establish causation, practical importance, or the direction of every relationship.
+1. **Identify the research question:** Determine what we're trying to find out and establish our null and alternative hypotheses.
+2. **Choose the appropriate statistical test:** Select a test based on the variables we're analyzing and the type of research we're conducting.
+3. **Set the significance level:** Decide what level of statistical significance we'll use before evaluating the results.
+4. **Run the analysis:** Calculate the test statistic and obtain the p-value.
+5. **Compare the results:** Look at whether the p-value is smaller than our selected significance level.
+6. **Make a decision:** Determine whether we should reject or fail to reject the null hypothesis.
+7. **Interpret the findings:** Explain what the results mean in plain language and connect them back to our research question.
+
+There are two main hypotheses we need to understand:
+
+- **Null hypothesis (H0):** Generally assumes there's no difference, no relationship, or no meaningful departure from an expected distribution.
+- **Alternative hypothesis (H1):** Suggests that a difference, relationship, or departure from the expected distribution does exist.
+
+One important thing to remember is that **statistical significance doesn't automatically mean something is practically important**.
+
+A statistically significant result tells us that the observed data would be relatively unlikely if the null hypothesis were true, based on the significance level we selected.
+
+However, it doesn't necessarily tell us why the relationship exists, whether one variable causes another, or whether the difference is large enough to matter in a real-world situation.
 
 ## Significance and Interpretation
 
-The p-value is interpreted in relation to the significance level. If the p-value is smaller than the selected level, the null hypothesis is rejected. If the p-value is not smaller, the null hypothesis is not rejected.
+When interpreting a hypothesis test, we compare the **p-value** to the significance level we selected, which is commonly 0.05.
 
-The conclusion should not say that the null hypothesis has been proven true. A non-significant result means that the analysis did not provide sufficient evidence to reject it. The final interpretation should also consider sample size, the strength of the pattern, the quality of the measures, and the original research question.
+The basic rule is:
+
+- **If p < 0.05:** We reject the null hypothesis because the results are statistically significant at the 5% level.
+- **If p >= 0.05:** We fail to reject the null hypothesis because we don't have enough statistical evidence to conclude that a difference or relationship exists at that level.
+
+This assumes we've chosen a significance level of 0.05. If we're using a different significance level, we would compare the p-value to that instead.
+
+Something the professor wants us to understand is that **failing to reject the null hypothesis doesn't mean we've proven it to be true**.
+
+It simply means our analysis didn't provide enough evidence to reject it.
+
+We also need to remember that statistical significance is only one part of interpreting our results.
+
+When explaining our findings, we should also consider:
+
+- The size of our sample.
+- How strong the relationship or difference appears to be.
+- Whether the variables were measured appropriately.
+- Whether the findings actually help answer our research question.
+
+The goal isn't just to report a p-value. We need to explain what the results tell us and why they matter.
 
 # Chi-Square Tests
 
 ## Chi-Square Goodness-of-Fit Test
 
-The chi-square goodness-of-fit test examines one categorical variable. It compares the observed distribution of cases across categories with an expected distribution.
+The **chi-square goodness-of-fit test** is used when we're analyzing a single categorical variable.
 
-The expected distribution may be equal across categories or may be based on percentages specified by the research question. The test asks whether the observed frequencies differ from the expected frequencies enough to conclude that the difference is unlikely to be due to chance.
+It allows us to compare the number of observations we actually collected with the number we would expect to see based on a particular distribution.
 
-The goodness-of-fit test is therefore a one-variable test. It does not test the relationship between two variables.
+For example, imagine we're surveying customers about their preferred shopping method. We might want to test whether customers are equally likely to prefer shopping online, in-store, or through a mobile app.
+
+If we expect each option to receive an equal percentage of responses, we can compare that expectation against the actual results of our survey.
+
+The expected distribution doesn't always have to be equal. It can also be based on specific percentages established by our research question or previous information.
+
+The test helps us determine whether the differences between the observed and expected frequencies are statistically significant.
+
+The main thing to remember is that **the goodness-of-fit test only looks at one categorical variable**.
+
+We're testing whether its distribution matches what we expected, not whether two different variables are related.
 
 ## Chi-Square Test of Independence
 
-The chi-square test of independence examines whether two categorical variables are associated. It uses a cross-tabulation of the variables and compares observed cell counts with the counts expected if the variables were independent.
+The **chi-square test of independence** is used when we want to determine whether there's a relationship between two categorical variables.
 
-The null hypothesis is that the two variables are independent in the population. The alternative hypothesis is that they are associated. A significant test indicates evidence of an association, but it does not by itself explain the cause of the association or show that one variable causes the other.
+This test builds on cross-tabulation because we're comparing the actual counts in each cell of the table with the counts we would expect if the variables were unrelated.
+
+For example, we might want to know whether a customer's age group is associated with their preferred shopping method.
+
+We could create a cross-tabulation comparing age groups with shopping preferences and then use the chi-square test of independence to see whether the differences are statistically significant.
+
+For this test, our hypotheses would be:
+
+- **Null hypothesis (H0):** The two variables are independent, meaning there's no association between them in the population.
+- **Alternative hypothesis (H1):** The two variables are associated, meaning there is a relationship between them in the population.
+
+If our results are statistically significant, we have evidence that the two variables are associated.
+
+However, **an association doesn't necessarily mean that one variable causes the other**.
+
+For example, even if age group and shopping preference are statistically associated, that doesn't automatically mean age itself is the reason someone prefers a particular shopping method.
+
+There could be other factors influencing that relationship.
+
+The biggest difference between the two chi-square tests is what we're trying to analyze:
+
+- **Goodness-of-fit:** Looks at one categorical variable and compares its observed distribution with an expected distribution.
+- **Test of independence:** Looks at two categorical variables and tests whether there's an association between them.
+
+Understanding this difference will help us choose the correct test when working through our Case 31 research questions in R.
+
 
 ## Conditions and Cautions
 
-Chi-square analysis requires categorical data and adequate expected cell counts. Sparse tables or very small expected counts can make the chi-square approximation unreliable. The analyst should inspect the expected counts and consider whether categories need to be combined in a substantively defensible way.
+When using chi-square tests, we need to make sure we're working with categorical variables and that our expected cell counts are large enough for the test to be reliable.
 
-The test result should be reported with the direction and meaning of the cross-tab pattern. A p-value without an explanation of the group percentages does not adequately describe the finding.
+If some categories have very few responses, the chi-square approximation might not be accurate. This is why it's important to check the expected counts before interpreting our results.
+
+If we run into categories with very small counts, we may need to combine some of them. However, we shouldn't combine categories just to make the test work. There needs to be a logical reason for grouping them together based on what we're studying.
+
+Another important thing to remember is that **reporting a p-value by itself isn't enough**.
+
+We also need to explain what the cross-tabulation is showing us, including how the percentages differ between groups and what those differences mean for our research question.
 
 # Adding a Third Variable
 
 ## Purpose
 
-A two-variable cross-tab can show an overall association, but a third variable can clarify the relationship. The third variable is used to examine whether the original association is consistent across subgroups or whether it changes after the data are separated into meaningful categories.
+A cross-tabulation with two variables can help us identify a possible relationship, but sometimes there's more going on than what we see in the original table.
 
-Introducing a third variable can reveal that the original relationship is stronger for some groups, weaker for others, or reversed in direction. This is why a relationship observed in an overall table should not always be treated as the complete explanation.
+By introducing a **third variable**, we can take a closer look at that relationship and see whether it stays consistent across different groups.
+
+For example, we might find an overall relationship between age and shopping preferences. However, when we separate respondents by income level, we could discover that the relationship is much stronger for certain income groups than others.
+
+Adding a third variable can help us understand whether:
+
+- The original relationship stays about the same across different groups.
+- The relationship becomes weaker or disappears.
+- The relationship only exists for certain groups.
+- The relationship changes in strength or direction depending on the group.
+
+The main reason for doing this is that **the overall relationship doesn't always tell us the full story**.
+
+Looking at additional variables can help us better understand what's actually happening in our data.
 
 ## Four Possible Patterns
 
-The module identifies four broad patterns that can appear after adding a third variable:
+According to the module, there are four main patterns we might see when adding a third variable to our analysis.
 
-1. **Replication:** The original relationship appears in each subgroup. The third variable does not substantially change the relationship.
-2. **Explanation:** The original relationship becomes weaker or disappears after the third variable is introduced. This suggests that the third variable may account for part of the original association.
-3. **Specification:** The relationship is present only for particular categories of the third variable. The third variable identifies where the association occurs.
-4. **Interpretation or interaction:** The direction or strength of the relationship changes across categories of the third variable. The relationship needs to be interpreted differently for different subgroups.
+1. **Replication:** The relationship we originally observed continues to appear across the different subgroups. In other words, adding the third variable doesn't really change the pattern we were seeing.
 
-The exact interpretation should be based on the subgroup percentages and the research context. The third variable should be selected because it has a theoretical or practical reason for clarifying the original relationship, not just because additional variables are available.
+2. **Explanation:** The original relationship becomes weaker or disappears after we account for the third variable. This suggests that the third variable might help explain why we saw the relationship in the first place.
+
+3. **Specification:** The relationship only appears within certain categories of the third variable. This helps us identify which groups are actually showing the association.
+
+4. **Interpretation or Interaction:** The strength or direction of the relationship changes depending on the subgroup. This means we may need to interpret the relationship differently for different groups instead of treating everyone the same.
+
+When interpreting these patterns, we should look closely at the percentages within each subgroup and consider how they relate to our research question.
+
+We also shouldn't add a third variable just because we have more data available. **There should be a research-based reason for including it**, whether that's something supported by theory or something that makes sense in the context of our study.
 
 # Using R for Cross-Tabulation and Chi-Square Analysis
 
 ## General Workflow
 
-The R workflow follows the same logic as the conceptual analysis:
+When performing cross-tabulation and chi-square analysis in R, we're following the same general process we learned conceptually. The difference is that we're using R to organize the data, calculate the results, and run our statistical tests.
 
-1. Load the data and the packages needed for the analysis.
-2. Inspect the variables and their coding.
-3. Confirm that the variables are categorical and that missing values are handled.
-4. Create a frequency table for each variable.
-5. Create a cross-tabulation for the independent and dependent variables.
-6. Calculate percentages in the direction needed for the research question.
-7. Run the appropriate chi-square test.
-8. Inspect expected counts and the test output.
-9. Interpret the pattern and statistical result in words.
+The general workflow looks like this:
 
-An R result is not complete just because the command ran successfully. The analyst still has to verify that the variables were coded correctly, the table is oriented correctly, and the output answers the intended research question.
+1. **Load our data and packages:** Start by importing the dataset and loading any R packages we need.
+2. **Review the variables:** Check the variables we're working with and make sure we understand how they're coded.
+3. **Check variable types and missing values:** Confirm that we're using categorical variables and that missing responses are handled appropriately.
+4. **Create frequency tables:** Look at the distribution of responses for each variable individually.
+5. **Create the cross-tabulation:** Compare the independent and dependent variables in a table.
+6. **Calculate the percentages:** Make sure we're using row or column percentages that actually answer our research question.
+7. **Run the chi-square test:** Use the appropriate test to determine whether the observed differences are statistically significant.
+8. **Review the output:** Check the expected counts, test statistic, and p-value.
+9. **Interpret the findings:** Explain what the results mean and how they relate to our research question.
+
+One thing to remember is that **just because our R code runs without errors doesn't mean our analysis is correct**.
+
+We still need to make sure the variables are coded properly, the table is organized correctly, and the statistical test is appropriate for what we're trying to answer.
 
 ## Example R Structure
 
-The exact variable names depend on the data set, but the analysis can be organized using functions such as:
+The exact variable names will depend on the dataset we're using, but we can organize our analysis with functions like these:
 
 ```{r, eval=FALSE}
 # Frequency counts
@@ -300,9 +493,16 @@ prop.table(tab, margin = 2)
 chisq.test(tab)
 ```
 
-The `margin` argument determines the direction of the proportions. I need to select the margin that matches the comparison I am trying to make and then explain what the percentages represent.
+The `margin` argument tells R which direction to use when calculating percentages.
 
-For a goodness-of-fit test, the expected probabilities can be specified when they are not equal:
+- **margin = 1:** Calculates percentages within each row.
+- **margin = 2:** Calculates percentages within each column.
+
+Since we're generally placing our dependent variable in the rows and independent variable in the columns, we would typically use `margin = 2` when comparing responses across the independent-variable groups.
+
+However, we should always double-check that the percentages we're calculating match what our research question is asking.
+
+For a chi-square goodness-of-fit test, we can also specify the expected probabilities when the categories aren't supposed to have equal proportions.
 
 ```{r, eval=FALSE}
 # Goodness-of-fit example structure
@@ -310,30 +510,72 @@ observed <- table(data$categorical_variable)
 chisq.test(observed, p = c(0.25, 0.25, 0.50))
 ```
 
-These examples show the structure of the commands. The actual variable names, expected probabilities, and interpretation must come from the data and research question.
+In this example, we're testing an expected distribution of 25%, 25%, and 50% across three categories.
+
+These examples are meant to show us how the R commands are structured. When working with our actual dataset, we'll need to use the correct variable names, expected probabilities, and interpretations based on the research question.
 
 # Connecting the Analysis to the Data Analysis Table
 
-The data analysis table connects each analytics objective to the variables, measures, scale types, research questions or hypotheses, and statistical techniques. Each analytics objective can be broken into research questions or hypotheses so that the analysis is specific and manageable.
+The **data analysis table** is important because it helps us connect our analytics objectives to the specific variables and statistical tests we'll be using.
 
-The table should identify:
+Instead of just deciding to run different analyses, we're creating a plan that explains what we're trying to answer and how we're going to answer it.
 
-- the construct being studied;
-- the research question or hypothesis;
-- the question or variable that operationalizes the construct;
-- the scale of measurement;
-- the type of analysis; and
-- the statistical technique that will be used.
+Each analytics objective can be broken down into smaller research questions or hypotheses, which makes the analysis more manageable.
 
-The scale type affects which statistics are appropriate. The four scale types are nominal, ordinal, interval, and ratio. For example, nominal categories can be counted, while interval or ratio measures can support calculations such as means when the assumptions and research context make that appropriate.
+Our data analysis table should include:
 
-The data analysis table is different from the constructs-and-measures table. The constructs-and-measures table describes how constructs are defined and measured. The data analysis table goes further by specifying how the measured variables will be analyzed to answer the research questions.
+- **Construct:** The concept or characteristic we're trying to study.
+- **Research question or hypothesis:** What we're specifically trying to find out or test.
+- **Question or variable:** The survey question or dataset variable we're using to measure the construct.
+- **Scale of measurement:** Whether the variable is nominal, ordinal, interval, or ratio.
+- **Type of analysis:** The general approach we'll use to analyze the data.
+- **Statistical technique:** The specific test or method we'll use to answer the research question.
+
+One thing we need to pay attention to is the **scale of measurement**, since this helps determine which statistical methods are appropriate.
+
+The four measurement scales are:
+
+- **Nominal:** Categories without a natural order, such as preferred shopping method or gender.
+- **Ordinal:** Categories with a meaningful order, such as satisfaction levels.
+- **Interval:** Numerical values with equal distances between them, but without a true zero point.
+- **Ratio:** Numerical values with equal distances and a meaningful zero point, such as age or income.
+
+For example, if we're working with nominal variables, we can count how many observations fall into each category.
+
+If we're working with interval or ratio variables, we may be able to calculate statistics like the mean, depending on the assumptions and what we're trying to measure.
+
+It's also important to understand the difference between our **constructs-and-measures table** and our **data analysis table**.
+
+The constructs-and-measures table focuses on defining the concepts we're studying and explaining how we're measuring them.
+
+The data analysis table takes that a step further by showing how we'll actually use those measurements to answer our research questions.
+
+Basically, one table explains **what we're measuring**, while the other explains **how we're going to analyze it**.
 
 # Class Activities and Takeaways
 
 ## Module Planning Activity
 
-The module activity asks students to preview all of the steps, estimate the amount of time needed, identify deadlines, and allow at least twice the estimated time to complete the work. This planning step is intended to make the scope of the module clear before beginning the detailed analysis.
+For the module planning activity, we're supposed to look through all the steps before starting the actual work.
 
+The goal is to get a better idea of how much time the assignment will take and make sure we're not leaving everything until the last minute.
 
+The activity asks us to:
 
+- Review all the steps involved in the module.
+- Estimate how much time we'll need to complete each part.
+- Identify any important deadlines.
+- Set aside at least twice the amount of time we originally estimated.
+
+The idea behind doubling our estimated time is to give ourselves some flexibility in case we run into problems with the data, R code, or analysis.
+
+This is especially useful for assignments like Case 31, where we might need to troubleshoot our code, review our variables, or rerun analyses before everything is ready.
+
+Planning ahead should make it easier to manage the assignment and give us enough time to actually understand the results instead of just rushing to finish the work.
+
+# Appendix
+
+## Project Links
+
+- [GitHub Repository](https://github.com/jakevns/IBM6500/tree/main/M11)
+- [GitHub Pages Website](https://jakevns.github.io/IBM6500/M11/Evans_Jake-M11-CFA-Study-Note.html)

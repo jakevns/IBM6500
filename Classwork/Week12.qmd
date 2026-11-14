@@ -1,0 +1,106 @@
+---
+title: "Class Notes for Week 12"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-expand: 1
+    toc-location: right-body
+    embed-resources: true
+    theme: cosmo
+execute:
+  freeze: auto
+---
+
+# Introduction
+
+- Week 12 continues hypothesis testing with the Employees Federal Credit Union survey from Case 31. The class walkthrough used R for data wrangling and analysis and Quarto to present the results.
+- For the class notes submission, render the `.qmd` and submit the HTML by 10 p.m. Keep `embed-resources: true` under `format: html:` so the report can be opened as a standalone file.
+- The professor also previewed group project Milestone 5. Students who already have their GA4 data and have followed the earlier modules can move ahead. The next milestone will connect BigQuery to Looker Studio.
+
+# Testing Hypothesis (Cont'd)
+
+[Professor Jung's Case 31 sample presentation](https://jaejungca.github.io/case31/Jung_Jae_case31_analysis_present-all.html#/title-slide)
+
+## Case 31 methods and sample
+
+- The sampling frame was the credit union's list of 3,531 members. The case describes using randomly generated member numbers to select 300 people from that list. The prepared file used in the demo contained 128 rows and 54 variables.
+- Q38 identifies whether respondents live in the headquarters area. In the demo, 44.5% lived in the headquarters area and 55.5% lived elsewhere. The survey had no variables for gender, race or ethnicity, income, or education.
+- For each research question, identify the **construct**, the survey item or composite used to **measure it**, and the **measurement scale**. Then choose descriptive statistics and a test that fit the scale and the comparison.
+- The professor used `nrow()`, `ncol()`, and inline R to report numbers directly from the data. If the data change, the numbers update when the slides render. `echo: false` hides the code, while `output: false` hides its output.
+
+# EFA (Exploratory Factor Analysis) & PCA (Principal Component Analysis)
+
+## W12-1
+
+- The module covers PCA, EFA, and reliability. The Case 31 assignment applies those ideas to two constructs: **R3, attitude toward employee proficiency**, and **R6, attitude toward the credit union's operational efficiency**.
+- Before creating a composite index, check **dimensionality** and **reliability**. Dimensionality asks whether the items reflect one underlying construct. Reliability asks whether the items are internally consistent. Apply the same criteria to R3 and R6 and evaluate each set of items on its own.
+
+### R3 — Attitude toward employee proficiency
+
+- Q3–Q6 ask about employee courtesy, helpfulness, professionalism, and availability. In the demo, reliability was above .70, and the one-factor solution accounted for more than half of the variance. These results supported treating the four items as one measure.
+- The professor used `rowMeans()` to average Q3–Q6 **for each respondent** and called the composite `at_emp`. It stays on the original 1–5 scale and can be analyzed as a single variable.
+- `psych::describe(case31$at_emp)` gave a mean of **4.21**, a median of **4**, and an observed range from **2.5 to 5**. The distribution was left-skewed. Scores clustered toward the high end, with a tail extending toward lower ratings.
+- The assignment should show the reliability and factor analysis that justify the index, the descriptive statistics for the index, and the one-sample t-test.
+
+### R6 — Attitude toward operational efficiency
+
+- Use the same reliability and dimensionality checks for the R6 items. If they support one reliable measure, a composite can summarize the responses. If the items measure different aspects of operations, analyze and interpret those items separately.
+
+## W12-2: Hypothesis Testing
+
+### Choosing a test
+
+| Test | When to use it |
+|---|---|
+| One-sample t-test | Compare one sample mean with a specific benchmark, such as 3 on a 1–5 scale. |
+| Independent-samples t-test | Compare a numeric outcome between two separate groups. |
+| Paired-samples t-test | Compare two numeric measurements from the same people or matched pairs. The test uses the differences within pairs. |
+| One-way ANOVA | Compare a numeric outcome across groups defined by one categorical variable, typically with three or more groups. |
+| Chi-square test of independence | Use a cross-tabulation to test whether two categorical variables are associated. |
+| Chi-square goodness-of-fit test | Compare the observed counts for one categorical variable with an expected distribution. |
+
+- Start with descriptive statistics. For interval-scale data, look at the mean, standard deviation, and distribution. A histogram is generally appropriate for metric data. A bar chart can also make sense for a five-point item if the goal is to show how often each response option was selected.
+- For categorical data, start with counts and percentages. When groups have different sizes, compare percentages within each group so the distributions are easier to compare.
+- At a 5% significance level, reject the null hypothesis when `p < .05`. A larger p-value means the data provide insufficient evidence to reject it.
+
+### R1 — Savings rates and the one-sample t-test
+
+- The demo used reverse-coded Q7 (`q7r`) to measure how members rated the savings rate the credit union pays. On the recoded scale, **1 = very low**, **3 = average**, and **5 = very high**.
+- The two-sided test compared the population mean with 3 ($H_0: \mu = 3$, $H_A: \mu \ne 3$). The R formula was `t.test(q7r ~ 1, mu = 3, data = case31)`.
+- About **65%** selected “average,” and the sample mean was **3.07**. The test gave **p > .10**, so there was insufficient evidence that the mean differed from 3. The responses suggest that members generally saw the savings rate as about average.
+
+### R2 — Why members borrow elsewhere
+
+- The professor's demo used **Q8r** (perceived borrowing rates) and **Q30** (agreement that the credit union's rates are lower than competitors') to examine whether loan rates might help explain why members borrow elsewhere. The demo treated both as approximately interval and proposed descriptive statistics followed by one-sample t-tests.
+- Keep the coding direction in mind. A higher Q8r means members perceive **higher rates charged**, while a higher Q30 means stronger agreement that the credit union's rates are **lower than competitors'**.
+
+### R4a — Does perceived employee proficiency differ by where members live?
+
+- **Grouping variable:** Q38, headquarters area versus elsewhere. **Outcome:** `at_emp`, the employee proficiency index from R3.
+- The professor used a boxplot and group summaries to compare the distributions, then demonstrated Levene's test to check for evidence of unequal variances. The manual example used the equal-variance t-test, while the `gtsummary` table displayed a Welch test.
+- The group means were **4.28** for headquarters-area members and **4.14** for members living elsewhere, a difference of **0.14 points**. With **p > .05**, the sample provided insufficient evidence of a difference in average employee proficiency ratings by residence.
+
+### R4b — Is awareness of services associated with where members live?
+
+- The demo crossed **Q13**, awareness and use of regular share accounts, with **Q38**, residence. Q13 has three categories: unaware, aware but has not used, and aware and has used. Q13–Q26 cover 14 products and services.
+- Convert the labelled survey responses to factors so the table shows the category names. Use `table()` for counts and `prop.table(..., margin = 2)` for column proportions when residence is in the columns. Each residence group then sums to 100%. A mosaic plot gives a visual comparison of the two groups.
+- For regular share accounts, the chi-square test gave **χ² = 1.27, df = 2, p = .5295**. The test provided insufficient evidence that awareness and use of regular share accounts were associated with where members lived.
+
+### R4c, H1, and H2
+
+- **R4c:** The test depends on the operational efficiency measure. For an interval-scale outcome, compare the two residence groups with an independent-samples t-test. For a categorical outcome, cross-tabulate the responses by residence and use a chi-square test of independence.
+- **H1 and H2** were listed as a separate Case 31 hypothesis-testing assignment.
+
+## W12-3: Regression
+
+- **Step 1:** Review regression in Chapter 18.
+- **Step 2:** Review regression assumptions using the IBM 6510 material and the video provided in the module.
+- Apply regression to **Case 31 H5a–H5d**. The four hypotheses share the same dependent variable and use different independent variables.
+
+# CFA (Confirmatory Factor Analysis)
+
+- **W12-4:** The professor uses his own research to demonstrate the structural equation modeling (SEM) process from start to finish.
+- **W12-5:** The module covers how to assess convergent validity, discriminant validity, and common method bias (CMB).
+- **Assignment:** Read the assigned CMB article and take notes summarizing it.
