@@ -1,0 +1,964 @@
+---
+title: "The Moderator–Mediator Variable Distinction: Article Summary"
+subtitle: "Baron & Kenny (1986)"
+author: "Jake Evans"
+date: today
+format:
+  html:
+    toc: true
+    number-sections: true
+    embed-resources: true
+---
+
+# Article Information
+
+| | |
+|---|---|
+| **Authors** | Reuben M. Baron and David A. Kenny (University of Connecticut) |
+| **Title** | The Moderator–Mediator Variable Distinction in Social Psychological Research: Conceptual, Strategic, and Statistical Considerations |
+| **Journal** | *Journal of Personality and Social Psychology*, 51(6), 1173–1182 |
+| **Year** | 1986 |
+| **DOI** | <https://doi.org/10.1037/0022-3514.51.6.1173> |
+
+## Citation (APA)
+
+Baron, R. M., & Kenny, D. A. (1986). The moderator–mediator variable distinction in social psychological research: Conceptual, strategic, and statistical considerations. *Journal of Personality and Social Psychology, 51*(6), 1173–1182. https://doi.org/10.1037/0022-3514.51.6.1173
+
+
+# Purpose of the Article
+
+Researchers have often used the terms *moderator* and *mediator* interchangeably, even though they describe two different things. Baron and Kenny explain the differences between these two types of "third variables" from three perspectives: conceptual, strategic, and statistical.
+
+The article also walks through how we can analyze each type of variable and explains how moderators and mediators can be tested together within the same causal model.
+
+The authors give a couple of examples where researchers confused the two terms:
+
+- **Harkins, Latané, and Williams (1980):** Referred to identifiability as both a moderator and a mediator of social loafing within the same paragraph.
+- **Findley and Cooper (1983):** Described gender, age, race, and socioeconomic status (SES) as *mediators* of the relationship between locus of control and achievement, even though they were actually discussing *moderators*.
+
+One important point the authors make is that **the difference between moderators and mediators isn't simply about how variables are measured or manipulated**.
+
+For example, a moderator can be something researchers manipulate in an experiment or something they measure through a survey. It can also be related to a person's characteristics or the situation they're in.
+
+Similarly, mediators aren't limited to self-reported information or variables that only describe individual people.
+
+The main difference comes down to **the role each variable plays in explaining a relationship**.
+
+# Key Definitions
+
+| | Moderator | Mediator |
+|---|---|---|
+| **Question answered** | **When** or for whom does X affect Y? | **How** or **why** does X affect Y? |
+| **Role** | Helps identify which groups or conditions have the strongest or weakest relationship between X and Y | Explains the process or mechanism through which X influences Y |
+| **What it changes** | Changes the strength or direction of the relationship between X and Y | Helps explain how the effect of X is carried through to Y |
+| **Causal position** | Operates at the same level as X and is treated as an independent (exogenous) variable | Falls between X and Y, where X affects the mediator and the mediator affects Y |
+| **Statistical signature** | A significant interaction between X and Z (X × Z) | The effect of X on Y becomes smaller after controlling for the mediator |
+| **Ideal relation to X and Y** | Ideally unrelated to both X and Y, making the interaction easier to interpret | Expected to have strong relationships with both X and Y |
+| **Best used when** | The relationship between X and Y is weak or inconsistent | There is already a strong relationship between X and Y that we want to explain |
+| **Research interest** | Usually focuses on when or for whom the predictor matters | Usually focuses on understanding the underlying process rather than just the predictor |
+| **Nature** | More of a static classification that helps explain "who does what" | More of a dynamic process that helps explain why people behave or respond differently |
+
+: Moderator vs. mediator at a glance {#tbl-compare}
+
+The easiest way for me to remember the difference is that **moderators tell us when or for whom a relationship changes, while mediators help explain why or how that relationship happens**.
+
+# Moderators
+
+## Definition
+
+A **moderator** is a variable that changes the strength or direction of the relationship between an independent variable (predictor) and a dependent variable (criterion).
+
+According to Baron and Kenny (p. 1174), moderators can be either:
+
+- **Qualitative variables:** Categories such as sex, race, or social class.
+- **Quantitative variables:** Numerical measurements, such as reward levels or other continuous values.
+
+Essentially, a moderator helps us understand the circumstances where a relationship becomes stronger, weaker, or possibly changes direction.
+
+The authors explain moderators from a couple of different statistical perspectives.
+
+### Correlational View
+
+From a correlational perspective, a moderator changes the relationship, or zero-order correlation, between two variables.
+
+For example, Stern, McCants, and Pettine (1982) found that the relationship between stressful life events and illness was much stronger when those events were outside of someone's control.
+
+They compared situations such as:
+
+- **Uncontrollable events:** Something like the death of a spouse.
+- **Controllable events:** Something like a divorce.
+
+The important point is that the relationship between life events and illness wasn't equally strong across both types of situations.
+
+In this example, **how much control someone had over an event acted as a moderator** because it changed the strength of the relationship.
+
+### ANOVA View
+
+When looking at moderators through ANOVA, we're generally interested in an **interaction effect** between our main independent variable and another factor.
+
+This interaction helps us identify the conditions where the independent variable has a different effect on the dependent variable.
+
+The article gives an example from forced compliance research by Collins and Hoyt (1972).
+
+In their research, the insufficient-justification effect depended on whether someone made a public commitment or acted privately.
+
+- **Public commitment:** The insufficient-justification effect appeared as expected.
+- **Private behavior:** The direction of the effect was reversed.
+
+This is an example of moderation because the relationship changed depending on the situation.
+
+### Understanding Moderator Effects
+
+One thing to remember is that a moderator doesn't always have to completely reverse a relationship.
+
+There are different ways moderation can appear in our results:
+
+- **Reversal (crossover):** A relationship changes direction depending on the moderator. For example, something that has a positive effect for one group might have a negative effect for another.
+- **Reduction:** A relationship becomes weaker or even disappears under certain conditions.
+
+The authors also make an interesting point in Footnote 1. Although crossover effects are often statistically stronger, **a relationship going from a strong effect to no effect at all can sometimes be more meaningful from a research perspective**.
+
+This is important because we shouldn't automatically assume that a complete reversal is the only type of moderation worth paying attention to.
+
+Sometimes, understanding why a relationship exists for one group but disappears for another can give us just as much useful information.
+
+
+## The Moderator Model (Figure 1)
+
+```{mermaid}
+%%| label: fig-moderator
+%%| fig-cap: "Moderator model (after Baron & Kenny, 1986, Figure 1)"
+flowchart LR
+  X["Predictor (X)"] -- "a" --> Y["Outcome (Y)"]
+  Z["Moderator (Z)"] -- "b" --> Y
+  XZ["Predictor × Moderator (XZ)"] -- "c" --> Y
+```
+
+The figure shows how a moderator works within a relationship between a predictor (X) and an outcome (Y).
+
+The article uses an example from Glass and Singer (1972), where researchers looked at how noise intensity affected task performance. They also examined whether the controllability of the noise, including periodic versus aperiodic noise, changed that relationship.
+
+In this example, noise intensity is the predictor, task performance is the outcome, and controllability is the moderator.
+
+The model includes three paths:
+
+- **Path a:** The direct effect of the predictor (X) on the outcome (Y).
+- **Path b:** The direct effect of the moderator (Z) on the outcome (Y).
+- **Path c:** The interaction between the predictor and moderator (XZ), showing whether the effect of X on Y changes depending on Z.
+
+The most important part of this model is **Path c, which represents the interaction effect**.
+
+If the interaction is statistically significant, we have evidence supporting the moderation hypothesis.
+
+Paths a and b might also be statistically significant, but those main effects aren't what we're actually testing when we're looking for moderation.
+
+The goal is to determine whether **the relationship between X and Y changes depending on the moderator**.
+
+## Testing Moderation: Four Cases
+
+The statistical method we use to test moderation depends on whether our independent variable and moderator are categorical or continuous.
+
+Baron and Kenny describe four different situations. For the categorical variables in these examples, we're assuming there are only two categories.
+
+| Case | Moderator | Independent variable | How to test |
+|---|---|---|---|
+| **1** | Categorical | Categorical | Use a 2 × 2 ANOVA and look for a significant interaction. If the interaction is significant, we can follow up by testing the simple effects. |
+| **2** | Categorical | Continuous | Compare the **unstandardized regression slopes** between groups. We should test whether the slopes differ before examining each slope individually. |
+| **3** | Continuous | Categorical | Regress Y on X, Z, and the interaction term XZ. A significant XZ term, after controlling for X and Z, supports moderation. Simple effects can be examined using Aiken and West (1986). |
+| **4** | Continuous | Continuous | The method depends on the relationship. For a step function, divide Z into two groups and follow Case 2. For linear or quadratic relationships, use regression with interaction terms, similar to Case 3. |
+
+: Choosing an analysis for moderation {#tbl-cases}
+
+The main takeaway is that **we can't use the exact same statistical approach for every moderation analysis**.
+
+We need to understand how our variables are measured before choosing the correct method.
+
+For example, if both variables are categorical, ANOVA may be appropriate. However, if we're working with continuous variables, regression with interaction terms is generally more useful.
+
+### Why Not Compare Correlations (Case 2)?
+
+When we have a continuous independent variable and a categorical moderator, it might seem easier to calculate the correlation between X and Y separately for each group.
+
+This has been a common approach in attitude–behavior research, but Baron and Kenny explain that it can create problems.
+
+There are two main issues:
+
+1. **Differences in the variance of X:** Comparing correlations assumes that X has similar variability across the moderator groups. If one group has a smaller range of values, its correlation might appear weaker simply because there's less variation in the data.
+
+2. **Differences in measurement error for Y:** If the outcome variable is measured more accurately in one group than another, the correlations could appear different even when the underlying relationships are similar.
+
+Because of these problems, the authors recommend comparing **unstandardized regression coefficients instead of correlations or standardized beta coefficients**.
+
+Unstandardized slopes aren't affected in the same way by differences in the variance of X or measurement error in Y.
+
+However, there's still an important limitation. If the measurement error in X differs between groups, the regression slopes can also become distorted.
+
+In that situation, the authors recommend correcting for measurement error through a method such as the multiple-group option in LISREL.
+
+The main point is that **differences between group correlations don't automatically prove moderation**. We need to use a method that appropriately tests whether the relationship itself changes.
+
+### Forms of Moderation (Figure 2)
+
+When our moderator is continuous, the way it changes the relationship between X and Y can take several different forms.
+
+Baron and Kenny describe three general patterns: linear, quadratic, and step functions.
+
+#### Linear Moderation
+
+With **linear moderation**, the effect of X on Y changes gradually as the moderator increases or decreases.
+
+For example, as Z increases, the relationship between X and Y might steadily become stronger or weaker.
+
+This is the type of moderation researchers most commonly assume.
+
+To test for linear moderation, we can use regression with an interaction term between X and Z (XZ).
+
+If that interaction is significant, it suggests that the relationship between X and Y changes as Z changes.
+
+#### Quadratic Moderation
+
+With **quadratic moderation**, the relationship doesn't change at a constant rate.
+
+Instead, the effect of X on Y might remain relatively similar across part of the moderator's range and then begin changing more noticeably as Z reaches higher or lower values.
+
+This means the relationship can follow a curved pattern rather than a straight line.
+
+The authors explain that we can test this in two ways:
+
+- Divide the moderator into groups around the point where the relationship begins changing more rapidly.
+- Use regression with X, Z, XZ, Z², and XZ².
+
+When using the regression approach, **the XZ² interaction term is what we're interested in testing**.
+
+If this term is significant, it provides evidence that the moderating effect follows a quadratic pattern.
+
+#### Step Moderation
+
+With **step moderation**, the relationship between X and Y changes once the moderator reaches a particular value.
+
+Instead of gradually becoming stronger or weaker, the effect switches at a specific point.
+
+For example, a particular strategy might work for people below a certain score but stop working once their score passes a threshold.
+
+To test this, we can divide the moderator into two categories at the point where the relationship changes and then compare the groups.
+
+However, the authors point out that **it's often difficult to know exactly where that cutoff should be**.
+
+Most theories aren't specific enough to tell researchers the precise value where a relationship is expected to change.
+
+### Example: Persuasive Messages and IQ
+
+The article uses an example involving two types of persuasive messages:
+
+- **Fear-arousing messages:** Messages that try to persuade people by emphasizing fear or potential negative consequences.
+- **Rational messages:** Messages that rely more on logical arguments and reasoning.
+
+In this example, the type of message is our independent variable (X), while IQ is the moderator (Z).
+
+The idea is that the effectiveness of each message might depend on the person's IQ.
+
+For example:
+
+- Fear-arousing messages might be more effective for participants with lower IQ scores.
+- Rational messages might be more effective for participants with higher IQ scores.
+
+If we observe this pattern, it suggests that the relationship between message type and effectiveness changes depending on IQ.
+
+This would be an example of moderation because **the same independent variable has different effects depending on the characteristics of the group we're studying**.
+
+The important thing to remember is that we're not necessarily trying to prove that IQ directly causes someone to respond to a message in a certain way.
+
+Instead, we're examining whether IQ changes the relationship between the type of persuasive message and its effectiveness.
+
+This example helps show why moderators are useful. They allow us to go beyond asking whether something works and start asking **when it works and for whom it works best**.
+
+
+### Measurement Error in Case 4
+
+When both the independent variable and moderator are continuous, measurement error can make the analysis more complicated.
+
+According to Busemeyer and Jones (1983), **measurement error in either variable can reduce the statistical power of the interaction test**. This makes it harder for us to identify a significant moderating effect, even when one actually exists.
+
+Kenny and Judd (1984) developed methods to help correct for these measurement errors. However, their approach assumes that the variables follow a normal distribution.
+
+The main thing to remember is that **measurement error can make moderation harder to detect**, especially when we're working with two continuous variables.
+
+# Mediators
+
+## Definition
+
+A **mediator** is a variable that helps explain how or why an independent variable (predictor) affects a dependent variable (outcome).
+
+Baron and Kenny (p. 1176) explain that a variable functions as a mediator to the extent that it accounts for the relationship between the predictor and the outcome.
+
+Unlike moderators, which help us understand when or for whom a relationship changes, mediators focus on **the process that connects two variables**.
+
+The authors explain that mediators can help us understand how external events create internal psychological responses, which then influence someone's behavior.
+
+This idea goes back to Woodworth's (1928) **Stimulus-Organism-Response (S-O-R) model**.
+
+The basic idea is that people don't always respond directly to something happening around them. Instead, there's an internal process between the stimulus and the response.
+
+In other words:
+
+- **Stimulus:** Something happens in the environment.
+- **Organism:** The person processes or responds internally to that event.
+- **Response:** The internal process influences how the person ultimately behaves.
+
+This helps explain why two people might experience the same situation but respond differently depending on what's happening psychologically.
+
+### Example: Incentives, Choice, and Attitude Change
+
+The article gives an example involving incentives and attitude changes after someone performs an action that doesn't match their original beliefs.
+
+In this example, **choice acts as a moderator**, while **dissonance arousal and reduction act as mediators**.
+
+- **Moderator (choice):** Whether someone feels they had a choice changes the relationship between the incentive and their attitude change.
+- **Mediator (dissonance):** The psychological discomfort caused by acting against their beliefs, along with the process of reducing that discomfort, helps explain why their attitude changes.
+
+This example is useful because it shows how moderation and mediation can work together.
+
+The moderator helps explain **when the effect happens**, while the mediator helps explain **why the effect happens**.
+
+## The Mediator Model (Figure 3)
+
+```{mermaid}
+%%| label: fig-mediator
+%%| fig-cap: "Mediator model (after Baron & Kenny, 1986, Figure 3)"
+flowchart LR
+  X["Independent Variable"] -- "a" --> M["Mediator"]
+  M -- "b" --> Y["Outcome Variable"]
+  X -- "c" --> Y
+```
+
+The figure shows how a mediator fits between our independent variable (X) and dependent variable (Y).
+
+Instead of assuming that X only affects Y directly, we're also looking at whether X influences another variable (M), which then affects Y.
+
+The model includes three paths:
+
+- **Path a:** The effect of the independent variable (X) on the mediator (M).
+- **Path b:** The effect of the mediator (M) on the dependent variable (Y).
+- **Path c:** The direct relationship between the independent variable (X) and dependent variable (Y).
+
+The important idea is that **some or all of the effect of X on Y may be explained through the mediator**.
+
+For example, imagine we're studying whether employee training improves job performance.
+
+Training might improve an employee's confidence, and that increased confidence could then improve their performance.
+
+In that situation:
+
+- **X:** Employee training.
+- **M:** Employee confidence.
+- **Y:** Job performance.
+
+Confidence would be a possible mediator because it helps explain how training leads to better performance.
+
+The goal of mediation analysis is to determine whether this intermediate process helps account for the relationship between X and Y.
+
+## Conditions for Mediation
+
+According to Baron and Kenny, there are three main conditions we need to examine when testing whether a variable acts as a mediator.
+
+### Condition A: The Independent Variable Must Predict the Mediator
+
+First, changes in our independent variable should be associated with significant changes in the mediator.
+
+This is represented by **Path a**.
+
+For example, if we're studying employee training and confidence, we would first need to show that training significantly predicts confidence.
+
+If training has no relationship with confidence, it becomes harder to argue that confidence explains how training affects performance.
+
+### Condition B: The Mediator Must Predict the Dependent Variable
+
+Next, we need to show that the mediator significantly predicts the dependent variable.
+
+This is represented by **Path b**.
+
+Continuing with our example, we'd need to show that employee confidence is associated with job performance after accounting for training.
+
+This helps establish that the proposed mediator is actually related to the outcome we're trying to explain.
+
+### Condition C: The Direct Effect Should Become Smaller
+
+Finally, we look at what happens to the relationship between X and Y after including the mediator in our analysis.
+
+If the mediator helps explain the relationship, **the direct effect of X on Y should become smaller once we control for M**.
+
+The strongest example of mediation occurs when the direct effect disappears completely.
+
+This would suggest that the mediator accounts for the entire relationship between the independent and dependent variables within the model.
+
+::: {.callout-note}
+The original article labels Condition A as "Path c," but Figure 3 shows that it should refer to Path a, which connects the independent variable to the mediator.
+:::
+
+### Understanding the Reduction in Path c
+
+The authors explain that mediation isn't necessarily an all-or-nothing situation.
+
+Instead, we can look at how much the direct relationship between X and Y decreases after accounting for the mediator.
+
+- **Path c = 0:** This represents *perfect mediation*, where the mediator fully accounts for the original relationship in the model.
+- **Path c becomes smaller but doesn't reach zero:** This suggests *partial mediation*, where the mediator explains some of the relationship, but other factors may also be involved.
+
+One important point is that **perfect mediation isn't always a realistic expectation**, especially when we're studying human behavior.
+
+Social and psychological outcomes are usually influenced by multiple factors rather than one single cause.
+
+Because of this, identifying a mediator that significantly reduces the relationship between X and Y can still be an important finding.
+
+## Testing Mediation: Three Regression Equations
+
+Baron and Kenny explain that although ANOVA can provide some information about mediation, it doesn't give us the same level of detail as regression.
+
+Following the approach described by Judd and Kenny (1981b), the authors recommend using **three separate regression equations** to test the relationships involved in mediation.
+
+We don't need to use hierarchical or stepwise regression or calculate partial correlations separately. Instead, we estimate the three equations and examine the appropriate regression coefficients.
+
+| Equation | Regression | What we're looking for |
+|---|---|---|
+| **1** | Mediator on IV | Does the independent variable significantly predict the mediator? |
+| **2** | DV on IV | Does the independent variable significantly predict the dependent variable? |
+| **3** | DV on IV **and** mediator | Does the mediator predict the dependent variable after controlling for the IV, and does the IV's effect become smaller than it was in Equation 2? |
+
+: Baron and Kenny's steps for mediation {#tbl-steps}
+
+### Equation 1: Does X Predict the Mediator?
+
+Our first regression examines whether the independent variable significantly predicts the proposed mediator.
+
+Essentially, we're testing **Path a**.
+
+Using the employee training example, we'd test whether training significantly predicts employee confidence.
+
+If the relationship is significant and in the expected direction, we can move on to the next step.
+
+### Equation 2: Does X Predict Y?
+
+Next, we examine the relationship between our independent variable and dependent variable without including the mediator.
+
+This establishes the original relationship we're trying to explain.
+
+In our example, we'd test whether employee training significantly predicts job performance.
+
+The result gives us a coefficient that we can compare against the final regression.
+
+### Equation 3: Does the Mediator Explain the Relationship?
+
+For the third regression, we include both the independent variable and mediator as predictors of the dependent variable.
+
+This allows us to examine two things:
+
+1. Whether the mediator significantly predicts the outcome after controlling for the independent variable.
+2. Whether the independent variable's effect becomes smaller compared with Equation 2.
+
+For example, we'd examine whether confidence predicts job performance after accounting for training.
+
+We would then compare the effect of training on performance before and after adding confidence to the model.
+
+If the mediator is significant and the effect of the independent variable becomes smaller, that supports the mediation explanation under Baron and Kenny's approach.
+
+### Perfect vs. Partial Mediation
+
+The difference between perfect and partial mediation comes down to what happens to the direct effect of X on Y after adding the mediator.
+
+- **Perfect mediation:** The independent variable no longer has a direct effect on the dependent variable once the mediator is included.
+- **Partial mediation:** The independent variable still has a direct effect, but that effect becomes smaller after accounting for the mediator.
+
+The main takeaway is that **we're looking for evidence that the mediator helps explain the relationship, rather than simply checking whether all three variables are related**.
+
+```{mermaid}
+%%| label: fig-steps
+%%| fig-cap: "Decision flow for the three-equation test"
+flowchart TD
+  A["Eq. 1: Does IV predict Mediator?"] -->|Yes| B["Eq. 2: Does IV predict DV?"]
+  A -->|No| N["No mediation"]
+  B -->|Yes| C["Eq. 3: Does Mediator predict DV, controlling IV?"]
+  B -->|No| N
+  C -->|No| N
+  C -->|Yes| D{"IV effect in Eq. 3"}
+  D -->|"= 0"| P["Perfect (complete) mediation"]
+  D -->|"Smaller but ≠ 0"| Q["Partial mediation"]
+```
+
+This flowchart summarizes the decision process described in the original Baron and Kenny approach.
+
+We start by checking whether X predicts the mediator, then whether X predicts Y, and finally whether the mediator predicts Y after controlling for X.
+
+If those conditions are met, we examine how much the direct effect of X on Y decreases.
+
+One thing worth remembering is that **this is the original 1986 approach to testing mediation**. More recent methods often test the indirect effect directly, rather than requiring every relationship in this sequence to be statistically significant.
+
+## Multicollinearity Warning
+
+One challenge with mediation analysis is that the independent variable and mediator are expected to be related.
+
+After all, part of our hypothesis is that X influences M.
+
+However, when we include both variables in the same regression equation, that relationship can create **multicollinearity**.
+
+Multicollinearity occurs when two or more predictors are correlated with one another, making it harder to estimate their separate effects precisely.
+
+In Equation 3, this can reduce statistical power and make it more difficult to determine whether individual coefficients are significant.
+
+Because of this, Baron and Kenny emphasize that we shouldn't focus only on the p-values.
+
+We also need to look at **the actual size of the regression coefficients**.
+
+For example, it's possible for one coefficient to be smaller but statistically significant, while another coefficient is larger but not statistically significant.
+
+This can happen because statistical significance depends on more than just the size of the coefficient. It also depends on factors like variability and the uncertainty of the estimate.
+
+The important thing to remember is that **a change in statistical significance doesn't automatically tell us how much the relationship has changed**.
+
+When testing mediation, we should compare the coefficients themselves and consider how multicollinearity might be affecting our results.
+
+
+## Sobel Test for the Indirect Effect
+
+The **Sobel test (1982)** gives us a way to determine whether the indirect effect of an independent variable on a dependent variable through a mediator is statistically significant.
+
+This indirect effect is represented by **ab**, where:
+
+- **a:** The relationship between the independent variable (IV) and the mediator.
+- **b:** The relationship between the mediator and dependent variable (DV), after controlling for the IV.
+- **$s_a$:** The standard error for Path a.
+- **$s_b$:** The standard error for Path b.
+
+The exact standard error of the indirect effect, assuming multivariate normality, is calculated using:
+
+$$
+SE_{ab} = \sqrt{b^2 s_a^2 + a^2 s_b^2 + s_a^2 s_b^2}
+$$
+
+Sobel's approximation simplifies this calculation by leaving out the final term ($s_a^2 s_b^2$), which is usually relatively small.
+
+The idea is that **we're not just checking whether the individual paths are significant. We're also testing whether the indirect effect itself is statistically significant**.
+
+For example, if we're studying whether employee training improves performance through increased confidence, the Sobel test can help us evaluate whether that indirect relationship is significant.
+
+The authors also explain that Sobel's approach can be applied to more complicated mediation models.
+
+One thing worth remembering is that the Sobel test relies on a normal approximation, which can be less reliable with small samples or indirect effects that aren't normally distributed. More recent approaches often use bootstrapping to test indirect effects.
+
+## Assumptions and Sources of Bias
+
+When using multiple regression to test mediation, Baron and Kenny discuss two important assumptions:
+
+1. **No measurement error in the mediator:** We're assuming that our mediator is being measured accurately.
+2. **No feedback from the dependent variable to the mediator:** We're assuming that the outcome doesn't also cause changes in the mediator.
+
+If either assumption is violated, our results could become biased or harder to interpret.
+
+### Measurement Error in the Mediator
+
+One challenge with mediation analysis is that mediators often represent psychological concepts that aren't easy to measure directly.
+
+For example, something like confidence, motivation, or perceived control usually has to be measured through survey questions or other indicators.
+
+Because of this, **measurement error can become a major issue when testing mediation**.
+
+According to the authors, measurement error in the mediator can lead to two problems:
+
+- **Underestimating Path b:** The relationship between the mediator and dependent variable may appear weaker than it actually is.
+- **Overestimating the direct effect of the IV on the DV:** Path c may appear stronger because the mediator isn't being measured accurately enough to account for the relationship.
+
+What's interesting is that this problem can be especially serious when we're studying a mediator that actually plays an important role in the relationship.
+
+If the independent variable strongly affects the mediator, and the mediator strongly affects the outcome, measurement error could still make the mediator appear less important than it really is.
+
+This means **we could potentially overlook a useful mediator simply because we didn't measure it well enough**.
+
+### Addressing Measurement Error
+
+The authors recommend using multiple indicators to measure each construct rather than relying on a single question or measurement.
+
+They also discuss using **latent-variable structural equation modeling (SEM)** through programs such as LISREL-VI and EQS.
+
+These approaches offer several advantages:
+
+- They can work well in experimental research settings.
+- They allow us to test the relevant relationships directly rather than leaving certain paths out, as can happen with ANOVA.
+- They can account for measurement error and correlated measurement errors within the model.
+- More advanced models can also account for feedback relationships between variables.
+
+The main takeaway is that **using better measurements and more complete statistical models can improve our ability to identify mediation effects**.
+
+### Feedback
+
+Another issue occurs when we're not entirely sure about the direction of the relationship between our mediator and dependent variable.
+
+We might assume that the mediator causes the outcome, when the outcome could actually influence the mediator.
+
+For example, we might assume that confidence improves job performance. However, it's also possible that performing well at work increases someone's confidence.
+
+If we're only looking at correlations, it can be difficult to determine which direction the relationship actually follows.
+
+Smith (1982) suggested an approach involving two manipulated variables:
+
+1. One variable that affects only the mediator.
+2. Another variable that affects only the dependent variable.
+
+This design can help researchers separate the possible causal directions.
+
+The resulting models can be analyzed using **two-stage least squares regression** or **structural equation modeling (SEM)**.
+
+The important point is that **we shouldn't automatically assume the direction of a relationship just because our regression results are significant**.
+
+We still need to consider whether our research design supports the causal explanation we're making.
+
+# Strategic Considerations
+
+Baron and Kenny also explain how we should decide when to focus on moderators versus mediators.
+
+The choice depends on what we already know about the relationship and what we're trying to understand.
+
+### When to Use Moderators or Mediators
+
+**Moderators** are especially useful when the relationship between X and Y is weak, inconsistent, or different across groups.
+
+For example, we might find that a particular relationship exists in one setting but disappears in another.
+
+Instead of assuming the original relationship doesn't matter, we can look for a moderator that explains when or for whom the relationship is stronger.
+
+The authors use self-monitoring as an example (Snyder, 1983), showing how individual differences can help explain when personality traits predict behavior more accurately.
+
+**Mediators**, on the other hand, are most useful when we already have evidence of a strong relationship between X and Y and want to understand why it happens.
+
+Essentially:
+
+- **Moderation:** We know the relationship varies, and we want to understand under what conditions.
+- **Mediation:** We know there's a relationship, and we want to understand the process behind it.
+
+### Moving from Moderators to Mediators
+
+One interesting idea from the article is that identifying a moderator can help us discover a mediator.
+
+For example, imagine that race moderates the relationship between an instructional technique and student performance.
+
+Instead of stopping at the finding that different groups respond differently, researchers could investigate whether something like **evaluative anxiety** helps explain those differences.
+
+In this case, race might help identify where the relationship changes, while evaluative anxiety could help explain the underlying process.
+
+The authors suggest that **we should prioritize moderators that help us understand a possible mechanism**, rather than only choosing variables because they improve prediction.
+
+If two moderators are equally useful statistically, the better choice may be the one that points us toward a meaningful explanation.
+
+This also helps prevent researchers from continuously adding moderators without a clear theoretical reason.
+
+### Moving from Mediators to Interventions
+
+Mediators can also help researchers identify ways to improve real-world outcomes.
+
+For example, imagine that perceived control mediates the relationship between social density and performance.
+
+If crowded environments negatively affect performance because people feel like they have less control, then increasing their sense of control might help reduce that negative effect.
+
+The article gives examples of possible interventions, such as:
+
+- Changing dormitory layouts from corridors to suites.
+- Establishing quiet hours.
+- Giving people more control over their immediate environment.
+
+The key idea is that **once we understand why something happens, we can start looking for ways to change the process**.
+
+This makes mediation especially useful for developing interventions rather than simply describing relationships.
+
+## Operational Implications
+
+The article also explains how the way we study control changes depending on whether we're treating it as a moderator or mediator.
+
+| | Control as a moderator | Control as a mediator |
+|---|---|---|
+| **Operation** | Experimentally manipulate control independently of the stressor | Measure perceived control as a separate variable |
+| **Measuring perceived control** | Not necessarily required; if measured, it may serve as a manipulation check | Essential because perceived control is the mechanism we're trying to explain |
+| **Main concern** | Making sure control and the stressor are manipulated independently | Making sure perceived control is measured accurately, ideally using multiple measures (Campbell & Fiske, 1959) |
+
+The important difference is that **moderation focuses on manipulating or identifying the conditions where a relationship changes**, while mediation requires us to actually measure the process we're proposing.
+
+This is why the authors emphasize that **mediation requires more and better data**.
+
+# Combining Mediation and Moderation
+
+Baron and Kenny also explain that moderation and mediation don't have to be studied separately.
+
+In Figure 4, they present a model where control can serve as both a moderator and a mediator within the same research design.
+
+This allows researchers to examine not only whether a relationship changes under certain conditions, but also why those changes occur.
+
+The model uses the following variables:
+
+| Symbol | Meaning |
+|---|---|
+| **C** | Experimentally manipulated control |
+| **S** | Stressor (independent variable) |
+| **P** | Measured perceived control |
+| **O** | Outcome (dependent variable) |
+| **CS, PS, CP, CPS** | Interaction terms between the variables |
+
+In this model, both C and S are dichotomous variables, meaning they each have two categories.
+
+The authors also assume that the moderation effects follow a linear pattern.
+
+```{mermaid}
+%%| label: fig-combined
+%%| fig-cap: "Combined mediation–moderation model (after Baron & Kenny, 1986, Figure 4)"
+flowchart LR
+  C["Manipulation of Control (C)"] --> P["Perceived Control (P)"]
+  S["Stressor (S)"] --> P
+  CS["C × S (CS)"] --> P
+  P --> O["Outcome (O)"]
+  C --> O
+  S --> O
+  CS --> O
+```
+
+The figure shows that manipulated control, the stressor, and their interaction can influence perceived control.
+
+At the same time, these variables may also affect the outcome directly.
+
+By looking at these relationships together, researchers can determine whether perceived control helps explain the effects of the stressor or the interaction between control and the stressor.
+
+## Three-Step Analysis
+
+The authors describe a three-step process for analyzing this combined model.
+
+Each step adds additional variables to help us better understand what's happening.
+
+| Step | Model | What we're looking for |
+|---|---|---|
+| **1** | O on C, S, CS (2 × 2 ANOVA) | Determine whether control, the stressor, or their interaction affects the outcome. A significant CS interaction would suggest moderation. |
+| **2** | (a) P on C, S, CS; (b) O on C, S, P, CS | Determine whether perceived control helps explain the effects of the stressor or the interaction. If the CS effect becomes smaller after adding P, this suggests mediated moderation. |
+| **3** | O on C, S, P, CS, PS | Examine whether perceived control interacts with the stressor. If PS predicts the outcome and the CS effect becomes smaller, perceived control may be the moderator rather than manipulated control itself. |
+
+: Three-step test of the combined model {#tbl-combined}
+
+### Step 1: Test the Initial Effects
+
+We start by examining whether manipulated control (C), the stressor (S), and their interaction (CS) predict the outcome (O).
+
+This is essentially a **2 × 2 ANOVA**.
+
+We're looking for three possible effects:
+
+- **Control (C):** Does manipulating control affect the outcome?
+- **Stressor (S):** Does the stressor affect the outcome?
+- **Interaction (CS):** Does the effect of the stressor change depending on the level of manipulated control?
+
+If the interaction is significant, we have evidence that manipulated control moderates the relationship between the stressor and outcome.
+
+### Step 2: Introduce Perceived Control as a Mediator
+
+Next, we look at whether perceived control (P) helps explain the relationships identified in Step 1.
+
+We begin by examining whether C, S, and CS predict perceived control.
+
+Then we include perceived control in the regression predicting the outcome.
+
+For perceived control to mediate the relationship between the stressor and outcome, we would expect:
+
+- The stressor to affect perceived control.
+- Perceived control to predict the outcome after accounting for the other variables.
+- The stressor's direct effect on the outcome to become smaller after including perceived control.
+
+If the stressor no longer has a direct effect after accounting for perceived control, that would support complete mediation under the original Baron and Kenny framework.
+
+The authors also explain that manipulated control should strongly influence perceived control without necessarily having its own direct effect on the outcome.
+
+If manipulated control still affects the outcome directly, that could suggest the manipulation is doing something beyond simply changing perceived control.
+
+Similarly, if the CS interaction predicts perceived control, it suggests that the manipulation changes perceived control differently depending on the stressor level.
+
+One particularly important result would occur if **the CS interaction predicts the outcome in Step 1 but becomes smaller after perceived control is added in Step 2**.
+
+This would suggest that perceived control helps explain the original interaction effect, which the authors refer to as **mediated moderation**.
+
+### Step 3: Test Whether Perceived Control Is the Moderator
+
+In the final step, we add another interaction term: **PS**, representing perceived control multiplied by the stressor.
+
+Now we're examining whether perceived control itself changes the relationship between the stressor and outcome.
+
+If PS significantly predicts the outcome and the original CS interaction becomes smaller, this suggests that **perceived control, rather than manipulated control alone, may be responsible for the moderating effect**.
+
+In other words, the experimental manipulation may influence perceived control, which then changes how people respond to the stressor.
+
+This is useful because it helps us move beyond identifying the conditions where an effect occurs and toward understanding the psychological process responsible for it.
+
+### Two Ways to Explain the CS Interaction
+
+The authors explain that the original interaction between manipulated control and the stressor can be accounted for through perceived control in two ways:
+
+1. **Through mediation:** The manipulation changes perceived control differently depending on the stressor level. Perceived control then helps explain the interaction's effect on the outcome.
+
+2. **Through moderation:** The original interaction is explained through the interaction between perceived control and the stressor (PS). This suggests that perceived control itself changes how the stressor affects the outcome.
+
+The important distinction is that **the first explanation focuses on a mediating process, while the second identifies a more specific moderator**.
+
+## Further Extensions
+
+The authors also describe ways to expand the combined model.
+
+One option is to regress the outcome (O) on C, S, P, CS, and CP.
+
+Here, **CP** represents the interaction between manipulated control and perceived control.
+
+If CP is significant and perceived control also mediates the relationship between the stressor and outcome, this could suggest **moderated mediation**, as discussed by James and Brett (1984).
+
+Essentially, the mediation process may differ depending on the level of manipulated control.
+
+Researchers can also examine the second-order interaction **CPS**, which includes manipulated control, perceived control, and the stressor.
+
+This would allow us to investigate whether the interaction between perceived control and the stressor changes depending on manipulated control.
+
+::: {.callout-tip}
+## Mediated Moderation vs. Moderated Mediation
+
+These two terms sound very similar, but they describe different relationships.
+
+- **Mediated moderation:** We start with an interaction effect, such as CS predicting O, and then examine whether a mediator (P) helps explain that effect.
+
+- **Moderated mediation:** We start with a mediation process through P and examine whether the strength of that indirect relationship changes depending on a moderator, such as C.
+
+The easiest way for me to remember this is that **mediated moderation explains an interaction, while moderated mediation looks at when or for whom a mediation process changes**.
+:::
+
+# Applications in Social Psychology
+
+## Personal Control and Crowding
+
+The article reviews research on how personal control may influence people's responses to crowded environments.
+
+Studies by Langer and Saegert (1977) and Rodin, Solomon, and Metcalf (1978) attempted to show that control mediated the relationship between crowding and its effects.
+
+However, the authors point out an important limitation.
+
+These studies manipulated control experimentally and used ANOVA, but they didn't independently measure participants' perceived control.
+
+Because of this, **the researchers couldn't actually establish perceived control as a mediator**.
+
+To demonstrate mediation, they would have needed to show that the manipulation changed perceived control and that perceived control helped explain the outcome.
+
+Langer and Saegert also failed to find a significant interaction between control and density.
+
+This means their results didn't provide evidence for moderation through that interaction either.
+
+Based on the available evidence, Baron and Kenny suggest that it's easier to argue that control may moderate the relationship between density and crowding than to claim mediation has been established.
+
+They also point out that other psychological processes could help explain the relationship, including:
+
+- **Arousal labeling:** How people interpret or label their physiological responses.
+- **Amplification:** How environmental conditions may intensify people's reactions.
+
+These explanations were discussed in research by Freedman (1975) and Worchel and Teddlie (1976).
+
+The main takeaway is that **manipulating a variable doesn't automatically prove that it mediates a relationship**.
+
+We still need to measure the proposed mediator and test whether it helps explain the effect.
+
+## Behavioral Intention → Behavior
+
+The authors also discuss Fishbein and Ajzen's **Theory of Reasoned Action**, which examines how attitudes and social norms influence behavior.
+
+In this theory, **behavioral intention (BI)** acts as a mediator between attitudes, norms, and actual behavior (B).
+
+The basic idea is that our attitudes and perceived social expectations influence what we intend to do, and those intentions then influence our behavior.
+
+This is a clear example of mediation because behavioral intention helps explain how attitudes and norms are connected to behavior.
+
+However, Baron and Kenny criticize how some additional variables were classified in this research.
+
+For the relationship between behavioral intention and behavior, researchers described several variables as mediators, including:
+
+- Gender.
+- Time delay.
+- Co-worker compliance.
+- Skill.
+- Available resources.
+
+The problem is that **some of these variables are better understood as moderators rather than mediators**.
+
+For example, gender might change how strongly behavioral intention predicts actual behavior.
+
+That would make gender a moderator because we're examining whether the relationship differs between groups.
+
+The authors also point out that the statistical approach used by Fishbein and Ajzen involved examining changes in multiple *R* when variables were added to or removed from the model.
+
+While this can be useful when studying mediation, it doesn't directly test moderation.
+
+To test whether gender moderates the relationship between behavioral intention and behavior, we would need to include a **Gender × BI interaction term**.
+
+The article references Fishbein's (1966) finding that behavioral intentions predicted sexual behavior more accurately for women than men.
+
+This is an example of moderation because the strength of the relationship differs between groups.
+
+However, we could take the research further by asking **why** that difference exists.
+
+The authors suggest that something like impulsivity related to the timing of sexual behavior could potentially serve as a mediator.
+
+This would allow researchers to move beyond gender as a group difference and investigate the underlying psychological process.
+
+## Traits and Attitudes → Behavior
+
+Another application involves understanding how personality traits and attitudes predict behavior.
+
+Research by Snyder (1983) on **self-monitoring** and Scheier (1980) on **self-consciousness** helped show how these characteristics can act as moderators.
+
+For example, someone who is high in self-monitoring may adjust their behavior depending on the social situation, while someone with lower self-monitoring may behave more consistently with their personal attitudes or traits.
+
+This means the relationship between personality characteristics and behavior may differ depending on the person's level of self-monitoring.
+
+The authors explain that the combined model from Figure 4 could allow researchers to test both moderation and mediation in the same study.
+
+For example, researchers could:
+
+1. Test whether self-monitoring moderates the relationship between attitudes and behavior.
+2. Measure psychological processes such as differential attention or impression management.
+3. Examine whether those processes help explain why the moderating effect occurs.
+
+This would help researchers understand both **when the relationship changes and what psychological processes are responsible for that change**.
+
+The authors make an important distinction between the two concepts:
+
+- **Moderators are more static:** They help us identify which people or groups behave differently under certain conditions.
+- **Mediators are more dynamic:** They help us understand the internal states or processes that lead people to behave differently.
+
+This is one of the biggest reasons why both concepts are useful in social psychology.
+
+# Key Takeaways
+
+1. **Moderators explain when or for whom a relationship changes, while mediators explain how or why it happens.** Even though they're both third variables, they serve different purposes and shouldn't be used interchangeably.
+
+2. **Moderation is tested through an interaction effect (X × Z).** The correct statistical method depends on whether our predictor and moderator are categorical or continuous. When comparing groups, unstandardized regression slopes are generally preferred over simply comparing correlations.
+
+3. **The original Baron and Kenny approach tests mediation using three regression equations.** We first test whether the IV predicts the mediator, then whether the IV predicts the DV, and finally whether the mediator predicts the DV after accounting for the IV. We then look at whether the IV's effect becomes smaller.
+
+4. **The Sobel test evaluates whether the indirect effect (ab) is statistically significant.** This helps us test the effect that passes through the mediator rather than just examining each path separately.
+
+5. **Measurement error and feedback can create problems in mediation analysis.** If we're not measuring the mediator accurately or if the outcome also influences the mediator, our results can become biased. Using multiple indicators and SEM can help address these issues.
+
+6. **We need to look at coefficient sizes, not just statistical significance.** Because the IV and mediator are often correlated, multicollinearity can affect the results. A change in p-value doesn't always mean the underlying relationship changed in the same way.
+
+7. **Moderators are especially useful when a relationship is weak or inconsistent, while mediators help explain established relationships.** This gives us a starting point for deciding which type of analysis is more appropriate for our research question.
+
+8. **Moderators can lead us toward mediators, and mediators can help us develop interventions.** Once we know when a relationship changes, we can investigate why. Once we understand the process, we may be able to find ways to influence the outcome.
+
+9. **Moderation and mediation can be studied together in the same model.** Concepts like mediated moderation and moderated mediation allow us to examine more complicated relationships rather than treating each effect separately.
+
+10. **Mediation requires us to actually measure the proposed mediator.** Simply manipulating a variable or finding a significant relationship isn't enough to demonstrate mediation. Ideally, we should use multiple reliable measures to better understand the process.
+
+Overall, the biggest thing I took away from this article is that **moderation helps us identify the conditions where a relationship changes, while mediation helps us understand the process behind the relationship**.
+
+Both approaches can be useful on their own, but combining them gives researchers a much better way to understand complex relationships, especially when studying human behavior.
+
+It's also important to remember that Baron and Kenny's 1986 framework is the original approach discussed in this article. Modern mediation analysis often focuses more directly on testing indirect effects, including bootstrap confidence intervals, rather than relying only on the three-regression procedure.
+
+# Appendix
+
+## Project Links
+
+- [GitHub Repository](https://github.com/jakevns/IBM6500/tree/main/M11)
+- [GitHub Pages Website](https://jakevns.github.io/IBM6500/M11/Evans_Jake-M11-Baron_Kenny-Moderator_Mediator_Summary.html)
