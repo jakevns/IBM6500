@@ -1,0 +1,239 @@
+---
+title: "Case 31: Summary of Data Analysis"
+subtitle: "H1 and H2 - Employees Federal Credit Union"
+author: "Jake Evans"
+date: today
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: true
+    code-summary: "Show R code"
+    code-tools: true
+    embed-resources: true
+    fig-width: 8
+    fig-height: 4.5
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+library(haven)
+library(car)
+library(knitr)
+
+theme_set(theme_minimal(base_size = 13))
+
+# Cleaned data provided for Case 31 (Case 31 Data_efcu_4.sav)
+aware_lab <- c("Unaware", "Aware but Have Not Used", "Aware and Have Used")
+
+case31 <- read_sav("Case31_Data_efcu_4.sav") |>
+  zap_labels() |>
+  mutate(q13r = factor(q13_r, levels = 1:3, labels = aware_lab))
+
+fmt_p <- function(p) ifelse(p < .001, "< .001", sub("^0", "", sprintf("%.3f", p)))
+```
+
+# Data and Measures
+
+-   **Data:** `Case 31 Data_efcu_4.sav` (cleaned data provided for the case), *N* = `r nrow(case31)` members.
+-   **Recoded variables used:** q13r (1 = Unaware, 2 = Aware but Have Not Used, 3 = Aware and Have Used) and q8r (1 = Very Low to 5 = Very High; "No opinion" set to missing).
+
+# H1: Awareness of Regular Share Accounts and Adequacy of Financial Services
+
+> **H1:** Members' awareness of the regular share accounts will influence their opinions on the adequacy of financial services in meeting members' needs.
+
+-   **Constructs and roles:** awareness of the regular share account (IV); adequacy of financial services in meeting members' needs (DV)
+-   **Operationalization:** q13r (ordinal, 3 groups); q33 (interval, 1 = Strongly Disagree to 5 = Strongly Agree)
+-   **Statistics:** descriptive statistics, followed by a one-way ANOVA. A one-way ANOVA fits because the IV has three groups and the DV is interval; a *t*-test can compare only two groups.
+
+## Descriptive Statistics
+
+```{r}
+#| label: tbl-h1-desc
+#| tbl-cap: "Adequacy of financial services (q33) by awareness of the regular share account (q13r)"
+
+h1_desc <- case31 |>
+  group_by(Awareness = q13r) |>
+  summarise(n = n(), Mean = round(mean(q33), 2), SD = round(sd(q33), 2),
+            Min = min(q33), Max = max(q33)) |>
+  bind_rows(case31 |>
+              summarise(Awareness = "Overall", n = n(), Mean = round(mean(q33), 2),
+                        SD = round(sd(q33), 2), Min = min(q33), Max = max(q33)))
+kable(h1_desc)
+```
+
+```{r}
+#| label: fig-h1-means
+#| fig-cap: "Mean adequacy of financial services (q33) by awareness of the regular share account"
+
+h1_desc |>
+  filter(Awareness != "Overall") |>
+  mutate(Awareness = factor(Awareness, levels = aware_lab)) |>
+  ggplot(aes(Mean, Awareness)) +
+  geom_col(fill = "#2a78d6", width = 0.6) +
+  geom_text(aes(label = sprintf("%.2f", Mean)), hjust = -0.2) +
+  scale_x_continuous(limits = c(0, 5), breaks = 1:5) +
+  labs(x = "Mean of q33 (1 = Strongly Disagree, 5 = Strongly Agree)",
+       y = "Awareness of regular share account")
+```
+
+## One-way ANOVA
+
+-   $H_0$: all group means are equal ($\mu_{Unaware} = \mu_{Aware, not used} = \mu_{Aware, used}$)
+-   $H_A$: at least one pair of group means is different
+
+### Normality of Residuals
+
+```{r}
+#| label: h1-normality
+
+h1_aov <- aov(q33 ~ q13r, data = case31)
+h1_shapiro <- shapiro.test(residuals(h1_aov))
+h1_shapiro
+```
+
+### Homogeneity of Variance
+
+```{r}
+#| label: h1-levene
+
+h1_levene <- leveneTest(q33 ~ q13r, data = case31)
+h1_levene
+```
+
+### ANOVA Test
+
+```{r}
+#| label: h1-anova
+
+h1_sum <- summary(h1_aov)
+h1_sum
+```
+
+Because the residuals are not normally distributed, the Kruskal-Wallis test (the non-parametric alternative) is run as a check.
+
+```{r}
+#| label: h1-kruskal
+
+h1_kw <- kruskal.test(q33 ~ q13r, data = case31)
+h1_kw
+```
+
+### Post-hoc Analysis
+
+```{r}
+#| label: h1-tukey
+
+# After a significant ANOVA
+h1_tukey <- TukeyHSD(h1_aov)
+h1_tukey
+```
+
+```{r}
+#| label: h1-wilcox
+
+# After a significant Kruskal-Wallis test: pairwise Wilcoxon tests, Bonferroni-adjusted
+h1_wilcox <- pairwise.wilcox.test(case31$q33, case31$q13r, p.adjust.method = "bonferroni",
+                                  exact = FALSE)
+h1_wilcox
+```
+
+## Insights about H1
+
+```{r}
+#| label: h1-inline
+
+h1_F  <- h1_sum[[1]][["F value"]][1]
+h1_df <- h1_sum[[1]][["Df"]]
+h1_p  <- h1_sum[[1]][["Pr(>F)"]][1]
+tk    <- h1_tukey$q13r
+m     <- setNames(h1_desc$Mean[1:3], aware_lab)
+```
+
+::: callout-note
+## Insights about H1
+
+-   Awareness of the regular share account is related to how well members think the CU's financial services meet their needs, supporting H1 (*F*(`r h1_df[1]`, `r h1_df[2]`) = `r round(h1_F, 2)`, *p* = `r fmt_p(h1_p)`; Kruskal-Wallis *p* = `r fmt_p(h1_kw$p.value)`) (@tbl-h1-desc, @fig-h1-means).
+-   The relationship is negative. Members who are aware of the account **and have used it** rate the adequacy of services lowest (*M* = `r m[3]`), below both members who are unaware (*M* = `r m[1]`, Tukey *p* = `r fmt_p(tk[2, "p adj"])`) and members who are aware but have not used it (*M* = `r m[2]`, Tukey *p* = `r fmt_p(tk[3, "p adj"])`). The two lower awareness groups do not differ (Tukey *p* = `r fmt_p(tk[1, "p adj"])`). The pairwise Wilcoxon tests show the same pattern.
+-   Members who have actually used the regular share account are the least satisfied with how well the CU meets their needs.
+:::
+
+# H2: Opinion on CU Loan Rates vs. Belief that CU Rates Are Lower
+
+> **H2:** Members will not be different in their opinion on CU's loan rate (q8r) and the degree to which they agree that CU's loan rate is lower than competitors (q30).
+
+-   **Operationalization:** q8r, opinion about the rates charged on funds borrowed (interval, 1 = Very Low to 5 = Very High); q30, CU loan rates are lower than others (interval, 1 = Strongly Disagree to 5 = Strongly Agree)
+-   **Statistics:** descriptive statistics, followed by a paired-samples *t*-test. A paired test fits because the same members answered both questions, so the two scores are not independent samples.
+
+## Descriptive Statistics
+
+```{r}
+#| label: tbl-h2-desc
+#| tbl-cap: "Descriptive statistics for q8r and q30 (members who answered both)"
+
+h2 <- case31 |>
+  select(q8r = Q8_r, q30) |>
+  drop_na()
+
+h2 |>
+  pivot_longer(everything(), names_to = "Variable", values_to = "y") |>
+  group_by(Variable) |>
+  summarise(n = n(), Mean = round(mean(y), 2), SD = round(sd(y), 2),
+            Min = min(y), Max = max(y)) |>
+  mutate(Variable = c("q8r: Opinion about rates charged on funds borrowed",
+                      "q30: CU loan rates lower than others")) |>
+  kable()
+```
+
+```{r}
+#| label: fig-h2-freq
+#| fig-cap: "Response distributions for q8r and q30 (members who answered both)"
+
+h2 |>
+  pivot_longer(everything(), names_to = "Variable", values_to = "y") |>
+  mutate(Variable = dplyr::recode(Variable,
+                           q8r = "q8r: Loan rates (1 = Very Low, 5 = Very High)",
+                           q30 = "q30: CU rates lower (1 = Strongly Disagree, 5 = Strongly Agree)")) |>
+  count(Variable, y) |>
+  ggplot(aes(factor(y), n)) +
+  geom_col(fill = "#2a78d6", width = 0.7) +
+  facet_wrap(~Variable, ncol = 1) +
+  labs(x = "Response", y = "# of members")
+```
+
+## Paired-Samples t-test
+
+-   $H_0: \mu_{q8r} = \mu_{q30}$ (mean difference = 0)
+-   $H_A: \mu_{q8r} \neq \mu_{q30}$
+
+```{r}
+#| label: h2-ttest
+
+h2_t <- t.test(h2$q8r, h2$q30, paired = TRUE)
+h2_t
+```
+
+## Insights about H2
+
+::: callout-note
+## Insights about H2
+
+-   Members' opinion on the CU's loan rate (*M* = `r round(mean(h2$q8r), 2)`) and their agreement that the CU's loan rate is lower than competitors' (*M* = `r round(mean(h2$q30), 2)`) are not different (*t*(`r h2_t$parameter`) = `r round(h2_t$statistic, 2)`, *p* = `r fmt_p(h2_t$p.value)`), supporting H2 (@tbl-h2-desc).
+-   Both scores sit near the middle of their scales (@fig-h2-freq): the most common answers are that the CU's loan rates are "Average" (`r round(mean(h2$q8r == 3) * 100, 1)`%) and "Uncertain" whether they are lower than competitors' (`r round(mean(h2$q30 == 3) * 100, 1)`%).
+-   Members do not see the CU's loan rates as an advantage, which may help explain why they borrow elsewhere.
+:::
+
+# Appendix
+
+## Links
+
+-   [GitHub Pages: this report](https://jakevns.github.io/IBM6500/IC-Case31-Summary-H1-H2/Evans_Jake-IC-Case31-Summary-H1-H2.html)
+-   [GitHub Repo: assignment folder](https://github.com/jakevns/IBM6500/tree/main/IC-Case31-Summary-H1-H2)
